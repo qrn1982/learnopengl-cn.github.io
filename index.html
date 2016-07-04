@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="./img/favicon.ico">
+
+	<title>LearnOpenGL-CN</title>
+
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/highlight.css">
+        <link href="./css/base.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
+        <link href="./css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href=".">LearnOpenGL-CN</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li class="active">
+                    <a href=".">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">入门(Getting started)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="01 Getting started/01 OpenGL/">OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/02 Creating a window/">创建窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/03 Hello Window/">你好，窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/04 Hello Triangle/">你好，三角形</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/05 Shaders/">着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/06 Textures/">纹理</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/07 Transformations/">变换</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/08 Coordinate Systems/">坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/09 Camera/">摄像机</a>
+</li>
+
+        
+            
+<li >
+    <a href="01 Getting started/10 Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">光照(Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="02 Lighting/01 Colors/">颜色</a>
+</li>
+
+        
+            
+<li >
+    <a href="02 Lighting/02 Basic Lighting/">光照基础</a>
+</li>
+
+        
+            
+<li >
+    <a href="02 Lighting/03 Materials/">材质</a>
+</li>
+
+        
+            
+<li >
+    <a href="02 Lighting/04 Lighting maps/">光照贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="02 Lighting/05 Light casters/">投光物</a>
+</li>
+
+        
+            
+<li >
+    <a href="02 Lighting/06 Multiple lights/">多光源</a>
+</li>
+
+        
+            
+<li >
+    <a href="02 Lighting/07 Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">加载模型(Model Loading)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="03 Model Loading/01 Assimp/">Assimp开源模型导入库</a>
+</li>
+
+        
+            
+<li >
+    <a href="03 Model Loading/02 Mesh/">网格</a>
+</li>
+
+        
+            
+<li >
+    <a href="03 Model Loading/03 Model/">模型</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级OpenGL(Advanced OpenGL)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/01 Depth testing/">深度测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/02 Stencil testing/">模板测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/03 Blending/">混合</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/04 Face culling/">面剔除</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/05 Framebuffers/">帧缓冲</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/06 Cubemaps/">立方体贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/07 Advanced Data/">高级数据</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/08 Advanced GLSL/">高级GLSL</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/09 Geometry Shader/">几何着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/10 Instancing/">实例化</a>
+</li>
+
+        
+            
+<li >
+    <a href="04 Advanced OpenGL/11 Anti Aliasing/">抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级光照(Advanced Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="05 Advanced Lighting/01 Advanced Lighting/">高级光照</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/02 Gamma Correction/">Gamma校正</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">阴影</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="05 Advanced Lighting/03 Shadows/01 Shadow Mapping/">阴影映射</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/03 Shadows/02 Point Shadows/">点阴影</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/03 Shadows/03 CSM/">CSM</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/04 Normal Mapping/">法线贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/05 Parallax Mapping/">视差贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/06 HDR/">HDR</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/07 Bloom/">泛光</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/08 Deferred Shading/">延迟着色法</a>
+</li>
+
+        
+            
+<li >
+    <a href="05 Advanced Lighting/09 SSAO/">SSAO</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">实战(In Practice)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="06 In Practice/02 Text Rendering/">文字渲染</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">2D游戏</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="06 In Practice/2D-Game/01 Breakout/">Breakout</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a rel="next" >
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="01 Getting started/01 OpenGL/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#learnopengl-cn">LearnOpenGL-CN</a></li>
+        
+            <li><a href="#_1">如何认领翻译？</a></li>
+        
+            <li><a href="#_2">专业词汇对照表</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="learnopengl-cn">LearnOpenGL-CN</h1>
+<p>learnopengl.com系列教程的中文翻译，目前正在翻译中。</p>
+<p><strong>当前翻译进度：</strong>
+<img alt="Progress" src="http://progressed.io/bar/70?title=40/57" /></p>
+<p><strong>In Practice最后再弄，现在先把前面的校对完</strong></p>
+<h2 id="_1">如何认领翻译？</h2>
+<p>由于我们的志愿者来自五湖四海，为了避免冲突。请志愿者们先clone这个Repository 。同步到本地后找到要翻译的文章，创建一个如下所示的只包含作者、翻译者和原文链接信息的Markdown文件：</p>
+<pre><code>本文作者JoeyDeVries，由Geequlim翻译自http://learnopengl.com
+</code></pre>
+<p>译文的文件命名统一规范为：</p>
+<pre><code>&lt;两位数的章序列&gt; &lt;章名称&gt;/&lt;两位数节序列&gt; 节名称/&lt;两位数小节序列&gt; 小节名称.md
+</code></pre>
+<p>例如：</p>
+<pre><code>05 Advanced Lighting/03 Shadows/02 Point Shadows.md
+</code></pre>
+<p>加入LearnOpenGL-CN组织，然后提交并push您的文章。</p>
+<h3 id="qq383745868">欢迎志愿者们加入翻译组交流QQ群：383745868</h3>
+<h2 id="_2">专业词汇对照表</h2>
+<ol>
+<li>
+<p><a href="http://www.cnblogs.com/miloyip/p/GameEngineArchitectureIndex.html">《游戏引擎架构》中英词汇索引表</a></p>
+</li>
+<li>
+<p>摘抄自《OpenGL超级宝典第五版》</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>英文词</th>
+<th>对应翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aliasing</td>
+<td>锯齿</td>
+</tr>
+<tr>
+<td>Alpha</td>
+<td>透明度</td>
+</tr>
+<tr>
+<td>Ambient Light</td>
+<td>环境光</td>
+</tr>
+<tr>
+<td>Antialiasing</td>
+<td>抗锯齿</td>
+</tr>
+<tr>
+<td>Aspect Ratio</td>
+<td>纵横比</td>
+</tr>
+<tr>
+<td>Bezier curve</td>
+<td>贝塞尔曲线</td>
+</tr>
+<tr>
+<td>Bitplane</td>
+<td>位平面</td>
+</tr>
+<tr>
+<td>Buffer</td>
+<td>缓冲区</td>
+</tr>
+<tr>
+<td>Cartesian</td>
+<td>笛卡尔</td>
+</tr>
+<tr>
+<td>Clip coordinates</td>
+<td>裁剪坐标</td>
+</tr>
+<tr>
+<td>Clipping</td>
+<td>裁剪</td>
+</tr>
+<tr>
+<td>Convex</td>
+<td>凸</td>
+</tr>
+<tr>
+<td>Culling</td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>Destination color</td>
+<td>目标颜色</td>
+</tr>
+<tr>
+<td>Dithering</td>
+<td>抖动</td>
+</tr>
+<tr>
+<td>Double buffered</td>
+<td>双缓冲</td>
+</tr>
+<tr>
+<td>Extruded</td>
+<td>拉伸</td>
+</tr>
+<tr>
+<td>Eye coordinates</td>
+<td>视觉坐标</td>
+</tr>
+<tr>
+<td>Frustum</td>
+<td>平头截体</td>
+</tr>
+<tr>
+<td>Immediate mode</td>
+<td>立即模式</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>实现</td>
+</tr>
+<tr>
+<td>Khronos</td>
+<td>OpenGL维护小组</td>
+</tr>
+<tr>
+<td>Literal</td>
+<td>字面值</td>
+</tr>
+<tr>
+<td>Matrix</td>
+<td>矩阵</td>
+</tr>
+<tr>
+<td>Mipmapping</td>
+<td>Mip贴图</td>
+</tr>
+<tr>
+<td>Modelview Matrix</td>
+<td>模型视图矩阵</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>法线</td>
+</tr>
+<tr>
+<td>Normalize</td>
+<td>规范化</td>
+</tr>
+<tr>
+<td>Orthographic</td>
+<td>正交</td>
+</tr>
+<tr>
+<td>Prespective</td>
+<td>透视</td>
+</tr>
+<tr>
+<td>Piexl</td>
+<td>像素</td>
+</tr>
+<tr>
+<td>Pixmap</td>
+<td>像素图</td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td>多边形</td>
+</tr>
+<tr>
+<td>Primitive</td>
+<td>图元</td>
+</tr>
+<tr>
+<td>Projection</td>
+<td>投影</td>
+</tr>
+<tr>
+<td>Quadrilateral</td>
+<td>四边形</td>
+</tr>
+<tr>
+<td>Resterize</td>
+<td>光栅化</td>
+</tr>
+<tr>
+<td>Retained mode</td>
+<td>保留模式</td>
+</tr>
+<tr>
+<td>Render</td>
+<td>渲染</td>
+</tr>
+<tr>
+<td>Scintillation</td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td>Shader</td>
+<td>着色器</td>
+</tr>
+<tr>
+<td>Source Color</td>
+<td>源颜色</td>
+</tr>
+<tr>
+<td>Specification</td>
+<td>说明</td>
+</tr>
+<tr>
+<td>Spline</td>
+<td>样条</td>
+</tr>
+<tr>
+<td>Stipple</td>
+<td>点画</td>
+</tr>
+<tr>
+<td>Tessellation</td>
+<td>镶嵌</td>
+</tr>
+<tr>
+<td>Texel</td>
+<td>纹理单元</td>
+</tr>
+<tr>
+<td>Texture</td>
+<td>纹理</td>
+</tr>
+<tr>
+<td>Transformation</td>
+<td>变换</td>
+</tr>
+<tr>
+<td>Translucence</td>
+<td>半透明</td>
+</tr>
+<tr>
+<td>Vector</td>
+<td>向量</td>
+</tr>
+<tr>
+<td>Vertex</td>
+<td>顶点</td>
+</tr>
+<tr>
+<td>Viewing Volume</td>
+<td>可视区域</td>
+</tr>
+<tr>
+<td>Viewport</td>
+<td>视口</td>
+</tr>
+<tr>
+<td>Wireframe</td>
+<td>线框</td>
+</tr>
+<tr>
+<td>pipeline</td>
+<td>渲染管线</td>
+</tr>
+</tbody>
+</table></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="./js/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap-3.0.3.min.js"></script>
+        <script src="./js/highlight.pack.js"></script>
+        <script>var base_url = '.';</script>
+        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
+        <script src="./js/base.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

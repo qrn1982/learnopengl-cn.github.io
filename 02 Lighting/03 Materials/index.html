@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>材质 - LearnOpenGL-CN</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">LearnOpenGL-CN</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">入门(Getting started)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/01%20OpenGL/">OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/02%20Creating%20a%20window/">创建窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/03%20Hello%20Window/">你好，窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/04%20Hello%20Triangle/">你好，三角形</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/05%20Shaders/">着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/06%20Textures/">纹理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/07%20Transformations/">变换</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/08%20Coordinate%20Systems/">坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/09%20Camera/">摄像机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/10%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">光照(Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20Colors/">颜色</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20Basic%20Lighting/">光照基础</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">材质</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20Lighting%20maps/">光照贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20Light%20casters/">投光物</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20Multiple%20lights/">多光源</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">加载模型(Model Loading)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/01%20Assimp/">Assimp开源模型导入库</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/02%20Mesh/">网格</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/03%20Model/">模型</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级OpenGL(Advanced OpenGL)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/01%20Depth%20testing/">深度测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/02%20Stencil%20testing/">模板测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/03%20Blending/">混合</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/04%20Face%20culling/">面剔除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/05%20Framebuffers/">帧缓冲</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/06%20Cubemaps/">立方体贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/07%20Advanced%20Data/">高级数据</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/08%20Advanced%20GLSL/">高级GLSL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/09%20Geometry%20Shader/">几何着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/10%20Instancing/">实例化</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/11%20Anti%20Aliasing/">抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级光照(Advanced Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/01%20Advanced%20Lighting/">高级光照</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/02%20Gamma%20Correction/">Gamma校正</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">阴影</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/">阴影映射</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/02%20Point%20Shadows/">点阴影</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/03%20CSM/">CSM</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/04%20Normal%20Mapping/">法线贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/05%20Parallax%20Mapping/">视差贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/06%20HDR/">HDR</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/07%20Bloom/">泛光</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/08%20Deferred%20Shading/">延迟着色法</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/09%20SSAO/">SSAO</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">实战(In Practice)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/02%20Text%20Rendering/">文字渲染</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">2D游戏</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/2D-Game/01%20Breakout/">Breakout</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../02%20Basic%20Lighting/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../04%20Lighting%20maps/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#material">材质(Material)</a></li>
+        
+            <li><a href="#_1">设置材质</a></li>
+        
+            <li><a href="#_4">练习</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="material">材质(Material)</h1>
+<table>
+<thead>
+<tr>
+<th>原文</th>
+<th><a href="http://learnopengl.com/#!Lighting/Materials">Materials</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作者</td>
+<td>JoeyDeVries</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td><a href="http://bullteacher.com/">Django</a></td>
+</tr>
+<tr>
+<td>校对</td>
+<td><a href="http://geequlim.com">Geequlim</a></td>
+</tr>
+</tbody>
+</table>
+<p>在真实世界里，每个物体会对光产生不同的反应。钢看起来比陶瓷花瓶更闪闪发光，一个木头箱子不会像钢箱子一样对光产生很强的反射。每个物体对镜面高光也有不同的反应。有些物体不会散射(Scatter)很多光却会反射(Reflect)很多光，结果看起来就有一个较小的高光点(Highlight)，有些物体散射了很多，它们就会产生一个半径更大的高光。如果我们想要在OpenGL中模拟多种类型的物体，我们必须为每个物体分别定义材质(Material)属性。</p>
+<p>在前面的教程中，我们指定一个物体和一个光的颜色来定义物体的图像输出，并使之结合环境(Ambient)和镜面强度(Specular Intensity)元素。当描述物体的时候，我们可以使用3种光照元素：环境光照(Ambient Lighting)、漫反射光照(Diffuse Lighting)、镜面光照(Specular Lighting)定义一个材质颜色。通过为每个元素指定一个颜色，我们已经对物体的颜色输出有了精密的控制。现在把一个镜面高光元素添加到这三个颜色里，这是我们需要的所有材质属性：</p>
+<pre><code class="c++">#version 330 core
+struct Material
+{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+uniform Material material;
+</code></pre>
+
+<p>在片段着色器中，我们创建一个结构体(Struct)，来储存物体的材质属性。我们也可以把它们储存为独立的uniform值，但是作为一个结构体来储存可以更有条理。我们首先定义结构体的布局，然后简单声明一个uniform变量，以新创建的结构体作为它的类型。</p>
+<p>就像你所看到的，我们为每个冯氏光照模型的元素都定义一个颜色向量。<code>ambient</code>材质向量定义了在环境光照下这个物体反射的是什么颜色；通常这是和物体颜色相同的颜色。<code>diffuse</code>材质向量定义了在漫反射光照下物体的颜色。漫反射颜色被设置为(和环境光照一样)我们需要的物体颜色。<code>specular</code>材质向量设置的是物体受到的镜面光照的影响的颜色(或者可能是反射一个物体特定的镜面高光颜色)。最后，<code>shininess</code>影响镜面高光的散射/半径。</p>
+<p>这四个元素定义了一个物体的材质，通过它们我们能够模拟很多真实世界的材质。这里有一个列表<a href="http://devernay.free.fr/cours/opengl/materials.html">devernay.free.fr</a>展示了几种材质属性，这些材质属性模拟外部世界的真实材质。下面的图片展示了几种真实世界材质对我们的立方体的影响：</p>
+<p><img alt="" src="http://www.learnopengl.com/img/lighting/materials_real_world.png" /></p>
+<p>如你所见，正确地指定一个物体的材质属性，似乎就是改变我们物体的相关属性的比例。效果显然很引人注目，但是对于大多数真实效果，我们最终需要更加复杂的形状，而不单单是一个立方体。在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/03%20Model%20Loading/01%20Assimp/">下面的教程</a>中，我们会讨论更复杂的形状。</p>
+<p>为一个物体赋予一款正确的材质是非常困难的，这需要大量实验和丰富的经验，所以由于错误的设置材质而毁了物体的画面质量是件经常发生的事。</p>
+<p>让我们试试在着色器中实现这样的一个材质系统。</p>
+<h2 id="_1">设置材质</h2>
+<p>我们在片段着色器中创建了一个uniform材质结构体，所以下面我们希望改变光照计算来顺应新的材质属性。由于所有材质元素都储存在结构体中，我们可以从uniform变量<code>material</code>取得它们：</p>
+<pre><code class="c++">void main()
+{
+    // 环境光
+    vec3 ambient = lightColor * material.ambient;
+
+    // 漫反射光
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = lightColor * (diff * material.diffuse);
+
+    // 镜面高光
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = lightColor * (spec * material.specular);  
+
+    vec3 result = ambient + diffuse + specular;
+    color = vec4(result, 1.0f);
+}
+</code></pre>
+
+<p>你可以看到，我们现在获得所有材质结构体的属性，无论在哪儿我们都需要它们，这次通过材质颜色的帮助，计算结果输出的颜色。物体的每个材质属性都乘以它们对应的光照元素。</p>
+<p>通过设置适当的uniform，我们可以在应用中设置物体的材质。当设置uniform时，GLSL中的一个结构体并不会被认为有什么特别之处。一个结构体值扮演uniform变量的封装体，所以如果我们希望填充这个结构体，我们就仍然必须设置结构体中的各个元素的uniform值，但是这次带有结构体名字作为前缀：</p>
+<pre><code class="c++">GLint matAmbientLoc = glGetUniformLocation(lightingShader.Program, &quot;material.ambient&quot;);
+GLint matDiffuseLoc = glGetUniformLocation(lightingShader.Program, &quot;material.diffuse&quot;);
+GLint matSpecularLoc = glGetUniformLocation(lightingShader.Program, &quot;material.specular&quot;);
+GLint matShineLoc = glGetUniformLocation(lightingShader.Program, &quot;material.shininess&quot;);
+
+glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
+glUniform3f(matDiffuseLoc, 1.0f, 0.5f, 0.31f);
+glUniform3f(matSpecularLoc, 0.5f, 0.5f, 0.5f);
+glUniform1f(matShineLoc, 32.0f);
+</code></pre>
+
+<p>我们将<code>ambient</code>和<code>diffuse</code>元素设置成我们想要让物体所呈现的颜色，设置物体的<code>specular</code>元素为中等亮度颜色；我们不希望<code>specular</code>元素对这个指定物体产生过于强烈的影响。我们同样设置<code>shininess</code>为32。我们现在可以简单的在应用中影响物体的材质。</p>
+<p>运行程序，会得到下面这样的结果：</p>
+<p><img alt="" src="http://www.learnopengl.com/img/lighting/materials_with_material.png" /></p>
+<p>看起来很奇怪不是吗？</p>
+<h3 id="_2">光的属性</h3>
+<p>这个物体太亮了。物体过亮的原因是环境、漫反射和镜面三个颜色任何一个光源都会去全力反射。光源对环境、漫反射和镜面元素同时具有不同的强度。前面的教程，我们通过使用一个强度值改变环境和镜面强度的方式解决了这个问题。我们想做一个相同的系统，但是这次为每个光照元素指定了强度向量。如果我们想象<code>lightColor</code>是<code>vec3(1.0)</code>，代码看起来像是这样：</p>
+<pre><code class="c++">vec3 ambient = vec3(1.0f) * material.ambient;
+vec3 diffuse = vec3(1.0f) * (diff * material.diffuse);
+vec3 specular = vec3(1.0f) * (spec * material.specular);
+</code></pre>
+
+<p>所以物体的每个材质属性返回了每个光照元素的全强度。这些vec3(1.0)值可以各自独立的影响各个光源，这通常就是我们想要的。现在物体的<code>ambient</code>元素完全地展示了立方体的颜色，可是环境元素不应该对最终颜色有这么大的影响，所以我们要设置光的<code>ambient</code>亮度为一个小一点的值，从而限制环境色：</p>
+<pre><code class="c++">vec3 result = vec3(0.1f) * material.ambient;
+</code></pre>
+
+<p>我们可以用同样的方式影响光源<code>diffuse</code>和<code>specular</code>的强度。这和我们<a href="http://learnopengl-cn.readthedocs.org/zh/latest/02%20Lighting/02%20Basic%20Lighting/">前面教程</a>所做的极为相似；你可以说我们已经创建了一些光的属性来各自独立地影响每个光照元素。我们希望为光的属性创建一些与材质结构体相似的东西：</p>
+<pre><code class="c++">struct Light
+{
+    vec3 position;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+uniform Light light;
+</code></pre>
+
+<p>一个光源的<code>ambient</code>、<code>diffuse</code>和<code>specular</code>光都有不同的亮度。环境光通常设置为一个比较低的亮度，因为我们不希望环境色太过显眼。光源的<code>diffuse</code>元素通常设置为我们希望光所具有的颜色；经常是一个明亮的白色。<code>specular</code>元素通常被设置为<code>vec3(1.0f)</code>类型的全强度发光。要记住的是我们同样把光的位置添加到结构体中。</p>
+<p>就像材质uniform一样，需要更新片段着色器：</p>
+<pre><code class="c++">vec3 ambient = light.ambient * material.ambient;
+vec3 diffuse = light.diffuse * (diff * material.diffuse);
+vec3 specular = light.specular * (spec * material.specular);
+</code></pre>
+
+<p>然后我们要在应用里设置光的亮度：</p>
+<pre><code class="c++">GLint lightAmbientLoc = glGetUniformLocation(lightingShader.Program, &quot;light.ambient&quot;);
+GLint lightDiffuseLoc = glGetUniformLocation(lightingShader.Program, &quot;light.diffuse&quot;);
+GLint lightSpecularLoc = glGetUniformLocation(lightingShader.Program, &quot;light.specular&quot;);
+
+glUniform3f(lightAmbientLoc, 0.2f, 0.2f, 0.2f);
+glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f);// 让我们把这个光调暗一点，这样会看起来更自然
+glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
+</code></pre>
+
+<p>现在，我们调整了光是如何影响物体所有的材质的，我们得到一个更像前面教程的视觉输出。这次我们完全控制了物体光照和材质：</p>
+<p><img alt="" src="http://www.learnopengl.com/img/lighting/materials_light.png" /></p>
+<p>现在改变物体的外观相对简单了些。我们做点更有趣的事！</p>
+<h3 id="_3">不同的光源颜色</h3>
+<p>目前为止，我们使用光源的颜色仅仅去改变物体各个元素的强度(通过选用从白到灰到黑范围内的颜色)，并没有影响物体的真实颜色(只是强度)。由于现在能够非常容易地访问光的属性了，我们可以随着时间改变它们的颜色来获得一些有很意思的效果。由于所有东西都已经在片段着色器做好了，改变光的颜色很简单，我们可以立即创建出一些有趣的效果：</p>
+<video src="http://www.learnopengl.com/video/lighting/materials.mp4" controls="controls">
+</video>
+
+<p>如你所见，不同光的颜色极大地影响了物体的颜色输出。由于光的颜色直接影响物体反射的颜色(你可能想起在颜色教程中有讨论过)，它对视觉输出有显著的影响。</p>
+<p>利用<code>sin</code>和<code>glfwGetTime</code>改变光的环境和漫反射颜色，我们可以随着时间流逝简单的改变光源颜色：</p>
+<pre><code class="c++">glm::vec3 lightColor; lightColor.x = sin(glfwGetTime() * 2.0f);
+lightColor.y = sin(glfwGetTime() * 0.7f);
+lightColor.z = sin(glfwGetTime() * 1.3f);
+
+glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
+glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+
+glUniform3f(lightAmbientLoc, ambientColor.x, ambientColor.y, ambientColor.z);
+glUniform3f(lightDiffuseLoc, diffuseColor.x, diffuseColor.y, diffuseColor.z);
+</code></pre>
+
+<p>尝试和实验使用这些光照和材质值，看看它们怎样影响图像输出的。你可以从这里找到<a href="http://learnopengl.com/code_viewer.php?code=lighting/materials">程序的源码</a>，<a href="http://learnopengl.com/code_viewer.php?code=lighting/materials&amp;type=fragment">片段着色器</a>的源码。</p>
+<h2 id="_4">练习</h2>
+<ul>
+<li>你能像我们教程一开始那样根据一些材质的属性来模拟一个真实世界的物体吗？
+注意<a href="http://devernay.free.fr/cours/opengl/materials.html">材质表</a>中的环境光颜色与漫反射光的颜色可能不一样，因为他们并没有把光照强度考虑进去来模拟，你需要将光照颜色的强度改为<code>vec(1.0f)</code>来输出正确的结果：<a href="http://learnopengl.com/code_viewer.php?code=lighting/materials-exercise1">参考解答</a>，我做了一个青色(Cyan)的塑料箱子</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

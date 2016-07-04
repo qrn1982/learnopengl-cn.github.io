@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>高级数据 - LearnOpenGL-CN</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">LearnOpenGL-CN</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">入门(Getting started)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/01%20OpenGL/">OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/02%20Creating%20a%20window/">创建窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/03%20Hello%20Window/">你好，窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/04%20Hello%20Triangle/">你好，三角形</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/05%20Shaders/">着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/06%20Textures/">纹理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/07%20Transformations/">变换</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/08%20Coordinate%20Systems/">坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/09%20Camera/">摄像机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/10%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">光照(Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../02%20Lighting/01%20Colors/">颜色</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/02%20Basic%20Lighting/">光照基础</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/03%20Materials/">材质</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/04%20Lighting%20maps/">光照贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/05%20Light%20casters/">投光物</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/06%20Multiple%20lights/">多光源</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/07%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">加载模型(Model Loading)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/01%20Assimp/">Assimp开源模型导入库</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/02%20Mesh/">网格</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/03%20Model/">模型</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级OpenGL(Advanced OpenGL)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20Depth%20testing/">深度测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20Stencil%20testing/">模板测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20Blending/">混合</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20Face%20culling/">面剔除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20Framebuffers/">帧缓冲</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20Cubemaps/">立方体贴图</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">高级数据</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20Advanced%20GLSL/">高级GLSL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../09%20Geometry%20Shader/">几何着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20Instancing/">实例化</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20Anti%20Aliasing/">抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级光照(Advanced Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/01%20Advanced%20Lighting/">高级光照</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/02%20Gamma%20Correction/">Gamma校正</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">阴影</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/">阴影映射</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/02%20Point%20Shadows/">点阴影</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/03%20CSM/">CSM</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/04%20Normal%20Mapping/">法线贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/05%20Parallax%20Mapping/">视差贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/06%20HDR/">HDR</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/07%20Bloom/">泛光</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/08%20Deferred%20Shading/">延迟着色法</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/09%20SSAO/">SSAO</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">实战(In Practice)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/02%20Text%20Rendering/">文字渲染</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">2D游戏</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/2D-Game/01%20Breakout/">Breakout</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../06%20Cubemaps/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../08%20Advanced%20GLSL/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#_1">高级数据</a></li>
+        
+            <li><a href="#_2">缓冲数据写入</a></li>
+        
+            <li><a href="#_3">分批处理顶点属性</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="_1">高级数据</h1>
+<table>
+<thead>
+<tr>
+<th>原文</th>
+<th><a href="http://learnopengl.com/#!Advanced-OpenGL/Advanced-Data">Advanced Data</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作者</td>
+<td>JoeyDeVries</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td><a href="http://bullteacher.com/">Django</a></td>
+</tr>
+<tr>
+<td>校对</td>
+<td><a href="http://geequlim.com">Geequlim</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">缓冲数据写入</h2>
+<p>我们在OpenGL中大量使用缓冲来储存数据已经有一会儿了。有一些有趣的方式来操纵缓冲，也有一些有趣的方式通过纹理来向着色器传递大量数据。本教程中，我们会讨论一些更加有意思的缓冲函数，以及如何使用纹理对象来储存大量数据（教程中纹理部分还没写）。</p>
+<p>OpenGL中缓冲只是一块儿内存区域的对象，除此没有更多点的了。当把缓冲绑定到一个特定缓冲对象的时候，我们就给缓冲赋予了一个特殊的意义。当我们绑定到<code>GL_ARRAY_BUFFER</code>的时候，这个缓冲就是一个顶点数组缓冲，我们也可以简单地绑定到<code>GL_ELEMENT_ARRAY_BUFFER</code>。OpenGL内部为每个目标（target）储存一个缓冲，并基于目标来处理不同的缓冲。</p>
+<p>到目前为止，我们使用<code>glBufferData</code>函数填充缓冲对象管理的内存，这个函数分配了一块内存空间，然后把数据存入其中。如果我们向它的<code>data</code>这个参数传递的是NULL，那么OpenGL只会帮我们分配内存，而不会填充它。如果我们先打算开辟一些内存，稍后回到这个缓冲一点一点的填充数据，有些时候会很有用。</p>
+<p>我们还可以调用<code>glBufferSubData</code>函数填充特定区域的缓冲，而不是一次填充整个缓冲。这个函数需要一个缓冲目标（target），一个偏移量（offset），数据的大小以及数据本身作为参数。这个函数新的功能是我们可以给它一个偏移量（offset）来指定我们打算填充缓冲的位置与起始位置之间的偏移量。这样我们就可以插入/更新指定区域的缓冲内存空间了。一定要确保修改的缓冲要有足够的内存分配，所以在调用<code>glBufferSubData</code>之前，调用<code>glBufferData</code>是必须的。</p>
+<pre><code class="c++">glBufferSubData(GL_ARRAY_BUFFER, 24, sizeof(data), &amp;data); // 范围： [24, 24 + sizeof(data)]
+</code></pre>
+
+<p>把数据传进缓冲另一个方式是向缓冲内存请求一个指针，你自己直接把数据复制到缓冲中。调用<code>glMapBuffer</code>函数OpenGL会返回一个当前绑定缓冲的内存的地址，供我们操作：</p>
+<pre><code class="c++">float data[] = {
+  0.5f, 1.0f, -0.35f
+  ...
+};
+
+glBindBuffer(GL_ARRAY_BUFFER, buffer);
+// 获取当前绑定缓存buffer的内存地址
+void* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+// 向缓冲中写入数据
+memcpy(ptr, data, sizeof(data));
+// 完成够别忘了告诉OpenGL我们不再需要它了
+glUnmapBuffer(GL_ARRAY_BUFFER);
+</code></pre>
+
+<p>调用<code>glUnmapBuffer</code>函数可以告诉OpenGL我们已经用完指针了，OpenGL会知道你已经做完了。通过解映射（unmapping），指针会不再可用，如果OpenGL可以把你的数据映射到缓冲上，就会返回<code>GL_TRUE</code>。</p>
+<p>把数据直接映射到缓冲上使用<code>glMapBuffer</code>很有用，因为不用把它储存在临时内存里。你可以从文件读取数据然后直接复制到缓冲的内存里。</p>
+<h2 id="_3">分批处理顶点属性</h2>
+<p>使用<code>glVertexAttribPointer</code>函数可以指定缓冲内容的顶点数组的属性的布局(layout)。我们已经知道，通过使用顶点属性指针我们可以交叉属性，也就是说我们可以把每个顶点的位置、法线、纹理坐标放在彼此挨着的地方。现在我们了解了更多的缓冲的内容，可以采取另一种方式了。</p>
+<p>我们可以做的是把每种类型的属性的所有向量数据批量保存在一个布局，而不是交叉布局。与交叉布局123123123123不同，我们采取批量方式111122223333。</p>
+<p>当从文件加载顶点数据时你通常获取一个位置数组，一个法线数组和一个纹理坐标数组。需要花点力气才能把它们结合为交叉数据。使用<code>glBufferSubData</code>可以简单的实现分批处理方式：</p>
+<pre><code class="c++">GLfloat positions[] = { ... };
+GLfloat normals[] = { ... };
+GLfloat tex[] = { ... };
+// 填充缓冲
+glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), &amp;positions);
+glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions), sizeof(normals), &amp;normals);
+glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(normals), sizeof(tex), &amp;tex);
+</code></pre>
+
+<p>这样我们可以把属性数组当作一个整体直接传输给缓冲，不需要再处理它们了。我们还可以把它们结合为一个更大的数组然后使用<code>glBufferData</code>立即直接填充它，不过对于这项任务使用<code>glBufferSubData</code>是更好的选择。</p>
+<p>我们还要更新顶点属性指针来反应这些改变：</p>
+<pre><code class="c++">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);  
+glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)(sizeof(positions)));  
+glVertexAttribPointer(
+  2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)(sizeof(positions) + sizeof(normals)));
+</code></pre>
+
+<p>注意，<code>stride</code>参数等于顶点属性的大小，由于同类型的属性是连续储存的，所以下一个顶点属性向量可以在它的后面3（或2）的元素那儿找到。</p>
+<p>这是我们有了另一种设置和指定顶点属性的方式。使用哪个方式对OpenGL来说也不会有立竿见影的效果，这只是一种采用更加组织化的方式去设置顶点属性。选用哪种方式取决于你的偏好和应用类型。</p>
+<p>## 复制缓冲</p>
+<p>当你的缓冲被数据填充以后，你可能打算让其他缓冲能分享这些数据或者打算把缓冲的内容复制到另一个缓冲里。<code>glCopyBufferSubData</code>函数让我们能够相对容易地把一个缓冲的数据复制到另一个缓冲里。函数的原型是：</p>
+<pre><code class="c++">void glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
+</code></pre>
+
+<p><code>readtarget</code>和<code>writetarget</code>参数是复制的来源和目的的缓冲目标。例如我们可以从一个<code>VERTEX_ARRAY_BUFFER</code>复制到一个<code>VERTEX_ELEMENT_ARRAY_BUFFER</code>，各自指定源和目的的缓冲目标。当前绑定到这些缓冲目标上的缓冲会被影响到。</p>
+<p>但如果我们打算读写的两个缓冲都是顶点数组缓冲(<code>GL_VERTEX_ARRAY_BUFFER</code>)怎么办？我们不能用通一个缓冲作为操作的读取和写入目标次。出于这个理由，OpenGL给了我们另外两个缓冲目标叫做：<code>GL_COPY_READ_BUFFER</code>和<code>GL_COPY_WRITE_BUFFER</code>。这样我们就可以把我们选择的缓冲，用上面二者作为<code>readtarget</code>和<code>writetarget</code>的参数绑定到新的缓冲目标上了。</p>
+<p>接着<code>glCopyBufferSubData</code>函数会从readoffset处读取的size大小的数据，写入到writetarget缓冲的writeoffset位置。下面是一个复制两个顶点数组缓冲的例子：</p>
+<pre><code class="c++">GLfloat vertexData[] = { ... };
+glBindBuffer(GL_COPY_READ_BUFFER, vbo1);
+glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);
+glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, sizeof(vertexData));
+</code></pre>
+
+<p>我们也可以把<code>writetarget</code>缓冲绑定为新缓冲目标类型其中之一：</p>
+<pre><code class="c++">GLfloat vertexData[] = { ... };
+glBindBuffer(GL_ARRAY_BUFFER, vbo1);
+glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);
+glCopyBufferSubData(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, sizeof(vertexData));
+</code></pre>
+
+<p>有了这些额外的关于如何操纵缓冲的知识，我们已经可以以更有趣的方式来使用它们了。当你对OpenGL更熟悉，这些新缓冲方法就变得更有用。下个教程中我们会讨论unform缓冲对象，彼时我们会充分利用<code>glBufferSubData</code>。</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>混合 - LearnOpenGL-CN</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">LearnOpenGL-CN</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">入门(Getting started)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/01%20OpenGL/">OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/02%20Creating%20a%20window/">创建窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/03%20Hello%20Window/">你好，窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/04%20Hello%20Triangle/">你好，三角形</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/05%20Shaders/">着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/06%20Textures/">纹理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/07%20Transformations/">变换</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/08%20Coordinate%20Systems/">坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/09%20Camera/">摄像机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/10%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">光照(Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../02%20Lighting/01%20Colors/">颜色</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/02%20Basic%20Lighting/">光照基础</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/03%20Materials/">材质</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/04%20Lighting%20maps/">光照贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/05%20Light%20casters/">投光物</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/06%20Multiple%20lights/">多光源</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/07%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">加载模型(Model Loading)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/01%20Assimp/">Assimp开源模型导入库</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/02%20Mesh/">网格</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/03%20Model/">模型</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级OpenGL(Advanced OpenGL)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20Depth%20testing/">深度测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20Stencil%20testing/">模板测试</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">混合</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20Face%20culling/">面剔除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20Framebuffers/">帧缓冲</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20Cubemaps/">立方体贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20Advanced%20Data/">高级数据</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20Advanced%20GLSL/">高级GLSL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../09%20Geometry%20Shader/">几何着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20Instancing/">实例化</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20Anti%20Aliasing/">抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级光照(Advanced Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/01%20Advanced%20Lighting/">高级光照</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/02%20Gamma%20Correction/">Gamma校正</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">阴影</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/">阴影映射</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/02%20Point%20Shadows/">点阴影</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/03%20CSM/">CSM</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/04%20Normal%20Mapping/">法线贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/05%20Parallax%20Mapping/">视差贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/06%20HDR/">HDR</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/07%20Bloom/">泛光</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/08%20Deferred%20Shading/">延迟着色法</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/09%20SSAO/">SSAO</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">实战(In Practice)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/02%20Text%20Rendering/">文字渲染</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">2D游戏</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/2D-Game/01%20Breakout/">Breakout</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../02%20Stencil%20testing/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../04%20Face%20culling/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#blending">混合（Blending）</a></li>
+        
+            <li><a href="#_1">忽略片段</a></li>
+        
+            <li><a href="#_2">混合</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="blending">混合（Blending）</h1>
+<table>
+<thead>
+<tr>
+<th>原文</th>
+<th><a href="http://learnopengl.com/#!Advanced-OpenGL/Blending">Blending</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作者</td>
+<td>JoeyDeVries</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td><a href="http://bullteacher.com/">Django</a></td>
+</tr>
+<tr>
+<td>校对</td>
+<td><a href="http://geequlim.com">Geequlim</a></td>
+</tr>
+</tbody>
+</table>
+<p>在OpenGL中，物体透明技术通常被叫做混合(Blending)。透明是物体（或物体的一部分）非纯色而是混合色，这种颜色来自于不同浓度的自身颜色和它后面的物体颜色。一个有色玻璃窗就是一种透明物体，玻璃有自身的颜色，但是最终的颜色包含了所有玻璃后面的颜色。这也正是混合这名称的出处，因为我们将多种（来自于不同物体）颜色混合为一个颜色，透明使得我们可以看穿物体。</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_transparency.png" /></p>
+<p>透明物体可以是完全透明（它使颜色完全穿透）或者半透明的（它使颜色穿透的同时也显示自身颜色）。一个物体的透明度，被定义为它的颜色的alpha值。alpha颜色值是一个颜色向量的第四个元素，你可能已经看到很多了。在这个教程前，我们一直把这个元素设置为1.0，这样物体的透明度就是0.0，同样的，当alpha值是0.0时就表示物体是完全透明的，alpha值为0.5时表示物体的颜色由50%的自身的颜色和50%的后面的颜色组成。</p>
+<p>我们之前所使用的纹理都是由3个颜色元素组成的：红、绿、蓝，但是有些纹理同样有一个内嵌的aloha通道，它为每个纹理像素(Texel)包含着一个alpha值。这个alpha值告诉我们纹理的哪个部分有透明度，以及这个透明度有多少。例如，下面的窗子纹理的玻璃部分的alpha值为0.25(它的颜色是完全红色，但是由于它有75的透明度，它会很大程度上反映出网站的背景色，看起来就不那么红了)，角落部分alpha是0.0。</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_transparent_window.png" /></p>
+<p>我们很快就会把这个窗子纹理加到场景中，但是首先，我们将讨论一点简单的技术来实现纹理的半透明，也就是完全透明和完全不透明。</p>
+<h2 id="_1">忽略片段</h2>
+<p>有些图像并不关心半透明度，但也想基于纹理的颜色值显示一部分。例如，创建像草这种物体你不需要花费很大力气，通常把一个草的纹理贴到2D四边形上，然后把这个四边形放置到你的场景中。可是，草并不是像2D四边形这样的形状，而只需要显示草纹理的一部分而忽略其他部分。</p>
+<p>下面的纹理正是这样的纹理，它既有完全不透明的部分（alpha值为1.0）也有完全透明的部分（alpha值为0.0），而没有半透明的部分。你可以看到没有草的部分，图片显示了网站的背景色，而不是它自身的那部分颜色。</p>
+<p><img alt="" src="http://learnopengl.com/img/textures/grass.png" /></p>
+<p>所以，当向场景中添加像这样的纹理时，我们不希望看到一个方块图像，而是只显示实际的纹理像素，剩下的部分可以被看穿。我们要忽略(丢弃)纹理透明部分的像素，不必将这些片段储存到颜色缓冲中。在此之前，我们还要学一下如何加载一个带有透明像素的纹理。</p>
+<p>加载带有alpha值的纹理我们需要告诉SOIL，去加载RGBA元素图像，而不再是RGB元素的。SOIL能以RGBA的方式加载大多数没有alpha值的纹理，它会将这些像素的alpha值设为了1.0。</p>
+<pre><code class="c++">unsigned char * image = SOIL_load_image(path, &amp;width, &amp;height, 0, SOIL_LOAD_RGBA);
+</code></pre>
+
+<p>不要忘记还要改变OpenGL生成的纹理：</p>
+<pre><code class="c++">glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+</code></pre>
+
+<p>保证你在片段着色器中获取了纹理的所有4个颜色元素，而不仅仅是RGB元素：</p>
+<pre><code class="c++">void main()
+{
+    // color = vec4(vec3(texture(texture1, TexCoords)), 1.0);
+    color = texture(texture1, TexCoords);
+}
+</code></pre>
+
+<p>现在我们知道了如何加载透明纹理，是时候试试在深度测试教程里那个场景中添加几根草了。</p>
+<p>我们创建一个<code>std::vector</code>，并向里面添加几个<code>glm::vec3</code>变量，来表示草的位置：</p>
+<pre><code class="c++">vector&lt;glm::vec3&gt; vegetation;
+vegetation.push_back(glm::vec3(-1.5f,  0.0f, -0.48f));
+vegetation.push_back(glm::vec3( 1.5f,  0.0f,  0.51f));
+vegetation.push_back(glm::vec3( 0.0f,  0.0f,  0.7f));
+vegetation.push_back(glm::vec3(-0.3f,  0.0f, -2.3f));
+vegetation.push_back(glm::vec3( 0.5f,  0.0f, -0.6f));
+</code></pre>
+
+<p>一个单独的四边形被贴上草的纹理，这并不能完美的表现出真实的草，但是比起加载复杂的模型还是要高效很多，利用一些小技巧，比如在同一个地方添加多个不同朝向的草，还是能获得比较好的效果的。</p>
+<p>由于草纹理被添加到四边形物体上，我们需要再次创建另一个VAO，向里面填充VBO，以及设置合理的顶点属性指针。在我们绘制完地面和两个立方体后，我们就来绘制草叶：</p>
+<pre><code class="c++">glBindVertexArray(vegetationVAO);
+glBindTexture(GL_TEXTURE_2D, grassTexture);  
+for(GLuint i = 0; i &lt; vegetation.size(); i++)
+{
+    model = glm::mat4();
+    model = glm::translate(model, vegetation[i]);
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}  
+glBindVertexArray(0);
+</code></pre>
+
+<p>运行程序你将看到：
+<img alt="" src="http://learnopengl.com/img/advanced/blending_no_discard.png" /></p>
+<p>出现这种情况是因为OpenGL默认是不知道如何处理alpha值的，不知道何时忽略(丢弃)它们。我们不得不手动做这件事。幸运的是这很简单，感谢着色器，GLSL为我们提供了discard命令，它保证了片段不会被进一步处理，这样就不会进入颜色缓冲。有了这个命令我们就可以在片段着色器中检查一个片段是否有在一定的阈限下的alpha值，如果有，那么丢弃这个片段，就好像它不存在一样：</p>
+<pre><code class="c++">#version 330 core
+in vec2 TexCoords;
+
+out vec4 color;
+
+uniform sampler2D texture1;
+
+void main()
+{
+    vec4 texColor = texture(texture1, TexCoords);
+    if(texColor.a &lt; 0.1)
+        discard;
+    color = texColor;
+}
+</code></pre>
+
+<p>在这儿我们检查被采样纹理颜色包含着一个低于0.1这个阈限的alpha值，如果有，就丢弃这个片段。这个片段着色器能够保证我们只渲染哪些不是完全透明的片段。现在我们来看看效果：</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_discard.png" /></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>需要注意的是，当采样纹理边缘的时候，OpenGL在边界值和下一个重复的纹理的值之间进行插值（因为我们把它的放置方式设置成了GL_REPEAT）。这样就行了，但是由于我们使用的是透明值，纹理图片的上部获得了它的透明值是与底边的纯色值进行插值的。结果就是一个有点半透明的边，你可以从我们的纹理四边形的四周看到。为了防止它的出现，当你使用alpha纹理的时候要把纹理环绕方式设置为<code>GL_CLAMP_TO_EDGE</code>：</p>
+<p><code>glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);</code></p>
+<p><code>glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);</code></p>
+</div>
+<p>你可以<a href="http://learnopengl.com/code_viewer.php?code=advanced/blending_discard">在这里得到源码</a>。</p>
+<h2 id="_2">混合</h2>
+<p>上述丢弃片段的方式，不能使我们获得渲染半透明图像，我们要么渲染出像素，要么完全地丢弃它。为了渲染出不同的透明度级别，我们需要开启<strong>混合</strong>(Blending)。像大多数OpenGL的功能一样，我们可以开启<code>GL_BLEND</code>来启用混合功能：</p>
+<pre><code class="c++">glEnable(GL_BLEND);
+</code></pre>
+
+<p>开启混合后，我们还需要告诉OpenGL它该如何混合。</p>
+<p>OpenGL以下面的方程进行混合：</p>
+<p>C¯result = C¯source ∗ Fsource + C¯destination ∗ Fdestination</p>
+<ul>
+<li>C¯source：源颜色向量。这是来自纹理的本来的颜色向量。</li>
+<li>C¯destination：目标颜色向量。这是储存在颜色缓冲中当前位置的颜色向量。</li>
+<li>Fsource：源因子。设置了对源颜色的alpha值影响。</li>
+<li>Fdestination：目标因子。设置了对目标颜色的alpha影响。</li>
+</ul>
+<p>片段着色器运行完成并且所有的测试都通过以后，混合方程才能自由执行片段的颜色输出，当前它在颜色缓冲中（前面片段的颜色在当前片段之前储存）。源和目标颜色会自动被OpenGL设置，而源和目标因子可以让我们自由设置。我们来看一个简单的例子：</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_equation.png" /></p>
+<p>我们有两个方块，我们希望在红色方块上绘制绿色方块。红色方块会成为源颜色（它会先进入颜色缓冲），我们将在红色方块上绘制绿色方块。</p>
+<p>那么问题来了：我们怎样来设置因子呢？我们起码要把绿色方块乘以它的alpha值，所以我们打算把Fsource设置为源颜色向量的alpha值：0.6。接着，让目标方块的浓度等于剩下的alpha值。如果最终的颜色中绿色方块的浓度为60%，我们就把红色的浓度设为40%（1.0 – 0.6）。所以我们把Fdestination设置为1减去源颜色向量的alpha值。方程将变成：</p>
+<p><img alt="" src="../../img/blending_C_result.png" /></p>
+<p>最终方块结合部分包含了60%的绿色和40%的红色，得到一种脏兮兮的颜色：</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_equation_mixed.png" /></p>
+<p>最后的颜色被储存到颜色缓冲中，取代先前的颜色。</p>
+<p>这个方案不错，但我们怎样告诉OpenGL来使用这样的因子呢？恰好有一个叫做<code>glBlendFunc</code>的函数。</p>
+<p><code>void glBlendFunc(GLenum sfactor, GLenum dfactor)</code>接收两个参数，来设置源（source）和目标（destination）因子。OpenGL为我们定义了很多选项，我们把最常用的列在下面。注意，颜色常数向量C¯constant可以用<code>glBlendColor</code>函数分开来设置。</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GL_ZERO</td>
+<td>0</td>
+</tr>
+<tr>
+<td>GL_ONE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>GL_SRC_COLOR</td>
+<td>颜色C¯source.</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_SRC_COLOR</td>
+<td>1 − C¯source.</td>
+</tr>
+<tr>
+<td>GL_DST_COLOR</td>
+<td>C¯destination</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_DST_COLOR</td>
+<td>1 − C¯destination.</td>
+</tr>
+<tr>
+<td>GL_SRC_ALPHA</td>
+<td>C¯source的alpha值</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_SRC_ALPHA</td>
+<td>1 - C¯source的alpha值</td>
+</tr>
+<tr>
+<td>GL_DST_ALPHA</td>
+<td>C¯destination的alpha值</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_DST_ALPHA</td>
+<td>1 - C¯destination的alpha值</td>
+</tr>
+<tr>
+<td>GL_CONSTANT_COLOR</td>
+<td>C¯constant.</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_CONSTANT_COLOR</td>
+<td>1 - C¯constant</td>
+</tr>
+<tr>
+<td>GL_CONSTANT_ALPHA</td>
+<td>C¯constant的alpha值</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_CONSTANT_ALPHA</td>
+<td>1 − C¯constant的alpha值</td>
+</tr>
+</tbody>
+</table>
+<p>为从两个方块获得混合结果，我们打算把源颜色的alpha给源因子，1-alpha给目标因子。调整到<code>glBlendFunc</code>之后就像这样：</p>
+<pre><code class="c++">glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+</code></pre>
+
+<p>也可以为RGB和alpha通道各自设置不同的选项，使用<code>glBlendFuncSeperate</code>：</p>
+<pre><code class="c++">glBlendFuncSeperate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,GL_ONE, GL_ZERO);
+</code></pre>
+
+<p>这个方程就像我们之前设置的那样，设置了RGB元素，但是只让最终的alpha元素被源alpha值影响到。</p>
+<p>OpenGL给了我们更多的自由，我们可以改变方程源和目标部分的操作符。现在，源和目标元素已经相加了。如果我们愿意的话，我们还可以把它们相减。</p>
+<p><code>void glBlendEquation(GLenum mode)</code>允许我们设置这个操作，有3种可行的选项：</p>
+<ul>
+<li>GL_FUNC_ADD：默认的，彼此元素相加：C¯result = Src + Dst.</li>
+<li>GL_FUNC_SUBTRACT：彼此元素相减： C¯result = Src – Dst.</li>
+<li>GL_FUNC_REVERSE_SUBTRACT：彼此元素相减，但顺序相反：C¯result = Dst – Src.</li>
+</ul>
+<p>通常我们可以简单地省略<code>glBlendEquation</code>因为GL_FUNC_ADD在大多数时候就是我们想要的，但是如果你如果你真想尝试努力打破主流常规，其他的方程或许符合你的要求。</p>
+<h3 id="_3">渲染半透明纹理</h3>
+<p>现在我们知道OpenGL如何处理混合，是时候把我们的知识运用起来了，我们来添加几个半透明窗子。我们会使用本教程开始时用的那个场景，但是不再渲染草纹理，取而代之的是来自教程开始处半透明窗子纹理。</p>
+<p>首先，初始化时我们需要开启混合，设置合适和混合方程：</p>
+<pre><code class="c++">glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+</code></pre>
+
+<p>由于我们开启了混合，就不需要丢弃片段了，所以我们把片段着色器设置为原来的那个版本：</p>
+<pre><code class="c++">#version 330 core
+in vec2 TexCoords;
+
+out vec4 color;
+
+uniform sampler2D texture1;
+
+void main()
+{
+    color = texture(texture1, TexCoords);
+}
+</code></pre>
+
+<p>这一次（无论OpenGL什么时候去渲染一个片段），它都根据alpha值，把当前片段的颜色和颜色缓冲中的颜色进行混合。因为窗子的玻璃部分的纹理是半透明的，我们应该可以透过玻璃看到整个场景。</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_incorrect_order.png" /></p>
+<p>如果你仔细看看，就会注意到有些不对劲。前面的窗子透明部分阻塞了后面的。为什么会这样？</p>
+<p>原因是深度测试在与混合的一同工作时出现了点状况。当写入深度缓冲的时候，深度测试不关心片段是否有透明度，所以透明部分被写入深度缓冲，就和其他值没什么区别。结果是整个四边形的窗子被检查时都忽视了透明度。即便透明部分应该显示出后面的窗子，深度缓冲还是丢弃了它们。</p>
+<p>所以我们不能简简单单地去渲染窗子，我们期待着深度缓冲为我们解决这所有问题；这也正是混合之处代码不怎么好看的原因。为保证前面窗子显示了它后面的窗子，我们必须首先绘制后面的窗子。这意味着我们必须手工调整窗子的顺序，从远到近地逐个渲染。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>对于全透明物体，比如草叶，我们选择简单的丢弃透明像素而不是混合，这样就减少了令我们头疼的问题（没有深度测试问题）。</p>
+</div>
+<h3 id="_4">别打乱顺序</h3>
+<p>要让混合在多物体上有效，我们必须先绘制最远的物体，最后绘制最近的物体。普通的无混合物体仍然可以使用深度缓冲正常绘制，所以不必给它们排序。我们一定要保证它们在透明物体前绘制好。当无透明度物体和透明物体一起绘制的时候，通常要遵循以下原则：</p>
+<p>先绘制所有不透明物体。
+为所有透明物体排序。
+按顺序绘制透明物体。
+一种排序透明物体的方式是，获取一个物体到观察者透视图的距离。这可以通过获取摄像机的位置向量和物体的位置向量来得到。接着我们就可以把它和相应的位置向量一起储存到一个map数据结构（STL库）中。map会自动基于它的键排序它的值，所以当我们把它们的距离作为键添加到所有位置中后，它们就自动按照距离值排序了：</p>
+<pre><code class="c++">std::map&lt;float, glm::vec3&gt; sorted;
+for (GLuint i = 0; i &lt; windows.size(); i++) // windows contains all window positions
+{
+    GLfloat distance = glm::length(camera.Position - windows[i]);
+    sorted[distance] = windows[i];
+}
+</code></pre>
+
+<p>最后产生了一个容器对象，基于它们距离从低到高储存了每个窗子的位置。</p>
+<p>随后当渲染的时候，我们逆序获取到每个map的值（从远到近），然后以正确的绘制相应的窗子：</p>
+<pre><code class="c++">for(std::map&lt;float,glm::vec3&gt;::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it)
+{
+    model = glm::mat4();
+    model = glm::translate(model, it-&gt;second);
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+</code></pre>
+
+<p>我们从map得来一个逆序的迭代器，迭代出每个逆序的条目，然后把每个窗子的四边形平移到相应的位置。这个相对简单的方法对透明物体进行了排序，修正了前面的问题，现在场景看起来像这样：</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/blending_sorted.png" /></p>
+<p>你可以<a href="http://learnopengl.com/code_viewer.php?code=advanced/blending_sorted">从这里得到完整的带有排序的源码</a>。</p>
+<p>虽然这个按照它们的距离对物体进行排序的方法在这个特定的场景中能够良好工作，但它不能进行旋转、缩放或者进行其他的变换，奇怪形状的物体需要一种不同的方式，而不能简单的使用位置向量。</p>
+<p>在场景中排序物体是个有难度的技术，它很大程度上取决于你场景的类型，更不必说会耗费额外的处理能力了。完美地渲染带有透明和不透明的物体的场景并不那么容易。有更高级的技术例如次序无关透明度（order independent transparency），但是这超出了本教程的范围。现在你不得不采用普通的混合你的物体，但是如果你小心谨慎，并知道这个局限，你仍可以得到颇为合适的混合实现。</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

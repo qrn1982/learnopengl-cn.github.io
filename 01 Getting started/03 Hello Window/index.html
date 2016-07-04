@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>你好，窗口 - LearnOpenGL-CN</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">LearnOpenGL-CN</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">入门(Getting started)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20OpenGL/">OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20Creating%20a%20window/">创建窗口</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">你好，窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20Hello%20Triangle/">你好，三角形</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20Shaders/">着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20Textures/">纹理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20Transformations/">变换</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20Coordinate%20Systems/">坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../09%20Camera/">摄像机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">光照(Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../02%20Lighting/01%20Colors/">颜色</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/02%20Basic%20Lighting/">光照基础</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/03%20Materials/">材质</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/04%20Lighting%20maps/">光照贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/05%20Light%20casters/">投光物</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/06%20Multiple%20lights/">多光源</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/07%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">加载模型(Model Loading)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/01%20Assimp/">Assimp开源模型导入库</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/02%20Mesh/">网格</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/03%20Model/">模型</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级OpenGL(Advanced OpenGL)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/01%20Depth%20testing/">深度测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/02%20Stencil%20testing/">模板测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/03%20Blending/">混合</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/04%20Face%20culling/">面剔除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/05%20Framebuffers/">帧缓冲</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/06%20Cubemaps/">立方体贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/07%20Advanced%20Data/">高级数据</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/08%20Advanced%20GLSL/">高级GLSL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/09%20Geometry%20Shader/">几何着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/10%20Instancing/">实例化</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../04%20Advanced%20OpenGL/11%20Anti%20Aliasing/">抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级光照(Advanced Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/01%20Advanced%20Lighting/">高级光照</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/02%20Gamma%20Correction/">Gamma校正</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">阴影</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/">阴影映射</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/02%20Point%20Shadows/">点阴影</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/03%20CSM/">CSM</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/04%20Normal%20Mapping/">法线贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/05%20Parallax%20Mapping/">视差贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/06%20HDR/">HDR</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/07%20Bloom/">泛光</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/08%20Deferred%20Shading/">延迟着色法</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/09%20SSAO/">SSAO</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">实战(In Practice)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/02%20Text%20Rendering/">文字渲染</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">2D游戏</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/2D-Game/01%20Breakout/">Breakout</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../02%20Creating%20a%20window/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../04%20Hello%20Triangle/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#_1">你好，窗口</a></li>
+        
+            <li><a href="#glew">GLEW</a></li>
+        
+            <li><a href="#viewport">视口(Viewport)</a></li>
+        
+            <li><a href="#_2">准备好你的引擎</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="_1">你好，窗口</h1>
+<table>
+<thead>
+<tr>
+<th>原文</th>
+<th><a href="http://learnopengl.com/#!Getting-started/Hello-Window">Hello Window</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作者</td>
+<td>JoeyDeVries</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td>Geequlim</td>
+</tr>
+<tr>
+<td>校对</td>
+<td>Geequlim</td>
+</tr>
+</tbody>
+</table>
+<p>上一节中我们获取并编译了GLFW和GLEW这两个开源库，现在我们就可以使用它们来创建一个OpenGL绘图窗口了。首先，新建一个<code>.cpp</code>文件，然后把下面的代码粘贴到该文件的最前面。注意，之所以定义<code>GLEW_STATIC</code>宏，是因为我们使用GLEW的静态链接库。</p>
+<pre><code class="c++">// GLEW
+#define GLEW_STATIC
+#include &lt;GL/glew.h&gt;
+// GLFW
+#include &lt;GLFW/glfw3.h&gt;
+</code></pre>
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>请确认在包含GLFW的头文件之前包含了GLEW的头文件。在包含glew.h头文件时会引入许多OpenGL必要的头文件(例如GL/gl.h)，所以#include <GL/glew.h>应放在引入其他头文件的代码之前。</p>
+</div>
+<p>接下来我们创建<code>main</code>函数，并做一些初始化GLFW的操作：</p>
+<pre><code class="c++">int main()
+{
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+    return 0;
+}
+</code></pre>
+
+<p>首先我们在<code>main</code>函数中调用<code>glfwInit</code>函数来初始化GLFW，然后我们可以使用<code>glfwWindowHint</code>函数来配置GLFW。<code>glfwWindowHint</code>函数的第一个参数表示我们要进行什么样的配置，我们可以选择大量以<code>GLFW_</code>开头的枚举值；第二个参数接受一个整形，用来设置这个配置的值。该函数的所有的选项以及对应的值都可以在 <a href="http://www.glfw.org/docs/latest/window.html#window_hints">GLFW&rsquo;s window handling</a> 这篇文档中找到。如果你现在编译你的cpp文件会得到大量的连接错误，这是因为你还需要进一步设置GLFW。</p>
+<p>由于本站的教程都是基于OpenGL3.3以后的版本展开讨论的，所以我们需要告诉GLFW我们要使用的OpenGL版本是3.3，这样GLFW会在创建OpenGL上下文时做出适当的调整。这也可以确保用户在没有适当的OpenGL版本支持的情况下无法运行。在这里我们告诉GLFW想要的OpenGL版本号是3.3，并且不允许用户调整窗口的大小。我们明确地告诉GLFW我们想要使用核心模式(Core-profile)，这将导致我们无法使用那些已经废弃的API，而这不正是一个很好的提醒吗？当我们不小心用了旧功能时报错，就能避免使用一些被废弃的用法了。如果你使用的是Mac OSX系统你还需要加下面这行代码这些配置才能起作用：</p>
+<pre><code class="c++">glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+</code></pre>
+
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>请确认您的系统支持OpenGL3.3或更高版本，否则此应用有可能会崩溃或者出现不可预知的错误。可以通过运行glew附带的glxinfo程序或者其他的工具(例如<a href="http://download.cnet.com/OpenGL-Extensions-Viewer/3000-18487_4-34442.html">OpenGL Extension Viewer</a>来查看你的OpenGL版本。如果你的OpenGL版本低于3.3请更新你的驱动程序或者有必要的话更新设备。</p>
+</div>
+<p>接下来我们创建一个窗口对象，这个窗口对象中具有和窗口相关的许多数据，而且会被GLFW的其他函数频繁地用到。</p>
+<pre><code class="c++">GLFWwindow* window = glfwCreateWindow(800, 600, &quot;LearnOpenGL&quot;, nullptr, nullptr);
+if (window == nullptr)
+{
+    std::cout &lt;&lt; &quot;Failed to create GLFW window&quot; &lt;&lt; std::endl;
+    glfwTerminate();
+    return -1;
+}
+glfwMakeContextCurrent(window);
+</code></pre>
+
+<p><code>glfwCreateWindow</code>函数需要窗口的宽和高作为它的前两个参数；第三个参数表示只这个窗口的名称(标题)，这里我们使用<strong>&ldquo;LearnOpenGL&rdquo;</strong>，当然你也可以使用你喜欢的名称；最后两个参数我们暂时忽略，先置为空指针就行。它的返回值<code>GLFWwindow</code>对象的指针会在其他的GLFW操作中使用到。创建完窗口我们就可以通知GLFW给我们的窗口在当前的线程中创建我们等待已久的OpenGL上下文了。</p>
+<h3 id="glew">GLEW</h3>
+<p>在之前的教程中已经提到过，GLEW是用来管理OpenGL的函数指针的，所以在调用任何OpenGL的函数之前我们需要初始化GLEW。</p>
+<pre><code class="c++">glewExperimental = GL_TRUE;
+if (glewInit() != GLEW_OK)
+{
+    std::cout &lt;&lt; &quot;Failed to initialize GLEW&quot; &lt;&lt; std::endl;
+    return -1;
+}
+</code></pre>
+
+<p>请注意，我们在初始化GLEW之前设置<code>glewExperimental</code>变量的值为<code>GL_TRUE</code>，这样做能让GLEW在管理OpenGL的函数指针时更多地使用现代化的技术，如果把它设置为<code>GL_FALSE</code>的话可能会在使用OpenGL的核心模式(Core-profile)时出现一些问题。</p>
+<h3 id="viewport">视口(Viewport)</h3>
+<p>在我们绘制之前还有一件重要的事情要做，我们必须告诉OpenGL渲染窗口的尺寸大小，这样OpenGL才只能知道要显示数据的窗口坐标。我们可以通过调用<code>glViewport</code>函数来设置这些维度：</p>
+<pre><code class="c++">glViewport(0, 0, 800, 600);  
+</code></pre>
+
+<p>前两个参数设置窗口左下角的位置。第三个和第四个参数设置渲染窗口的宽度和高度,我们设置成与GLFW的窗口的宽高大小，我们也可以将这个值设置成比窗口小的数值，然后所有的OpenGL渲染将会显示在一个较小的区域。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>OpenGL使用<code>glViewport</code>定义的位置和宽高进行位置坐标的转换，将OpenGL中的位置坐标转换为你的屏幕坐标。例如，OpenGL中的坐标(0.5,0.5)有可能被转换为屏幕中的坐标(200,450)。注意，OpenGL只会把-1到1之间的坐标转换为屏幕坐标，因此在此例中(-1，1)转换为屏幕坐标是(0,600)。</p>
+</div>
+<h2 id="_2">准备好你的引擎</h2>
+<p>我们可不希望只绘制一个图像之后我们的应用程序就关闭窗口并立即退出。我们希望程序在我们明确地关闭它之前一直保持运行状态并能够接受用户输入。因此，我们需要在程序中添加一个while循环，我们可以把它称之为游戏循环(Game Loop)，这样我们的程序就能在我们让GLFW退出前保持运行了。下面几行的代码就实现了一个简单的游戏循环：</p>
+<pre><code class="c++">while(!glfwWindowShouldClose(window))
+{
+    glfwPollEvents();
+    glfwSwapBuffers(window);
+}
+</code></pre>
+
+<ul>
+<li><code>glfwWindowShouldClose</code>函数在我们每次循环的开始前检查一次GLFW是否准备好要退出，如果是这样的话该函数返回true然后游戏循环便结束了，之后为我们就可以关闭应用程序了。</li>
+<li><code>glfwPollEvents</code>函数检查有没有触发什么事件(比如键盘有按钮按下、鼠标移动等)然后调用对应的回调函数(我们可以手动设置这些回调函数)。我们一般在游戏循环的一开始就检查事件。</li>
+<li>调用<code>glfwSwapBuffers</code>会交换缓冲区(储存着GLFW窗口每一个像素颜色的缓冲区)</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>双缓冲区(Double buffer)</strong></p>
+<p>应用程序使用单缓冲区绘图可能会存在图像闪烁的问题。 这是因为生成的图像不是一下子被绘制出来的，而是按照从左到右，由上而下逐像素地绘制而成的。最终图像不是在瞬间显示给用户,而是通过一步一步地计算结果绘制的，这可能会花费一些时间。为了规避这些问题，我们应用双缓冲区渲染窗口应用程序。前面的缓冲区保存着计算后可显示给用户的图像，被显示到屏幕上；所有的的渲染命令被传递到后台的缓冲区进行计算。当所有的渲染命令执行结束后，我们交换前台缓冲和后台缓冲，这样图像就立即呈显出来，之后清空缓冲区。</p>
+</div>
+<h3 id="_3">最后一件事</h3>
+<p>当游戏循环结束后我们需要释放之前的操作分配的资源，我们可以在main函数的最后调用<code>glfwTerminate</code>函数来释放GLFW分配的内存。</p>
+<pre><code class="c++">glfwTerminate();
+return 0;
+</code></pre>
+
+<p>这样便能清空GLFW分配的内存然后正确地退出应用程序。现在你可以尝试编译并运行你的应用程序了，你将会看到如下的一个黑色窗口：</p>
+<p><img alt="" src="http://learnopengl.com/img/getting-started/hellowindow.png" /></p>
+<p>如果你没有编译通过或者有什么问题的话，首先请检查你程序的的链接选项是否正确
+。然后对比本教程的代码，检查你的代码是不是哪里写错了，你也可以<a href="http://learnopengl.com/code_viewer.php?code=getting-started/hellowindow">点击这里</a>获取我的完整代码。</p>
+<h3 id="_4">输入</h3>
+<p>我们同样也希望能够在GLFW中实现一些键盘控制，这是通过设置GLFW的<strong>回调函数(Callback Function)</strong>来实现的。回调函数事实上是一个函数指针，当我们为GLFW设置回调函数后，GLWF会在恰当的时候调用它。<strong>按键回调(KeyCallback)</strong>是众多回调函数中的一种，当我们为GLFW设置按键回调之后，GLFW会在用户有键盘交互时调用它。该回调函数的原型如下所示：</p>
+<pre><code class="c++">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+</code></pre>
+
+<p>按键回调函数接受一个<code>GLFWwindow</code>指针作为它的第一个参数；第二个整形参数用来表示事件的按键；第三个整形参数描述用户是否有第二个键按下或释放；第四个整形参数表示事件类型，如按下或释放；最后一个参数是表示是否有Ctrl、Shift、Alt、Super等按钮的操作。GLFW会在恰当的时候调用它，并为各个参数传入适当的值。</p>
+<pre><code class="c++">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+    // 当用户按下ESC键,我们设置window窗口的WindowShouldClose属性为true
+    // 关闭应用程序
+    if(key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GL_TRUE);
+}    
+</code></pre>
+
+<p>在这个<code>key_callback</code>函数中，它检测键盘是否按下了Escape键。如果键的确按下了(不释放)，我们使用<code>glfwSetwindowShouldClose</code>函数设定<code>WindowShouldClose</code>属性为true从而关闭GLFW。main函数的while循环下一次的检测将失败并且程序关闭。</p>
+<p>最后一件事就是通过GLFW使用适合的回调来注册我们的函数，代码是这样的:</p>
+<pre><code class="c++">glfwSetKeyCallback(window, key_callback);  
+</code></pre>
+
+<p>除了按键回调函数之外，我们还能为GLFW注册其他的回调函数。例如，我们可以注册一个函数来处理窗口尺寸变化、处理一些错误信息等。我们可以在创建窗口之后到开始游戏循环之前注册各种回调函数。</p>
+<h3 id="rendering">渲染(Rendering)</h3>
+<p>我们要把所有的渲染操作放到游戏循环中，因为我们想让这些渲染操作在每次游戏循环迭代的时候都能被执行。我们将做如下的操作：</p>
+<pre><code class="c++">// 程序循环
+while(!glfwWindowShouldClose(window))
+{
+    // 检查事件
+    glfwPollEvents();
+
+    // 在这里执行各种渲染操作
+    ...
+
+    //交换缓冲区
+    glfwSwapBuffers(window);
+}
+</code></pre>
+
+<p>为了测试一切都正常，我们想让屏幕清空为一种我们选择的颜色。在每次执行新的渲染之前我们都希望清除上一次循环的渲染结果，除非我们想要看到上一次的结果。我们可以通过调用<code>glClear</code>函数来清空屏幕缓冲区的颜色，他接受一个整形常量参数来指定要清空的缓冲区，这个常量可以是<code>GL_COLOR_BUFFER_BIT</code>，<code>GL_DEPTH_BUFFER_BIT</code>和<code>GL_STENCIL_BUFFER_BIT</code>。由于现在我们只关心颜色值，所以我们只清空颜色缓冲区。</p>
+<pre><code class="c++">glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+glClear(GL_COLOR_BUFFER_BIT);
+</code></pre>
+
+<p>注意，除了<code>glClear</code>之外，我们还要调用<code>glClearColor</code>来设置要清空缓冲的颜色。当调用<code>glClear</code>函数之后，整个指定清空的缓冲区都被填充为<code>glClearColor</code>所设置的颜色。在这里，我们将屏幕设置为了类似黑板的深蓝绿色。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>你应该能够想起来我们在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/01%20OpenGL/">OpenGL</a>教程的内容，<code>glClearColor</code>函数是一个状态设置函数，而<code>glClear</code>函数则是一个状态应用的函数。</p>
+</div>
+<p><img alt="" src="http://learnopengl.com/img/getting-started/hellowindow2.png" /></p>
+<p>此程序的完整源代码可以在<a href="http://learnopengl.com/code_viewer.php?code=getting-started/hellowindow2">这里</a>找到。</p>
+<p>好了，到目前为止我们已经做好开始在游戏循环中添加许多渲染操作的准备了，我认为我们的闲扯已经够多了，从下一篇教程开始我们将真正的征程。</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

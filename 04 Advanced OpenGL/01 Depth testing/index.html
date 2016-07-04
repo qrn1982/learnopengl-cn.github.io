@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>深度测试 - LearnOpenGL-CN</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">LearnOpenGL-CN</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">入门(Getting started)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/01%20OpenGL/">OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/02%20Creating%20a%20window/">创建窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/03%20Hello%20Window/">你好，窗口</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/04%20Hello%20Triangle/">你好，三角形</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/05%20Shaders/">着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/06%20Textures/">纹理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/07%20Transformations/">变换</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/08%20Coordinate%20Systems/">坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/09%20Camera/">摄像机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../01%20Getting%20started/10%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">光照(Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../02%20Lighting/01%20Colors/">颜色</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/02%20Basic%20Lighting/">光照基础</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/03%20Materials/">材质</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/04%20Lighting%20maps/">光照贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/05%20Light%20casters/">投光物</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/06%20Multiple%20lights/">多光源</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../02%20Lighting/07%20Review/">复习</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">加载模型(Model Loading)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/01%20Assimp/">Assimp开源模型导入库</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/02%20Mesh/">网格</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../03%20Model%20Loading/03%20Model/">模型</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级OpenGL(Advanced OpenGL)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li class="active">
+    <a href="./">深度测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20Stencil%20testing/">模板测试</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20Blending/">混合</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20Face%20culling/">面剔除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20Framebuffers/">帧缓冲</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20Cubemaps/">立方体贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20Advanced%20Data/">高级数据</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20Advanced%20GLSL/">高级GLSL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../09%20Geometry%20Shader/">几何着色器</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20Instancing/">实例化</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20Anti%20Aliasing/">抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">高级光照(Advanced Lighting)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/01%20Advanced%20Lighting/">高级光照</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/02%20Gamma%20Correction/">Gamma校正</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">阴影</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/">阴影映射</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/02%20Point%20Shadows/">点阴影</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/03%20Shadows/03%20CSM/">CSM</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/04%20Normal%20Mapping/">法线贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/05%20Parallax%20Mapping/">视差贴图</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/06%20HDR/">HDR</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/07%20Bloom/">泛光</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/08%20Deferred%20Shading/">延迟着色法</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../05%20Advanced%20Lighting/09%20SSAO/">SSAO</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">实战(In Practice)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/02%20Text%20Rendering/">文字渲染</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">2D游戏</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../06%20In%20Practice/2D-Game/01%20Breakout/">Breakout</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../../03%20Model%20Loading/03%20Model/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../02%20Stencil%20testing/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#depth-testing">深度测试(Depth testing)</a></li>
+        
+            <li><a href="#_1">深度测试函数</a></li>
+        
+            <li><a href="#_2">深度值精度</a></li>
+        
+            <li><a href="#_4">深度冲突</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="depth-testing">深度测试(Depth testing)</h1>
+<table>
+<thead>
+<tr>
+<th>原文</th>
+<th><a href="http://learnopengl.com/#!Advanced-OpenGL/Depth-testing">Depth testing</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作者</td>
+<td>JoeyDeVries</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td><a href="http://bullteacher.com/">Django</a></td>
+</tr>
+<tr>
+<td>校对</td>
+<td><a href="http://geequlim.com">Geequlim</a></td>
+</tr>
+</tbody>
+</table>
+<p>在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/08%20Coordinate%20Systems/">坐标系的教程</a>中我们呈现了一个3D容器,使用<strong>深度缓冲</strong>,以防止被其他面遮挡的面渲染到前面。在本教程中我们将细致地讨论被深度缓冲区(depth-buffer或z-buffer)所存储的<strong>深度值</strong>以及它是如何确定一个片段是否被其他片段遮挡。</p>
+<p><strong>深度缓冲</strong>就像<strong>颜色缓冲</strong>(存储所有的片段颜色:视觉输出)那样存储每个片段的信息，(通常) 和颜色缓冲区有相同的宽度和高度。深度缓冲由窗口系统自动创建并将其深度值存储为 16、 24 或 32 位浮点数。在大多数系统中深度缓冲区为24位。</p>
+<p>当深度测试启用的时候， OpenGL 测试深度缓冲区内的深度值。OpenGL 执行深度测试的时候，如果此测试通过，深度缓冲内的值将被设为新的深度值。如果深度测试失败，则丢弃该片段。</p>
+<p>深度测试在片段着色器运行之后(并且模板测试运行之后，我们将在<a href="http://www.learnopengl.com/#!Advanced-OpenGL/Stencil-testing">接下来</a>的教程中讨论)在屏幕空间中执行的。屏幕空间坐标直接有关的视区，由OpenGL的<code>glViewport</code>函数给定，并且可以通过GLSL的片段着色器中内置的 <code>gl_FragCoord</code>变量访问。<code>gl_FragCoord</code> 的 X 和 y 表示该片段的屏幕空间坐标 ((0，0) 在左下角)。<code>gl_FragCoord</code> 还包含一个 z 坐标，它包含了片段的实际深度值。此 z 坐标值是与深度缓冲区的内容进行比较的值。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>现在大多数 GPU 都支持一种称为提前深度测试(Early depth testing)的硬件功能。提前深度测试允许深度测试在片段着色器之前运行。明确一个片段永远不会可见的 (它是其它物体的后面) 我们可以更早地放弃该片段。</p>
+<p>片段着色器通常是相当费时的所以我们应该尽量避免运行它们。对片段着色器提前深度测试一个限制是，你不应该写入片段的深度值。如果片段着色器将写入其深度值，提前深度测试是不可能的，OpenGL不能事先知道深度值。</p>
+</div>
+<p>深度测试默认是关闭的，要启用深度测试的话，我们需要用<code>GL_DEPTH_TEST</code>选项来打开它：</p>
+<pre><code class="c++">glEnable(GL_DEPTH_TEST);
+</code></pre>
+
+<p>一旦启用深度测试，如果片段通过深度测试，OpenGL自动在深度缓冲区存储片段的 z 值，如果深度测试失败，那么相应地丢弃该片段。如果启用深度测试，那么在每个渲染之前还应使用<code>GL_DEPTH_BUFFER_BIT</code>清除深度缓冲区，否则深度缓冲区将保留上一次进行深度测试时所写的深度值</p>
+<pre><code class="c++">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+</code></pre>
+
+<p>在某些情况下我们需要进行深度测试并相应地丢弃片段，但我们不希望更新深度缓冲区，基本上，可以使用一个只读的深度缓冲区；OpenGL允许我们通过将其深度掩码设置为<code>GL_FALSE</code>禁用深度缓冲区写入:</p>
+<pre><code class="c++">glDepthMask(GL_FALSE);
+</code></pre>
+
+<p>注意这只在深度测试被启用的时候有效。</p>
+<h2 id="_1">深度测试函数</h2>
+<p>OpenGL 允许我们修改它深度测试使用的比较运算符(comparison operators)。这样我们能够控制OpenGL通过或丢弃碎片和如何更新深度缓冲区。我们可以通过调用<code>glDepthFunc</code>来设置比较运算符 (或叫做深度函数(depth function)):</p>
+<pre><code class="c++">glDepthFunc(GL_LESS);
+</code></pre>
+
+<p>该函数接受在下表中列出的几个比较运算符:</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GL_ALWAYS</td>
+<td>永远通过测试</td>
+</tr>
+<tr>
+<td>GL_NEVER</td>
+<td>永远不通过测试</td>
+</tr>
+<tr>
+<td>GL_LESS</td>
+<td>在片段深度值小于缓冲区的深度时通过测试</td>
+</tr>
+<tr>
+<td>GL_EQUAL</td>
+<td>在片段深度值等于缓冲区的深度时通过测试</td>
+</tr>
+<tr>
+<td>GL_LEQUAL</td>
+<td>在片段深度值小于等于缓冲区的深度时通过测试</td>
+</tr>
+<tr>
+<td>GL_GREATER</td>
+<td>在片段深度值大于缓冲区的深度时通过测试</td>
+</tr>
+<tr>
+<td>GL_NOTEQUAL</td>
+<td>在片段深度值不等于缓冲区的深度时通过测试</td>
+</tr>
+<tr>
+<td>GL_GEQUAL</td>
+<td>在片段深度值大于等于缓冲区的深度时通过测试</td>
+</tr>
+</tbody>
+</table>
+<p>默认情况下使用<code>GL_LESS</code>，这将丢弃深度值高于或等于当前深度缓冲区的值的片段。</p>
+<p>让我们看看改变深度函数对输出的影响。我们将使用新鲜的代码安装程序显示一个没有灯光的有纹理地板上的两个有纹理的立方体。你可以在这里找到源代码和其着色器代码。</p>
+<p>代码中我们将深度函数设为<code>GL_ALWAYS</code>:</p>
+<pre><code class="c++">glDepthFunc(GL_ALWAYS);
+</code></pre>
+
+<p>这和我们没有启用深度测试得到了相同的行为。深度测试只是简单地通过，所以这样最后绘制的片段就会呈现在之前绘制的片段前面，即使他们应该在前面。由于我们最后绘制地板平面，那么平面的片段会覆盖每个容器的片段:</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/depth_testing_func_always.png" /></p>
+<p>重新设置到<code>GL_LESS</code>给了我们曾经的场景：</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/depth_testing_func_less.png" /></p>
+<h2 id="_2">深度值精度</h2>
+<p>在深度缓冲区中包含深度值介于<code>0.0</code>和<code>1.0</code>之间，从观察者看到其内容与场景中的所有对象的 z 值进行了比较。这些视图空间中的 z 值可以在投影平头截体的近平面和远平面之间的任何值。我们因此需要一些方法来转换这些视图空间 z 值到 [0，1] 的范围内，方法之一就是线性将它们转换为 [0，1] 范围内。下面的 (线性) 方程把 z 值转换为 0.0 和 1.0 之间的值 :</p>
+<p><img alt="" src="../../img/05_01_F_depth.png" /></p>
+<p>这里far和near是我们用来提供到投影矩阵设置可见视图截锥的远近值 (见<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/08%20Coordinate%20Systems/">坐标系</a>)。方程带内锥截体的深度值 z，并将其转换到 [0，1] 范围。在下面的图给出 z 值和其相应的深度值的关系:</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/depth_linear_graph.png" /></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>注意在物体接近近平面的时候，方程给出的深度值接近0.0，物体接近远平面时，方程给出的深度接近1.0。</p>
+</div>
+<p>然而，在实践中是几乎从来不使用这样的线性深度缓冲区。正确的投影特性的非线性深度方程是和1/z成正比的 。这样基本上做的是在z很近是的高精度和 z 很远的时候的低精度。用几秒钟想一想: 我们真的需要让1000单位远的物体和只有1单位远的物体的深度值有相同的精度吗?线性方程没有考虑这一点。</p>
+<p>由于非线性函数是和 1/z 成正比，例如1.0 和 2.0 之间的 z 值，将变为 1.0 到 0.5之间， 这样在z非常小的时候给了我们很高的精度。50.0 和 100.0 之间的 Z 值将只占 2%的浮点数的精度，这正是我们想要的。这类方程，也需要近和远距离考虑，下面给出:</p>
+<p><img alt="" src="../../img/05_01_F_depth_nonliner.png" /></p>
+<p>如果你不知道这个方程到底怎么回事也不必担心。要记住的重要一点是在深度缓冲区的值不是线性的屏幕空间 (它们在视图空间投影矩阵应用之前是线性)。值为 0.5 在深度缓冲区并不意味着该对象的 z 值是投影平头截体的中间;顶点的 z 值是实际上相当接近近平面!你可以看到 z 值和产生深度缓冲区的值在下列图中的非线性关系:</p>
+<p><img alt="" src="http://learnopengl.com/img/advanced/depth_non_linear_graph.png" /></p>
+<p>正如你所看到，一个附近的物体的小的 z 值因此给了我们很高的深度精度。变换 (从观察者的角度) 的 z 值的方程式被嵌入在投影矩阵，所以当我们变换顶点坐标从视图到裁剪，然后到非线性方程应用了的屏幕空间中。如果你好奇的投影矩阵究竟做了什么我建议阅读<a href="http://www.songho.ca/opengl/gl_projectionmatrix.html">这个文章</a>。</p>
+<p>接下来我们看看这个非线性的深度值。</p>
+<h3 id="_3">深度缓冲区的可视化</h3>
+<p>我们知道在片段渲染器的内置<code>gl_FragCoord</code>向量的 z 值包含那个片段的深度值。如果我们要吧深度值作为颜色输出，那么我们可以在场景中显示的所有片段的深度值。我们可以返回基于片段的深度值的颜色向量:</p>
+<pre><code class="c++">void main()
+{
+    color = vec4(vec3(gl_FragCoord.z), 1.0f);
+}  
+</code></pre>
+
+<p>如果再次运行同一程序你可能会发现一切都是白的，它看起来像我们的深度值都是最大值 1.0。那么为什么没有深度值接近 0.0而发暗?</p>
+<p>你可能还记得从上一节中的屏幕空间的深度值是非线性如他们在z很小的时候有很高的精度，，较大的 z 值有较低的精度。该片段的深度值会迅速增加，所以几乎所有顶点的深度值接近 1.0。如果我们小心的靠近物体，你最终可能会看到的色彩越来越暗，意味着它们的 z 值越来越小:</p>
+<p><img alt="" src="http://www.learnopengl.com/img/advanced/depth_testing_visible_depth.png" /></p>
+<p>这清楚地表明深度值的非线性特性。近的物体相对远的物体对的深度值比对象较大的影响。只移动几英寸就能让暗色完全变亮。</p>
+<p>但是我们可以让深度值变换回线性。要实现这一目标我们需要让点应用投影变换逆的逆变换，成为单独的深度值的过程。这意味着我们必须首先重新变换范围 [0，1] 中的深度值为单位化的设备坐标(normalized device coordinates)范围内 [-1，1] (裁剪空间(clip space))。然后，我们想要反转非线性方程 (等式2) 就像在投影矩阵做的那样并将此反转方程应用于所得到的深度值。然后，结果是一个线性的深度值。听起来能行对吗?</p>
+<p>首先，我们需要并不太难的 NDC 深度值转换:</p>
+<pre><code class="c++">float z = depth * 2.0 - 1.0;
+</code></pre>
+
+<p>然后把我们所得到的 z 值应用逆转换来检索的线性深度值:</p>
+<pre><code class="c++">float linearDepth = (2.0 * near) / (far + near - z * (far - near));
+</code></pre>
+
+<p>注意此方程不是方程 2 的精确的逆方程。这个方程从投影矩阵中导出，可以从新使用等式2将他转换为非线性深度值。这个方程也会考虑使用[0，1] 而不是 [near，far]范围内的 z 值 。<a href="http://www.songho.ca/opengl/gl_projectionmatrix.html">math-heavy</a>为感兴趣的读者阐述了大量详细的投影矩阵的知识;它还表明了方程是从哪里来的。</p>
+<p>这不是从投影矩阵推导出的准确公式;这个方程是除以far的结果。深度值的范围一直到far，这作为一个介于 0.0 和 1.0 之间的颜色值并不合适。除以far的值把深度值映射到介于 0.0 和 1.0，更适合用于演示目的。</p>
+<p>这个能够将屏幕空间的非线性深度值转变为线性深度值的完整的片段着色器如下所示：</p>
+<pre><code class="c++">#version 330 core
+
+out vec4 color;
+
+float LinearizeDepth(float depth)
+{
+    float near = 0.1;
+    float far = 100.0;
+    float z = depth * 2.0 - 1.0; // Back to NDC
+    return (2.0 * near) / (far + near - z * (far - near));
+}
+
+void main()
+{
+    float depth = LinearizeDepth(gl_FragCoord.z);
+    color = vec4(vec3(depth), 1.0f);
+}
+</code></pre>
+
+<p>如果现在运行该应用程序，我们得到在距离实际上线性的深度值。尝试移动现场周围看到深度值线性变化</p>
+<p><img alt="" src="http://www.learnopengl.com/img/advanced/depth_testing_visible_linear.png" />。</p>
+<p>颜色主要是黑色的因为深度值线性范围从 0.1 的近平面到 100 的远平面，那里离我们很远。其结果是，我们相对靠近近平面，从而得到较低 (较暗) 的深度值。</p>
+<h2 id="_4">深度冲突</h2>
+<p>两个平面或三角形如此紧密相互平行深度缓冲区不具有足够的精度以至于无法得到哪一个靠前。结果是，这两个形状不断似乎切换顺序导致怪异出问题。这被称为深度冲突，因为它看上去像形状争夺顶靠前的位置。</p>
+<p>我们到目前为止一直在使用的场景中有几个地方深度冲突很显眼。容器被置于确切高度地板被安置这意味着容器的底平面与地板平面共面。两个平面的深度值是相同的，因此深度测试也没有办法找出哪个是正确。</p>
+<p>如果您移动摄像机到容器的里面，那么这个影响清晰可，容器的底部不断切换容器的平面和地板的平面:</p>
+<p><img alt="" src="http://www.learnopengl.com/img/advanced/depth_testing_z_fighting.png" /></p>
+<p>深度冲突是深度缓冲区的普遍问题，当对象的距离越远一般越强(因为深度缓冲区在z值非常大的时候没有很高的精度)。深度冲突还无法完全避免，但有一般的几个技巧，将有助于减轻或完全防止深度冲突在你的场景中的出现：</p>
+<h3 id="_5">防止深度冲突</h3>
+<p>第一个也是最重要的技巧是让物体之间不要离得太近，以至于他们的三角形重叠。通过在物体之间制造一点用户无法察觉到的偏移，可以完全解决深度冲突。在容器和平面的条件下，我们可以把容器像+y方向上略微移动。这微小的改变可能完全不被注意但是可以有效地减少或者完全解决深度冲突。然而这需要人工的干预每个物体，并进行彻底地测试，以确保这个场景的物体之间没有深度冲突。</p>
+<p>另一个技巧是尽可能把近平面设置得远一些。前面我们讨论过越靠近近平面的位置精度越高。所以我们移动近平面远离观察者，我们可以在椎体内很有效的提高精度。然而把近平面移动的太远会导致近处的物体被裁剪掉。所以不断调整测试近平面的值，为你的场景找出最好的近平面的距离。</p>
+<p>另外一个技巧是放弃一些性能来得到更高的深度值的精度。大多数的深度缓冲区都是24位。但现在显卡支持32位深度值，这让深度缓冲区的精度提高了一大节。所以牺牲一些性能你会得到更精确的深度测试，减少深度冲突。</p>
+<p>我们已经讨论过的 3 个技术是最常见和容易实现消除深度冲突的技术。还有一些其他技术需要更多的工作，仍然不会完全消除深度冲突。深度冲突是一个常见的问题，但如果你将列举的技术适当结合你可能不会真的需要处理深度冲突。</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
