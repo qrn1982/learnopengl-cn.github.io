@@ -732,7 +732,20 @@ RenderText(shader, &quot;(C) LearnOpenGL.com&quot;, 540.0f, 570.0f, 0.5f, glm::v
 <p>可以看出，对应&rsquo;p&rsquo;和&rsquo;(&lsquo;等字形的方块明显向下偏移了一些，通过这些你就能清楚地看到那条传说中的基线了。</p>
 <h2 id="_5">关于未来</h2>
 <p>本教程演示了如何使用FreeType绘制TrueType文字。这种方式灵活、可缩放并支持多种字符编码。然而，你的应用程序可能并不需要这么强大的功能，性能更好的点阵字体也许是更可取的。当然你可以结合这两种方法通过动态生成位图字体中所有字符字形。这节省了从大量的纹理渲染器开关和基于每个字形紧密包装可以节省相当的一些性能。</p>
-<p>另一个使用FreeType字体的问题是字形纹理是对应着一个固定的字体大小的，因此直接对其放大就会出现锯齿边缘。此外，对字形进行旋转还会使它们看上去变得模糊。通过将每个像素设为最近的字形轮廓的像素，而不是直接设为实际栅格化的像素，可以减轻这些问题。这项技术被称为<strong>signed distance fields</strong>，Valve在几年前发表过一篇了<a href="http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf">论文</a>，探讨了他们通过这项技术来获得好得惊人的3D渲染效果。</p></div>
+<p>另一个使用FreeType字体的问题是字形纹理是对应着一个固定的字体大小的，因此直接对其放大就会出现锯齿边缘。此外，对字形进行旋转还会使它们看上去变得模糊。通过将每个像素设为最近的字形轮廓的像素，而不是直接设为实际栅格化的像素，可以减轻这些问题。这项技术被称为<strong>signed distance fields</strong>，Valve在几年前发表过一篇了<a href="http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf">论文</a>，探讨了他们通过这项技术来获得好得惊人的3D渲染效果。</p>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//learnopengl-cn.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div>
         </div>
 
         <footer class="col-md-12">

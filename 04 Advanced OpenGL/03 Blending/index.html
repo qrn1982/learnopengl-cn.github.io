@@ -710,7 +710,20 @@ for (GLuint i = 0; i &lt; windows.size(); i++) // windows contains all window po
 <p><img alt="" src="http://learnopengl.com/img/advanced/blending_sorted.png" /></p>
 <p>你可以<a href="http://learnopengl.com/code_viewer.php?code=advanced/blending_sorted">从这里得到完整的带有排序的源码</a>。</p>
 <p>虽然这个按照它们的距离对物体进行排序的方法在这个特定的场景中能够良好工作，但它不能进行旋转、缩放或者进行其他的变换，奇怪形状的物体需要一种不同的方式，而不能简单的使用位置向量。</p>
-<p>在场景中排序物体是个有难度的技术，它很大程度上取决于你场景的类型，更不必说会耗费额外的处理能力了。完美地渲染带有透明和不透明的物体的场景并不那么容易。有更高级的技术例如次序无关透明度（order independent transparency），但是这超出了本教程的范围。现在你不得不采用普通的混合你的物体，但是如果你小心谨慎，并知道这个局限，你仍可以得到颇为合适的混合实现。</p></div>
+<p>在场景中排序物体是个有难度的技术，它很大程度上取决于你场景的类型，更不必说会耗费额外的处理能力了。完美地渲染带有透明和不透明的物体的场景并不那么容易。有更高级的技术例如次序无关透明度（order independent transparency），但是这超出了本教程的范围。现在你不得不采用普通的混合你的物体，但是如果你小心谨慎，并知道这个局限，你仍可以得到颇为合适的混合实现。</p>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//learnopengl-cn.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div>
         </div>
 
         <footer class="col-md-12">
