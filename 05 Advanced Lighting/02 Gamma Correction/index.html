@@ -437,6 +437,8 @@
         
             <li><a href="#_1">衰减</a></li>
         
+            <li><a href="#_2">附加资源</a></li>
+        
     
     </ul>
 </div></div>
@@ -485,7 +487,7 @@
 <p>最后一行代码，将fragColor的每个颜色元素应用有一个1.0/gamma的幂运算，校正像素着色器的颜色输出。</p>
 <p>这个方法有个问题就是为了保持一致，你必须在像素着色器里加上这个gamma校正，所以如果你有很多像素着色器，它们可能分别用于不同物体，那么你就必须在每个着色器里都加上gamma校正了。一个更简单的方案是在你的渲染循环中引入后处理阶段，在后处理四边形上应用gamma校正，这样你只要做一次就好了。</p>
 <p>这些单行代码代表了gamma校正的实现。不太令人印象深刻，但当你进行gamma校正的时候有一些额外的事情别忘了考虑。</p>
-<h4 id="srgb">sRGB纹理</h4>
+<h3 id="srgb">sRGB纹理</h3>
 <p>因为监视器总是在sRGB空间中显示应用了gamma的颜色，无论什么时候当你在计算机上绘制、编辑或者画出一个图片的时候，你所选的颜色都是根据你在监视器上看到的那种。这实际意味着所有你创建或编辑的图片并不是在线性空间，而是在sRGB空间中（译注：sRGB空间定义的gamma接近于2.2），假如在你的屏幕上对暗红色翻一倍，便是根据你所感知到的亮度进行的，并不等于将红色元素加倍。</p>
 <p>结果就是纹理编辑者，所创建的所有纹理都是在sRGB空间中的纹理，所以如果我们在渲染应用中使用这些纹理，我们必须考虑到这点。在我们应用gamma校正之前，这不是个问题，因为纹理在sRGB空间创建和展示，同样我们还是在sRGB空间中使用，从而不必gamma校正纹理显示也没问题。然而，现在我们是把所有东西都放在线性空间中展示的，纹理颜色就会变坏，如下图展示的那样：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/gamma_correction_srgbtextures.png" /></p>
@@ -522,7 +524,7 @@ vec3 diffuseColor = pow(texture(diffuse, texCoords).rgb, vec3(gamma));
 </div>
 <p>我创建的这个简单的demo场景，你可以在这里找到源码以及顶点和像素着色器。按下空格就能在有gamma校正和无gamma校正的场景进行切换，两个场景使用的是相同的纹理和衰减。这不是效果最好的demo，不过它能展示出如何应用所有这些技术。</p>
 <p>总而言之，gamma校正使你可以在线性空间中进行操作。因为线性空间更符合物理世界，大多数物理公式现在都可以获得较好效果，比如真实的光的衰减。你的光照越真实，使用gamma校正获得漂亮的效果就越容易。这也正是为什么当引进gamma校正时，建议只去调整光照参数的原因。</p>
-<h3 id="_2">附加资源</h3>
+<h2 id="_2">附加资源</h2>
 <p><a href="http://www.cambridgeincolour.com/tutorials/gamma-correction.htm">cambridgeincolour.com</a>:更多关于gamma和gamma校正的内容。</p>
 <p><a href="http://blog.wolfire.com/2010/02/Gamma-correct-lighting">wolfire.com</a>: David Rosen关于在渲染领域使用gamma校正的好处。</p>
 <p><a href="http://renderwonk.com/blog/index.php/archive/adventures-with-gamma-correct-rendering/">renderwonk.com</a>: 一些额外的实践上的思考。</p>

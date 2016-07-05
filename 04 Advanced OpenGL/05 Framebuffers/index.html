@@ -755,7 +755,9 @@ void main()
 <h3 id="blur">Blur</h3>
 <p>创建模糊效果的kernel定义如下：</p>
 <p>
+<script type="math/tex; mode=display">
 <script type="math/tex">\begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix} / 16</script>
+</script>
 </p>
 <p>由于所有数值加起来的总和为16,简单返回结合起来的采样颜色是非常亮的,所以我们必须将kernel的每个值除以16.最终的kernel数组会是这样的:</p>
 <pre><code class="c++">float kernel[9] = float[](

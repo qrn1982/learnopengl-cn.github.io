@@ -685,8 +685,8 @@ specular *= attenuation;
 <ul>
 <li><code>LightDir</code>：从片段指向光源的向量。</li>
 <li><code>SpotDir</code>：聚光灯所指向的方向。</li>
-<li><code>Phi\(\phi\)</code>：定义聚光灯半径的切光角。每个落在这个角度之外的，聚光灯都不会照亮。</li>
-<li><code>Theta\(\theta\)</code>：<code>LightDir</code>向量和<code>SpotDir</code>向量之间的角度。<script type="math/tex">\theta</script>值应该比<script type="math/tex">\Phi</script>值小，这样才会在聚光灯内。</li>
+<li><code>Phi</code><script type="math/tex">\phi</script>：定义聚光灯半径的切光角。每个落在这个角度之外的，聚光灯都不会照亮。</li>
+<li><code>Theta</code><script type="math/tex">\theta</script>：<code>LightDir</code>向量和<code>SpotDir</code>向量之间的角度。<script type="math/tex">\theta</script>值应该比<script type="math/tex">\Phi</script>值小，这样才会在聚光灯内。</li>
 </ul>
 <p>所以我们大致要做的是，计算<code>LightDir</code>向量和<code>SpotDir</code>向量的点乘（返回两个单位向量的点乘，还记得吗？），然后在和切光角<script type="math/tex">\phi</script>对比。现在你应该明白聚光灯是我们下面将创建的手电筒的范例。</p>
 <h3 id="_4">手电筒</h3>
@@ -746,16 +746,16 @@ color = vec4(light.ambient*vec3(texture(material.diffuse,TexCoords)), 1.0f);
 <th>
 <script type="math/tex">\theta</script>
 </th>
-<th>角度制<script type="math/tex">\theta</script>
-</th>
+<th>
+<script type="math/tex">\theta</script>（角度）</th>
 <th>
 <script type="math/tex">\phi</script>（内切）</th>
-<th>角度制<script type="math/tex">\phi</script>
-</th>
+<th>
+<script type="math/tex">\phi</script>（角度）</th>
 <th>
 <script type="math/tex">\gamma</script>（外切）</th>
-<th>角度制<script type="math/tex">\gamma</script>
-</th>
+<th>
+<script type="math/tex">\gamma</script>（角度）</th>
 <th>
 <script type="math/tex">\epsilon</script>
 </th>
