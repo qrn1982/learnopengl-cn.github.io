@@ -446,19 +446,19 @@
     
         <li class="main active"><a href="#ssao">SSAO</a></li>
         
-            <li><a href="#sample-buffers">样本缓冲(Sample buffers)</a></li>
+            <li><a href="#_1">样本缓冲</a></li>
         
-            <li><a href="#normal-oriented-hemisphere">法向半球(Normal-oriented Hemisphere)</a></li>
+            <li><a href="#_2">法向半球</a></li>
         
-            <li><a href="#_1">随机核心转动</a></li>
+            <li><a href="#_3">随机核心转动</a></li>
         
             <li><a href="#ssao_1">SSAO着色器</a></li>
         
-            <li><a href="#_2">环境遮蔽模糊</a></li>
+            <li><a href="#_4">环境遮蔽模糊</a></li>
         
-            <li><a href="#_3">应用环境遮蔽</a></li>
+            <li><a href="#_5">应用环境遮蔽</a></li>
         
-            <li><a href="#_4">附加资源</a></li>
+            <li><a href="#_6">附加资源</a></li>
         
     
     </ul>
@@ -504,7 +504,7 @@
 <p>由于这个原因，我们将不会使用球体的采样核心，而使用一个沿着表面法向量的半球体采样核心。</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/ssao_hemisphere.png" /></p>
 <p>通过在<strong>法向半球体(Normal-oriented Hemisphere)</strong>周围采样，我们将不会考虑到片段底部的几何体.它消除了环境光遮蔽灰蒙蒙的感觉，从而产生更真实的结果。这个SSAO教程将会基于法向半球法和John Chapman出色的<a href="http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html">SSAO教程</a>。</p>
-<h2 id="sample-buffers">样本缓冲(Sample buffers)</h2>
+<h2 id="_1">样本缓冲</h2>
 <p>SSAO需要获取几何体的信息，因为我们需要一些方式来确定一个片段的遮蔽因子。对于每一个片段，我们将需要这些数据：
 - 逐片段<strong>位置</strong>向量
 - 逐片段的<strong>法线</strong>向量
@@ -566,7 +566,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 <p>这给我们了一个线性深度纹理，我们可以用它来对每一个核心样本获取深度值。注意我们把线性深度值存储为了浮点数据；这样从0.1到50.0范围深度值都不会被限制在[0.0, 1.0]之间了。如果你不用浮点值存储这些深度数据，确保你首先将值除以<code>FAR</code>来标准化它们，再存储到<code>gPositionDepth</code>纹理中，并在以后的着色器中用相似的方法重建它们。同样需要注意的是<code>GL_CLAMP_TO_EDGE</code>的纹理封装方法。这保证了我们不会不小心采样到在屏幕空间中纹理默认坐标区域之外的深度值。</p>
 <p>接下来我们需要真正的半球采样核心和一些方法来随机旋转它。</p>
-<h2 id="normal-oriented-hemisphere">法向半球(Normal-oriented Hemisphere)</h2>
+<h2 id="_2">法向半球</h2>
 <p>我们需要沿着表面法线方向生成大量的样本。就像我们在这个教程的开始介绍的那样，我们想要生成形成半球形的样本。由于对每个表面法线方向生成采样核心非常困难，也不合实际，我们将在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/05%20Advanced%20Lighting/04%20Normal%20Mapping/">切线空间</a>(Tangent Space)内生成采样核心，法向量将指向正z方向。</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/ssao_hemisphere.png" /></p>
 <p>假设我们有一个单位半球，我们可以获得一个拥有最大64样本值的采样核心：</p>
@@ -606,7 +606,7 @@ for (GLuint i = 0; i &lt; 64; ++i)
 <p>这就给了我们一个大部分样本靠近原点的核心分布。</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/ssao_kernel_weight.png" /></p>
 <p>每个核心样本将会被用来偏移观察空间片段位置从而采样周围的几何体。我们在教程开始的时候看到，如果没有变化采样核心，我们将需要大量的样本来获得真实的结果。通过引入一个随机的转动到采样核心中，我们可以很大程度上减少这一数量。</p>
-<h2 id="_1">随机核心转动</h2>
+<h2 id="_3">随机核心转动</h2>
 <p>通过引入一些随机性到采样核心上，我们可以大大减少获得不错结果所需的样本数量。我们可以对场景中每一个片段创建一个随机旋转向量，但这会很快将内存耗尽。所以，更好的方法是创建一个小的随机旋转向量纹理平铺在屏幕上。</p>
 <p>我们创建一个4x4朝向切线空间平面法线的随机旋转向量数组：</p>
 <pre><code class="c++">std::vector&lt;glm::vec3&gt; ssaoNoise;
@@ -762,7 +762,7 @@ FragColor = occlusion;
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/ssao_without_blur.png" /></p>
 <p>可见，环境遮蔽产生了非常强烈的深度感。仅仅通过环境遮蔽纹理我们就已经能清晰地看见模型一定躺在地板上而不是浮在空中。</p>
 <p>现在的效果仍然看起来不是很完美，由于重复的噪声纹理再图中清晰可见。为了创建一个光滑的环境遮蔽结果，我们需要模糊环境遮蔽纹理。</p>
-<h2 id="_2">环境遮蔽模糊</h2>
+<h2 id="_4">环境遮蔽模糊</h2>
 <p>在SSAO阶段和光照阶段之间，我们想要进行模糊SSAO纹理的处理，所以我们又创建了一个帧缓冲对象来储存模糊结果。</p>
 <pre><code class="c++">GLuint ssaoBlurFBO, ssaoColorBufferBlur;
 glGenFramebuffers(1, &amp;ssaoBlurFBO);
@@ -800,7 +800,7 @@ void main() {
 <p>这里我们遍历了周围在-2.0和2.0之间的SSAO纹理单元(Texel)，采样与噪声纹理维度相同数量的SSAO纹理。我们通过使用返回<code>vec2</code>纹理维度的<code>textureSize</code>，根据纹理单元的真实大小偏移了每一个纹理坐标。我们平均所得的结果，获得一个简单但是有效的模糊效果：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/ssao.png" /></p>
 <p>这就完成了，一个包含逐片段环境遮蔽数据的纹理；在光照处理阶段中可以直接使用。</p>
-<h2 id="_3">应用环境遮蔽</h2>
+<h2 id="_5">应用环境遮蔽</h2>
 <p>应用遮蔽因子到光照方程中极其简单：我们要做的只是将逐片段环境遮蔽因子乘到光照环境分量上。如果我们使用上个教程中的Blinn-Phong延迟光照着色器并做出一点修改，我们将会得到下面这个片段着色器：</p>
 <pre><code class="c++">#version 330 core
 out vec4 FragColor;
@@ -868,7 +868,7 @@ FragColor = pow(occlusion, power);
 
 <p>多试试不同的场景和不同的参数，来欣赏SSAO的可定制性。</p>
 <p>尽管SSAO是一个很微小的效果，可能甚至不是很容易注意到，它在很大程度上增加了合适光照场景的真实性，它也绝对是一个在你工具箱中必备的技术。</p>
-<h2 id="_4">附加资源</h2>
+<h2 id="_6">附加资源</h2>
 <ul>
 <li><a href="http://john-chapman-graphics.blogspot.nl/2013/01/ssao-tutorial.html">SSAO教程</a>：John Chapman优秀的SSAO教程；本教程很大一部分代码和技巧都是基于他的文章</li>
 <li><a href="https://mtnphil.wordpress.com/2013/06/26/know-your-ssao-artifacts/">了解你的SSAO效果</a>：关于提高SSAO特定效果的一篇很棒的文章</li>

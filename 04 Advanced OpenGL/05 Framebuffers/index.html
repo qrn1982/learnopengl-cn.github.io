@@ -448,9 +448,16 @@
         
             <li><a href="#_1">创建一个帧缓冲</a></li>
         
-            <li><a href="#_2">纹理附件</a></li>
+    
+        <li class="main "><a href="#_5">后期处理</a></li>
         
-            <li><a href="#_8">练习</a></li>
+            <li><a href="#_6">反相</a></li>
+        
+            <li><a href="#_7">灰度</a></li>
+        
+            <li><a href="#kernel-effects">Kernel effects</a></li>
+        
+            <li><a href="#_10">练习</a></li>
         
     
     </ul>
@@ -502,7 +509,7 @@ glGenFramebuffers(1, &amp;fbo);
 <li>每个缓冲都应该有同样数目的样本。</li>
 </ul>
 <p>如果你不知道什么是样本也不用担心，我们会在后面的教程中讲到。</p>
-<p>从上面的需求中你可以看到，我们需要为帧缓冲创建一些附件，还需要把这些附件附加到帧缓冲上。当我们做完所有上面提到的条件的时候我们就可以用  <code>glCheckFramebufferStatus</code> 带上 <code>GL_FRAMEBUFFER</code> 这个参数来检查是否真的成功做到了。然后检查当前绑定的帧缓冲，返回了这些规范中的哪个值。如果返回的是 <code>GL_FRAMEBUFFER_COMPLETE</code>就对了：</p>
+<p>从上面的需求中你可以看到，我们需要为帧缓冲创建一些附件(Attachment)，还需要把这些附件附加到帧缓冲上。当我们做完所有上面提到的条件的时候我们就可以用  <code>glCheckFramebufferStatus</code> 带上 <code>GL_FRAMEBUFFER</code> 这个参数来检查是否真的成功做到了。然后检查当前绑定的帧缓冲，返回了这些规范中的哪个值。如果返回的是 <code>GL_FRAMEBUFFER_COMPLETE</code>就对了：</p>
 <pre><code class="c++">if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
   // Execute victory dance
 </code></pre>
@@ -516,7 +523,7 @@ glGenFramebuffers(1, &amp;fbo);
 </code></pre>
 
 <p>现在在执行完成检测前，我们需要把一个或更多的附件附加到帧缓冲上。一个附件就是一个内存地址，这个内存地址里面包含一个为帧缓冲准备的缓冲，它可以是个图像。当创建一个附件的时候我们有两种方式可以采用：纹理或渲染缓冲（renderbuffer）对象。</p>
-<h2 id="_2">纹理附件</h2>
+<h3 id="_2">纹理附件</h3>
 <p>当把一个纹理附加到帧缓冲上的时候，所有渲染命令会写入到纹理上，就像它是一个普通的颜色/深度或者模板缓冲一样。使用纹理的好处是，所有渲染操作的结果都会被储存为一个纹理图像，这样我们就可以简单的在着色器中使用了。</p>
 <p>创建一个帧缓冲的纹理和创建普通纹理差不多：</p>
 <pre><code class="c++">GLuint texture;
@@ -550,8 +557,8 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, texture, 0);
 </code></pre>
 
-<h3 id="renderbuffer-object-attachments">渲染缓冲对象附件（Renderbuffer object attachments）</h3>
-<p>在介绍了帧缓冲的可行附件类型——纹理后，OpenGL引进了渲染缓冲对象（Renderbuffer objects），所以在过去那些美好时光里纹理是附件的唯一可用的类型。和纹理图像一样，渲染缓冲对象也是一个缓冲，它可以是一堆字节、整数、像素或者其他东西。渲染缓冲对象的一大优点是，它以OpenGL原生渲染格式储存它的数据，因此在离屏渲染到帧缓冲的时候，这些数据就相当于被优化过的了。</p>
+<h3 id="_3">缓冲对象附件</h3>
+<p>在介绍了帧缓冲的可行附件类型——纹理后，OpenGL引进了渲染缓冲对象(Renderbuffer objects)，所以在过去那些美好时光里纹理是附件的唯一可用的类型。和纹理图像一样，渲染缓冲对象也是一个缓冲，它可以是一堆字节、整数、像素或者其他东西。渲染缓冲对象的一大优点是，它以OpenGL原生渲染格式储存它的数据，因此在离屏渲染到帧缓冲的时候，这些数据就相当于被优化过的了。</p>
 <p>渲染缓冲对象将所有渲染数据直接储存到它们的缓冲里，而不会进行针对特定纹理格式的任何转换，这样它们就成了一种快速可写的存储介质了。然而，渲染缓冲对象通常是只写的，不能修改它们（就像获取纹理，不能写入纹理一样）。可以用<code>glReadPixels</code>函数去读取，函数返回一个当前绑定的帧缓冲的特定像素区域，而不是直接返回附件本身。</p>
 <p>因为它们的数据已经是原生格式了，在写入或把它们的数据简单地到其他缓冲的时候非常快。当使用渲染缓冲对象时，像切换缓冲这种操作变得异常高速。我们在每个渲染迭代末尾使用的那个<code>glfwSwapBuffers</code>函数，同样以渲染缓冲对象实现：我们简单地写入到一个渲染缓冲图像，最后交换到另一个里。渲染缓冲对象对于这种操作来说很完美。</p>
 <p>创建一个渲染缓冲对象和创建帧缓冲代码差不多：</p>
@@ -574,7 +581,7 @@ glGenRenderbuffers(1, &amp;rbo);
 </code></pre>
 
 <p>在帧缓冲项目中，渲染缓冲对象可以提供一些优化，但更重要的是知道何时使用渲染缓冲对象，何时使用纹理。通常的规则是，如果你永远都不需要从特定的缓冲中进行采样，渲染缓冲对象对特定缓冲是更明智的选择。如果哪天需要从比如颜色或深度值这样的特定缓冲采样数据的话，你最好还是使用纹理附件。从执行效率角度考虑，它不会对效率有太大影响。</p>
-<h3 id="_3">渲染到纹理</h3>
+<h3 id="_4">渲染到纹理</h3>
 <p>现在我们知道了（一些）帧缓冲如何工作的，是时候把它们用起来了。我们会把场景渲染到一个颜色纹理上，这个纹理附加到一个我们创建的帧缓冲上，然后把纹理绘制到一个简单的四边形上，这个四边形铺满整个屏幕。输出的图像看似和没用帧缓冲一样，但是这次，它其实是直接打印到了一个单独的四边形上面。为什么这很有用呢？下一部分我们会看到原因。</p>
 <p>第一件要做的事情是创建一个帧缓冲对象，并绑定它，这比较明了：</p>
 <pre><code class="c++">GLuint framebuffer;
@@ -679,10 +686,10 @@ glBindVertexArray(0);
 <p>左侧展示了和深度测试教程中一样的输出结果，但是这次却是渲染到一个简单的四边形上的。如果我们以线框方式显示的话，那么显然，我们只是绘制了一个默认帧缓冲中单调的四边形。</p>
 <p>你可以<a href="http://learnopengl.com/code_viewer.php?code=advanced/framebuffers_screen_texture">从这里得到应用的源码</a>。</p>
 <p>然而这有什么好处呢？好处就是我们现在可以自由的获取已经渲染场景中的任何像素，然后把它当作一个纹理图像了，我们可以在片段着色器中创建一些有意思的效果。所有这些有意思的效果统称为后处理特效。</p>
-<h3 id="_4">后处理</h3>
-<p>现在，整个场景渲染到了一个单独的纹理上，我们可以创建一些有趣的效果，只要简单操纵纹理数据就能做到。这部分，我们会向你展示一些流行的后处理特效，以及怎样添加一些创造性去创建出你自己的特效。</p>
-<h3 id="_5">反相</h3>
-<p>我们已经取得了渲染输出的每个颜色，所以在片段着色器里返回这些颜色的反色并不难。我们得到屏幕纹理的颜色，然后用1.0减去它：</p>
+<h1 id="_5">后期处理</h1>
+<p>现在，整个场景渲染到了一个单独的纹理上，我们可以创建一些有趣的效果，只要简单操纵纹理数据就能做到。这部分，我们会向你展示一些流行的后期处理(Post-processing)特效，以及怎样添加一些创造性去创建出你自己的特效。</p>
+<h3 id="_6">反相</h3>
+<p>我们已经取得了渲染输出的每个颜色，所以在片段着色器里返回这些颜色的反色(Inversion)并不难。我们得到屏幕纹理的颜色，然后用1.0减去它：</p>
 <pre><code class="c++">void main()
 {
     color = vec4(vec3(1.0 - texture(screenTexture, TexCoords)), 1.0);
@@ -692,7 +699,7 @@ glBindVertexArray(0);
 <p>虽然反相是一种相对简单的后处理特效，但是已经很有趣了：</p>
 <p><img alt="image description" src="http://learnopengl.com/img/advanced/framebuffers_grayscale.png" /></p>
 <p>整个场景现在的颜色都反转了，只需在着色器中写一行代码就能做到，酷吧？</p>
-<h3 id="_6">灰度</h3>
+<h3 id="_7">灰度</h3>
 <p>另一个有意思的效果是移除所有除了黑白灰以外的颜色作用，是整个图像成为黑白的。实现它的简单的方式是获得所有颜色元素，然后将它们平均化：</p>
 <pre><code class="c++">void main()
 {
@@ -712,7 +719,7 @@ glBindVertexArray(0);
 </code></pre>
 
 <p><img alt="" src="http://learnopengl.com/img/advanced/framebuffers_grayscale.png" /></p>
-<h3 id="kernel-effects">Kernel effects</h3>
+<h2 id="kernel-effects">Kernel effects</h2>
 <p>在单独纹理图像上进行后处理的另一个好处是我们可以从纹理的其他部分进行采样。比如我们可以从当前纹理值的周围采样多个纹理值。创造性地把它们结合起来就能创造出有趣的效果了。</p>
 <p>kernel是一个长得有点像一个小矩阵的数值数组，它中间的值中心可以映射到一个像素上，这个像素和这个像素周围的值再乘以kernel，最后再把结果相加就能得到一个值。所以，我们基本上就是给当前纹理坐标加上一个它四周的偏移量，然后基于kernel把它们结合起来。下面是一个kernel的例子：</p>
 <p>
@@ -765,8 +772,8 @@ void main()
 <p>这个锐化的kernel看起来像这样：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/framebuffers_sharpen.png" /></p>
 <p>这里创建的有趣的效果就好像你的玩家吞了某种麻醉剂产生的幻觉一样。</p>
-<h3 id="blur">Blur</h3>
-<p>创建模糊效果的kernel定义如下：</p>
+<h3 id="_8">模糊</h3>
+<p>创建模糊(Blur)效果的kernel定义如下：</p>
 <p>
 <script type="math/tex; mode=display">
 <script type="math/tex">\begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix} / 16</script>
@@ -784,8 +791,8 @@ void main()
 <p><img alt="" src="http://learnopengl.com/img/advanced/framebuffers_blur.png" /></p>
 <p>这样的模糊效果具有创建许多有趣效果的潜力.例如,我们可以随着时间的变化改变模糊量,创建出类似于某人喝醉酒的效果,或者,当我们的主角摘掉眼镜的时候增加模糊.模糊也能为我们在后面的教程中提供都颜色值进行平滑处理的能力.</p>
 <p>你可以看到我们一旦拥有了这个kernel的实现以后,创建一个后处理特效就不再是一件难事.最后,我们再来讨论一个流行的特效,以结束本节内容.</p>
-<h3 id="_7">边检测</h3>
-<p>下面的边检测kernel与锐化kernel类似:</p>
+<h3 id="_9">边检测</h3>
+<p>下面的边检测(Edge-detection)kernel与锐化kernel类似:</p>
 <p>
 <script type="math/tex; mode=display">
 \begin{bmatrix} 1 & 1 & 1 \\ 1 & -8 & 1 \\ 1 & 1 & 1 \end{bmatrix}
@@ -794,7 +801,7 @@ void main()
 <p>这个kernel将所有的边提高亮度,而对其他部分进行暗化处理,当我们值关心一副图像的边缘的时候,它非常有用.</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/framebuffers_edge_detection.png" /></p>
 <p>在一些像Photoshop这样的软件中使用这些kernel作为图像操作工具/过滤器一点都不奇怪.因为掀开可以具有很强的平行处理能力，我们以实时进行针对每个像素的图像操作便相对容易，图像编辑工具因而更经常使用显卡来进行图像处理。</p>
-<h2 id="_8">练习</h2>
+<h2 id="_10">练习</h2>
 <ul>
 <li>你可以使用帧缓冲来创建一个后视镜吗?做到它,你必须绘制场景两次:一次正常绘制,另一次摄像机旋转180度后绘制.尝试在你的显示器顶端创建一个小四边形,在上面应用后视镜的镜面纹理:<a href="http://learnopengl.com/code_viewer.php?code=advanced/framebuffers-exercise1">解决方案</a>,<a href="http://learnopengl.com/img/advanced/framebuffers_mirror.png">视觉效果</a></li>
 <li>自己随意调整一下kernel值,创建出你自己后处理特效.尝试在网上搜索其他有趣的kernel.</li>

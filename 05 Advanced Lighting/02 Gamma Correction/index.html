@@ -444,9 +444,9 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#gammagamma-correction">Gamma校正(Gamma Correction)</a></li>
+        <li class="main active"><a href="#gamma">Gamma校正</a></li>
         
-            <li><a href="#gamma">Gamma校正</a></li>
+            <li><a href="#gamma_1">Gamma校正</a></li>
         
             <li><a href="#_1">衰减</a></li>
         
@@ -457,9 +457,34 @@
 </div></div>
             <div class="col-md-9" role="main">
 
-<p>本文作者JoeyDeVries，由Django翻译自<a href="http://learnopengl.com">http://learnopengl.com</a></p>
-<h1 id="gammagamma-correction">Gamma校正(Gamma Correction)</h1>
-<p>当我们计算出场景中所有像素的最终颜色以后，我们就必须把它们显示在监视器上。过去，大多数监视器是阴极射线管显示器（CRT）。这些监视器有一个物理特性就是两倍的输入电压产生的不是两倍的亮度。输入电压产生约为输入电压的2.2次幂的亮度，这叫做监视器Gamma（译注：Gamma也叫灰度系数，每种显示设备都有自己的Gamma值，都不相同，有一个公式：设备输出亮度 = 电压的Gamma次幂，任何设备Gamma基本上都不会等于1，等于1是一种理想的线性状态，这种理想状态是：如果电压和亮度都是在0到1的区间，那么多少电压就等于多少亮度。对于CRT，Gamma通常为2.2，因而，输出亮度 = 输入电压的2.2次幂，你可以从本节第二张图中看到Gamma2.2实际显示出来的总会比预期暗，相反Gamma0.45就会比理想预期亮，如果你讲Gamma0.45叠加到Gamma2.2的显示设备上，便会对偏暗的显示效果做到校正，这个简单的思路就是本节的核心）。</p>
+<h1 id="gamma">Gamma校正</h1>
+<table>
+<thead>
+<tr>
+<th>原文</th>
+<th><a href="http://learnopengl.com/#!Advanced-Lighting/Gamma-Correction">Gamma Correction</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作者</td>
+<td>JoeyDeVries</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td><a href="http://bullteacher.com/">Django</a></td>
+</tr>
+<tr>
+<td>校对</td>
+<td>暂无</td>
+</tr>
+</tbody>
+</table>
+<p>当我们计算出场景中所有像素的最终颜色以后，我们就必须把它们显示在监视器上。过去，大多数监视器是阴极射线管显示器（CRT）。这些监视器有一个物理特性就是两倍的输入电压产生的不是两倍的亮度。输入电压产生约为输入电压的2.2次幂的亮度，这叫做监视器Gamma。</p>
+<div class="admonition note">
+<p class="admonition-title">译注</p>
+<p>Gamma也叫灰度系数，每种显示设备都有自己的Gamma值，都不相同，有一个公式：设备输出亮度 = 电压的Gamma次幂，任何设备Gamma基本上都不会等于1，等于1是一种理想的线性状态，这种理想状态是：如果电压和亮度都是在0到1的区间，那么多少电压就等于多少亮度。对于CRT，Gamma通常为2.2，因而，输出亮度 = 输入电压的2.2次幂，你可以从本节第二张图中看到Gamma2.2实际显示出来的总会比预期暗，相反Gamma0.45就会比理想预期亮，如果你讲Gamma0.45叠加到Gamma2.2的显示设备上，便会对偏暗的显示效果做到校正，这个简单的思路就是本节的核心</p>
+</div>
 <p>人类所感知的亮度恰好和CRT所显示出来相似的指数关系非常匹配。为了更好的理解所有含义，请看下面的图片：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/gamma_correction_brightness.png" /></p>
 <p>第一行是人眼所感知到的正常的灰阶，亮度要增加一倍（比如从0.1到0.2）你才会感觉比原来变亮了一倍（译注：这里的意思是说比如一个东西的亮度0.3，让人感觉它比原来变亮一倍，那么现在这个亮度应该成为0.6，而不是0.4，也就是说人眼感知到的亮度的变化并非线性均匀分布的。问题的关键在于这样的一倍相当于一个亮度级，例如假设0.1、0.2、0.4、0.8是我们定义的四个亮度级别，在0.1和0.2之间人眼只能识别出0.15这个中间级，而虽然0.4到0.8之间的差距更大，这个区间人眼也只能识别出一个颜色）。然而，当我们谈论光的物理亮度，也就是光子的数量的多少的时候，底部的灰阶显示出的才是这时讨论的亮度。底部的灰阶显示出的是双倍的亮度所返回的物理亮度（译注：这里亮度是指光子数量和正相关的亮度，即物理亮度，前面讨论的是人的感知亮度；物理亮度和感知亮度的区别在于，物理亮度基于光子数量，感知亮度基于人的感觉，比如第二个灰阶里亮度0.1的光子数量是0.2的二分之一），但是由于这与我们的眼睛感知亮度不完全一致（对比较暗的颜色变化更敏感），所以它看起来很奇怪。</p>
@@ -470,8 +495,8 @@
 <p>直到现在，我们还一直假设我们所有的工作都是在线性空间中进行的（译注：Gamma为1），但最终还是要把所哟的颜色输出到监视器上，所以我们配置的所有颜色和光照变量从物理角度来看都是不正确的，在我们的监视器上很少能够正确地显示。出于这个原因，我们（以及艺术家）通常将光照值设置得比本来更亮一些（由于监视器会将其亮度显示的更暗一些），如果不是这样，在线性空间里计算出来的光照就会不正确。同时，还要记住，监视器所显示出来的图像和线性图像的最小亮度是相同的，它们最大的亮度也是相同的；只是中间亮度部分会被压暗。</p>
 <p>因为所有中间亮度都是线性空间计算出来的（译注：计算的时候假设Gamma为1）监视器显以后，实际上都会不正确。当使用更高级的光照算法时，这个问题会变得越来越明显，你可以看看下图：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/gamma_correction_example.png" /></p>
-<h2 id="gamma">Gamma校正</h2>
-<p>Gamma校正的思路是在最终的颜色输出上应用监视器Gamma的倒数。回头看前面的Gamma曲线图，你会有一个短划线，它是监视器Gamma曲线的翻转曲线。我们在颜色显示到监视器的时候把每个颜色输出都加上这个翻转的Gamma曲线，这样应用了监视器Gamma以后最终的颜色将会变为线性的。我们所得到的中间色调就会更亮，所以虽然监视器使它们变暗，但是我们又将其平衡回来了。</p>
+<h2 id="gamma_1">Gamma校正</h2>
+<p>Gamma校正(Gamma Correction)的思路是在最终的颜色输出上应用监视器Gamma的倒数。回头看前面的Gamma曲线图，你会有一个短划线，它是监视器Gamma曲线的翻转曲线。我们在颜色显示到监视器的时候把每个颜色输出都加上这个翻转的Gamma曲线，这样应用了监视器Gamma以后最终的颜色将会变为线性的。我们所得到的中间色调就会更亮，所以虽然监视器使它们变暗，但是我们又将其平衡回来了。</p>
 <p>我们来看另一个例子。还是那个暗红色<script type="math/tex">(0.5, 0.0, 0.0)</script>。在将颜色显示到监视器之前，我们先对颜色应用Gamma校正曲线。线性的颜色显示在监视器上相当于降低了<script type="math/tex">2.2</script>次幂的亮度，所以倒数就是<script type="math/tex">1/2.2</script>次幂。Gamma校正后的暗红色就会成为<script type="math/tex">(0.5, 0.0, 0.0)^{1/2.2} = (0.5, 0.0, 0.0)^{0.45} = (0.73, 0.0, 0.0)</script>。校正后的颜色接着被发送给监视器，最终显示出来的颜色是<script type="math/tex">(0.73, 0.0, 0.0)^{2.2} = (0.5, 0.0, 0.0)</script>。你会发现使用了Gamma校正，监视器最终会显示出我们在应用中设置的那种线性的颜色。</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -520,7 +545,7 @@ vec3 diffuseColor = pow(texture(diffuse, texCoords).rgb, vec3(gamma));
 <p>因为不是所有纹理都是在sRGB空间中的所以当你把纹理指定为sRGB纹理时要格外小心。比如diffuse纹理，这种为物体上色的纹理几乎都是在sRGB空间中的。而为了获取光照参数的纹理，像specular贴图和法线贴图几乎都在线性空间中，所以如果你把它们也配置为sRGB纹理的话，光照就坏掉了。指定sRGB纹理时要当心。</p>
 <p>将diffuse纹理定义为sRGB纹理之后，你将获得你所期望的视觉输出，但这次每个物体都会只进行一次gamma校正。</p>
 <h2 id="_1">衰减</h2>
-<p>在使用了gamma校正之后，另一个不同之处是光照衰减。真实的物理世界中，光照的衰减和光源的距离的平方成反比。</p>
+<p>在使用了gamma校正之后，另一个不同之处是光照衰减(Attenuation)。真实的物理世界中，光照的衰减和光源的距离的平方成反比。</p>
 <pre><code class="c++">float attenuation = 1.0 / (distance * distance);
 </code></pre>
 
@@ -538,9 +563,11 @@ vec3 diffuseColor = pow(texture(diffuse, texCoords).rgb, vec3(gamma));
 <p>我创建的这个简单的demo场景，你可以在这里找到源码以及顶点和像素着色器。按下空格就能在有gamma校正和无gamma校正的场景进行切换，两个场景使用的是相同的纹理和衰减。这不是效果最好的demo，不过它能展示出如何应用所有这些技术。</p>
 <p>总而言之，gamma校正使你可以在线性空间中进行操作。因为线性空间更符合物理世界，大多数物理公式现在都可以获得较好效果，比如真实的光的衰减。你的光照越真实，使用gamma校正获得漂亮的效果就越容易。这也正是为什么当引进gamma校正时，建议只去调整光照参数的原因。</p>
 <h2 id="_2">附加资源</h2>
-<p><a href="http://www.cambridgeincolour.com/tutorials/gamma-correction.htm">cambridgeincolour.com</a>:更多关于gamma和gamma校正的内容。</p>
-<p><a href="http://blog.wolfire.com/2010/02/Gamma-correct-lighting">wolfire.com</a>: David Rosen关于在渲染领域使用gamma校正的好处。</p>
-<p><a href="http://renderwonk.com/blog/index.php/archive/adventures-with-gamma-correct-rendering/">renderwonk.com</a>: 一些额外的实践上的思考。</p>
+<ul>
+<li><a href="http://www.cambridgeincolour.com/tutorials/gamma-correction.htm">cambridgeincolour.com</a>:更多关于gamma和gamma校正的内容。</li>
+<li><a href="http://blog.wolfire.com/2010/02/Gamma-correct-lighting">wolfire.com</a>: David Rosen关于在渲染领域使用gamma校正的好处。</li>
+<li><a href="http://renderwonk.com/blog/index.php/archive/adventures-with-gamma-correct-rendering/">renderwonk.com</a>: 一些额外的实践上的思考。</li>
+</ul>
 
 <div id="disqus_thread"></div>
 <script>

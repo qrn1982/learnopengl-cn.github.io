@@ -444,16 +444,19 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#instancing">实例化(Instancing)</a></li>
+        <li class="main active"><a href="#_1">实例化</a></li>
         
-            <li><a href="#instanced-arrays">实例化数组(instanced arrays)</a></li>
+            <li><a href="#_2">实例化数组</a></li>
+        
+    
+        <li class="main "><a href="#_3">小行星带</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="instancing">实例化(Instancing)</h1>
+<h1 id="_1">实例化</h1>
 <table>
 <thead>
 <tr>
@@ -486,8 +489,8 @@
 </code></pre>
 
 <p>像这样绘制出你模型的其他实例，多次绘制之后，很快将达到一个瓶颈，这是因为你<code>glDrawArrays</code>或<code>glDrawElements</code>这样的函数(Draw call)过多。这样渲染顶点数据，会明显降低执行效率，这是因为OpenGL在它可以绘制你的顶点数据之前必须做一些准备工作(比如告诉GPU从哪个缓冲读取数据，以及在哪里找到顶点属性，所有这些都会使CPU到GPU的总线变慢)。所以即使渲染顶点超快，而多次给你的GPU下达这样的渲染命令却未必。</p>
-<p>如果我们能够将数据一次发送给GPU，就会更方便，然后告诉OpenGL使用一个绘制函数，将这些数据绘制为多个物体。这就是我们将要展开讨论的<strong>实例化(instancing)</strong>。</p>
-<p><strong>实例化(instancing)</strong>是一种只调用一次渲染函数却能绘制出很多物体的技术，它节省渲染物体时从CPU到GPU的通信时间，而且只需做一次即可。要使用实例化渲染，我们必须将<code>glDrawArrays</code>和<code>glDrawElements</code>各自改为<code>glDrawArraysInstanced</code>和<code>glDrawElementsInstanced</code>。这些用于实例化的函数版本需要设置一个额外的参数，叫做<strong>实例数量(instance count)</strong>，它设置我们打算渲染实例的数量。这样我们就只需要把所有需要的数据发送给GPU一次就行了，然后告诉GPU它该如何使用一个函数来绘制所有这些实例。</p>
+<p>如果我们能够将数据一次发送给GPU，就会更方便，然后告诉OpenGL使用一个绘制函数，将这些数据绘制为多个物体。这就是我们将要展开讨论的<strong>实例化(Instancing)</strong>。</p>
+<p>实例化是一种只调用一次渲染函数却能绘制出很多物体的技术，它节省渲染物体时从CPU到GPU的通信时间，而且只需做一次即可。要使用实例化渲染，我们必须将<code>glDrawArrays</code>和<code>glDrawElements</code>各自改为<code>glDrawArraysInstanced</code>和<code>glDrawElementsInstanced</code>。这些用于实例化的函数版本需要设置一个额外的参数，叫做<strong>实例数量(Instance Count)</strong>，它设置我们打算渲染实例的数量。这样我们就只需要把所有需要的数据发送给GPU一次就行了，然后告诉GPU它该如何使用一个函数来绘制所有这些实例。</p>
 <p>就其本身而言，这个函数用处不大。渲染同一个物体一千次对我们来说没用，因为每个渲染出的物体不仅相同而且还在同一个位置；我们只能看到一个物体！出于这个原因GLSL在着色器中嵌入了另一个内建变量，叫做<strong><code>gl_InstanceID</code></strong>。</p>
 <p>在通过实例化绘制时，<code>gl_InstanceID</code>的初值是0，它在每个实例渲染时都会增加1。如果我们渲染43个实例，那么在顶点着色器<code>gl_InstanceID</code>的值最后就是42。每个实例都拥有唯一的值意味着我们可以索引到一个位置数组，并将每个实例摆放在世界空间的不同的位置上。</p>
 <p>我们调用一个实例化渲染函数，在标准化设备坐标中绘制一百个2D四边形来看看实例化绘制的效果是怎样的。通过对一个储存着100个偏移量向量的索引，我们为每个实例四边形添加一个偏移量。最后，窗口被排列精美的四边形网格填满：</p>
@@ -571,8 +574,8 @@ glBindVertexArray(0);
 </code></pre>
 
 <p><code>glDrawArraysInstanced</code>的参数和<code>glDrawArrays</code>一样，除了最后一个参数设置了我们打算绘制实例的数量。我们想展示100个四边形，它们以10×10网格形式展现，所以这儿就是100.运行代码，你会得到100个相似的有色四边形。</p>
-<h2 id="instanced-arrays">实例化数组(instanced arrays)</h2>
-<p>在这种特定条件下，前面的实现很好，但是当我们有100个实例的时候（这很正常），最终我们将碰到uniform数据数量的上线。为避免这个问题另一个可替代方案是实例化数组，它使用顶点属性来定义，这样就允许我们使用更多的数据了，当顶点着色器渲染一个新实例时它才会被更新。</p>
+<h2 id="_2">实例化数组</h2>
+<p>在这种特定条件下，前面的实现很好，但是当我们有100个实例的时候（这很正常），最终我们将碰到uniform数据数量的上线。为避免这个问题另一个可替代方案是实例化数组(Instanced Array)，它使用顶点属性来定义，这样就允许我们使用更多的数据了，当顶点着色器渲染一个新实例时它才会被更新。</p>
 <p>使用顶点属性，每次运行顶点着色器都将让GLSL获取到下个顶点属性集合，它们属于当前顶点。当把顶点属性定义为实例数组时，顶点着色器只更新每个实例的顶点属性的内容而不是顶点的内容。这使我们在每个顶点数据上使用标准顶点属性，用实例数组来储存唯一的实例数据。</p>
 <p>为了展示一个实例化数组的例子，我们将采用前面的例子，把偏移uniform表示为一个实例数组。我们不得不增加另一个顶点属性，来更新顶点着色器。</p>
 <pre><code class="c++">#version 330 core
@@ -623,7 +626,7 @@ glVertexAttribDivisor(2, 1);
 <p><img alt="" src="http://learnopengl.com/img/advanced/instancing_quads_arrays.png" /></p>
 <p>如果你仍然不确定实例渲染如何工作，或者想看看上面的代码是如何组合起来的，你可以在<a href="http://learnopengl.com/code_viewer.php?code=advanced/instancing_quads">这里找到应用的源码</a>。</p>
 <p>这些例子不是实例的好例子，不过挺有意思的。它们可以让你对实例的工作方式有一个概括的理解，但是当绘制拥有极大数量的相同物体的时候，它极其有用，现在我们还没有展示呢。出于这个原因，我们将在接下来的部分进入太空来看看实例渲染的威力。</p>
-<h3 id="_1">小行星带</h3>
+<h1 id="_3">小行星带</h1>
 <p>想象一下，在一个场景中有一个很大的行星，行星周围有一圈小行星带。这样一个小行星大可能包含成千上万的石块，对于大多数显卡来说几乎是难以完成的渲染任务。这个场景对于实例渲染来说却不再话下，由于所有小行星可以使用一个模型来表示。每个小行星使用一个变换矩阵就是一个经过少量变化的独一无二的小行星了。</p>
 <p>为了展示实例渲染的影响，我们先不使用实例渲染，来渲染一个小行星围绕行星飞行的场景。这个场景的大天体可以<a href="http://learnopengl.com/data/models/planet.rar">从这里下载</a>，此外要把小行星放在合适的位置上。小行星可以<a href="http://learnopengl.com/data/models/rock.rar">从这里下载</a>。</p>
 <p>为了得到我们理想中的效果，我们将为每个小行星生成一个变换矩阵，作为它们的模型矩阵。变换矩阵先将小行星平移到行星带上，我们还要添加一个随机位移值来作为偏移量，这样才能使行星带更自然。接着我们应用一个随机缩放，以及一个随机旋转向量。最后，变换矩阵就会将小行星变换到行星的周围，同时使它们更自然，每个行星都有别于其他的。</p>

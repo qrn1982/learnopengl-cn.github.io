@@ -450,7 +450,14 @@
         
             <li><a href="#viewport">视口(Viewport)</a></li>
         
-            <li><a href="#_2">准备好你的引擎</a></li>
+    
+        <li class="main "><a href="#_2">准备好你的引擎</a></li>
+        
+            <li><a href="#_3">最后一件事</a></li>
+        
+            <li><a href="#_4">输入</a></li>
+        
+            <li><a href="#_5">渲染</a></li>
         
     
     </ul>
@@ -526,7 +533,7 @@ glfwMakeContextCurrent(window);
 </code></pre>
 
 <p><code>glfwCreateWindow</code>函数需要窗口的宽和高作为它的前两个参数；第三个参数表示只这个窗口的名称(标题)，这里我们使用<strong>&ldquo;LearnOpenGL&rdquo;</strong>，当然你也可以使用你喜欢的名称；最后两个参数我们暂时忽略，先置为空指针就行。它的返回值<code>GLFWwindow</code>对象的指针会在其他的GLFW操作中使用到。创建完窗口我们就可以通知GLFW给我们的窗口在当前的线程中创建我们等待已久的OpenGL上下文了。</p>
-<h3 id="glew">GLEW</h3>
+<h2 id="glew">GLEW</h2>
 <p>在之前的教程中已经提到过，GLEW是用来管理OpenGL的函数指针的，所以在调用任何OpenGL的函数之前我们需要初始化GLEW。</p>
 <pre><code class="c++">glewExperimental = GL_TRUE;
 if (glewInit() != GLEW_OK)
@@ -537,7 +544,7 @@ if (glewInit() != GLEW_OK)
 </code></pre>
 
 <p>请注意，我们在初始化GLEW之前设置<code>glewExperimental</code>变量的值为<code>GL_TRUE</code>，这样做能让GLEW在管理OpenGL的函数指针时更多地使用现代化的技术，如果把它设置为<code>GL_FALSE</code>的话可能会在使用OpenGL的核心模式(Core-profile)时出现一些问题。</p>
-<h3 id="viewport">视口(Viewport)</h3>
+<h2 id="viewport">视口(Viewport)</h2>
 <p>在我们绘制之前还有一件重要的事情要做，我们必须告诉OpenGL渲染窗口的尺寸大小，这样OpenGL才只能知道要显示数据的窗口坐标。我们可以通过调用<code>glViewport</code>函数来设置这些维度：</p>
 <pre><code class="c++">glViewport(0, 0, 800, 600);  
 </code></pre>
@@ -547,7 +554,7 @@ if (glewInit() != GLEW_OK)
 <p class="admonition-title">Important</p>
 <p>OpenGL使用<code>glViewport</code>定义的位置和宽高进行位置坐标的转换，将OpenGL中的位置坐标转换为你的屏幕坐标。例如，OpenGL中的坐标(0.5,0.5)有可能被转换为屏幕中的坐标(200,450)。注意，OpenGL只会把-1到1之间的坐标转换为屏幕坐标，因此在此例中(-1，1)转换为屏幕坐标是(0,600)。</p>
 </div>
-<h2 id="_2">准备好你的引擎</h2>
+<h1 id="_2">准备好你的引擎</h1>
 <p>我们可不希望只绘制一个图像之后我们的应用程序就关闭窗口并立即退出。我们希望程序在我们明确地关闭它之前一直保持运行状态并能够接受用户输入。因此，我们需要在程序中添加一个while循环，我们可以把它称之为游戏循环(Game Loop)，这样我们的程序就能在我们让GLFW退出前保持运行了。下面几行的代码就实现了一个简单的游戏循环：</p>
 <pre><code class="c++">while(!glfwWindowShouldClose(window))
 {
@@ -566,7 +573,7 @@ if (glewInit() != GLEW_OK)
 <p><strong>双缓冲区(Double buffer)</strong></p>
 <p>应用程序使用单缓冲区绘图可能会存在图像闪烁的问题。 这是因为生成的图像不是一下子被绘制出来的，而是按照从左到右，由上而下逐像素地绘制而成的。最终图像不是在瞬间显示给用户,而是通过一步一步地计算结果绘制的，这可能会花费一些时间。为了规避这些问题，我们应用双缓冲区渲染窗口应用程序。前面的缓冲区保存着计算后可显示给用户的图像，被显示到屏幕上；所有的的渲染命令被传递到后台的缓冲区进行计算。当所有的渲染命令执行结束后，我们交换前台缓冲和后台缓冲，这样图像就立即呈显出来，之后清空缓冲区。</p>
 </div>
-<h3 id="_3">最后一件事</h3>
+<h2 id="_3">最后一件事</h2>
 <p>当游戏循环结束后我们需要释放之前的操作分配的资源，我们可以在main函数的最后调用<code>glfwTerminate</code>函数来释放GLFW分配的内存。</p>
 <pre><code class="c++">glfwTerminate();
 return 0;
@@ -576,7 +583,7 @@ return 0;
 <p><img alt="" src="http://learnopengl.com/img/getting-started/hellowindow.png" /></p>
 <p>如果你没有编译通过或者有什么问题的话，首先请检查你程序的的链接选项是否正确
 。然后对比本教程的代码，检查你的代码是不是哪里写错了，你也可以<a href="http://learnopengl.com/code_viewer.php?code=getting-started/hellowindow">点击这里</a>获取我的完整代码。</p>
-<h3 id="_4">输入</h3>
+<h2 id="_4">输入</h2>
 <p>我们同样也希望能够在GLFW中实现一些键盘控制，这是通过设置GLFW的<strong>回调函数(Callback Function)</strong>来实现的。回调函数事实上是一个函数指针，当我们为GLFW设置回调函数后，GLWF会在恰当的时候调用它。<strong>按键回调(KeyCallback)</strong>是众多回调函数中的一种，当我们为GLFW设置按键回调之后，GLFW会在用户有键盘交互时调用它。该回调函数的原型如下所示：</p>
 <pre><code class="c++">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 </code></pre>
@@ -597,8 +604,8 @@ return 0;
 </code></pre>
 
 <p>除了按键回调函数之外，我们还能为GLFW注册其他的回调函数。例如，我们可以注册一个函数来处理窗口尺寸变化、处理一些错误信息等。我们可以在创建窗口之后到开始游戏循环之前注册各种回调函数。</p>
-<h3 id="rendering">渲染(Rendering)</h3>
-<p>我们要把所有的渲染操作放到游戏循环中，因为我们想让这些渲染操作在每次游戏循环迭代的时候都能被执行。我们将做如下的操作：</p>
+<h2 id="_5">渲染</h2>
+<p>我们要把所有的渲染(Rendering)操作放到游戏循环中，因为我们想让这些渲染操作在每次游戏循环迭代的时候都能被执行。我们将做如下的操作：</p>
 <pre><code class="c++">// 程序循环
 while(!glfwWindowShouldClose(window))
 {

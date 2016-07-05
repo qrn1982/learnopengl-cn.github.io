@@ -444,18 +444,22 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#blending">混合（Blending）</a></li>
+        <li class="main active"><a href="#_1">混合</a></li>
         
-            <li><a href="#_1">忽略片段</a></li>
+            <li><a href="#_2">忽略片段</a></li>
         
-            <li><a href="#_2">混合</a></li>
+            <li><a href="#_3">混合</a></li>
+        
+            <li><a href="#_4">渲染半透明纹理</a></li>
+        
+            <li><a href="#_5">别打乱顺序</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="blending">混合（Blending）</h1>
+<h1 id="_1">混合</h1>
 <table>
 <thead>
 <tr>
@@ -478,13 +482,13 @@
 </tr>
 </tbody>
 </table>
-<p>在OpenGL中，物体透明技术通常被叫做混合(Blending)。透明是物体（或物体的一部分）非纯色而是混合色，这种颜色来自于不同浓度的自身颜色和它后面的物体颜色。一个有色玻璃窗就是一种透明物体，玻璃有自身的颜色，但是最终的颜色包含了所有玻璃后面的颜色。这也正是混合这名称的出处，因为我们将多种（来自于不同物体）颜色混合为一个颜色，透明使得我们可以看穿物体。</p>
+<p>在OpenGL中，物体透明技术通常被叫做<strong>混合(Blending)</strong>。透明是物体（或物体的一部分）非纯色而是混合色，这种颜色来自于不同浓度的自身颜色和它后面的物体颜色。一个有色玻璃窗就是一种透明物体，玻璃有自身的颜色，但是最终的颜色包含了所有玻璃后面的颜色。这也正是混合这名称的出处，因为我们将多种（来自于不同物体）颜色混合为一个颜色，透明使得我们可以看穿物体。</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/blending_transparency.png" /></p>
 <p>透明物体可以是完全透明（它使颜色完全穿透）或者半透明的（它使颜色穿透的同时也显示自身颜色）。一个物体的透明度，被定义为它的颜色的alpha值。alpha颜色值是一个颜色向量的第四个元素，你可能已经看到很多了。在这个教程前，我们一直把这个元素设置为1.0，这样物体的透明度就是0.0，同样的，当alpha值是0.0时就表示物体是完全透明的，alpha值为0.5时表示物体的颜色由50%的自身的颜色和50%的后面的颜色组成。</p>
 <p>我们之前所使用的纹理都是由3个颜色元素组成的：红、绿、蓝，但是有些纹理同样有一个内嵌的aloha通道，它为每个纹理像素(Texel)包含着一个alpha值。这个alpha值告诉我们纹理的哪个部分有透明度，以及这个透明度有多少。例如，下面的窗子纹理的玻璃部分的alpha值为0.25(它的颜色是完全红色，但是由于它有75的透明度，它会很大程度上反映出网站的背景色，看起来就不那么红了)，角落部分alpha是0.0。</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/blending_transparent_window.png" /></p>
 <p>我们很快就会把这个窗子纹理加到场景中，但是首先，我们将讨论一点简单的技术来实现纹理的半透明，也就是完全透明和完全不透明。</p>
-<h2 id="_1">忽略片段</h2>
+<h2 id="_2">忽略片段</h2>
 <p>有些图像并不关心半透明度，但也想基于纹理的颜色值显示一部分。例如，创建像草这种物体你不需要花费很大力气，通常把一个草的纹理贴到2D四边形上，然后把这个四边形放置到你的场景中。可是，草并不是像2D四边形这样的形状，而只需要显示草纹理的一部分而忽略其他部分。</p>
 <p>下面的纹理正是这样的纹理，它既有完全不透明的部分（alpha值为1.0）也有完全透明的部分（alpha值为0.0），而没有半透明的部分。你可以看到没有草的部分，图片显示了网站的背景色，而不是它自身的那部分颜色。</p>
 <p><img alt="" src="http://learnopengl.com/img/textures/grass.png" /></p>
@@ -557,8 +561,8 @@ void main()
 <p><code>glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);</code></p>
 </div>
 <p>你可以<a href="http://learnopengl.com/code_viewer.php?code=advanced/blending_discard">在这里得到源码</a>。</p>
-<h2 id="_2">混合</h2>
-<p>上述丢弃片段的方式，不能使我们获得渲染半透明图像，我们要么渲染出像素，要么完全地丢弃它。为了渲染出不同的透明度级别，我们需要开启<strong>混合</strong>(Blending)。像大多数OpenGL的功能一样，我们可以开启<code>GL_BLEND</code>来启用混合功能：</p>
+<h2 id="_3">混合</h2>
+<p>上述丢弃片段的方式，不能使我们获得渲染半透明图像，我们要么渲染出像素，要么完全地丢弃它。为了渲染出不同的透明度级别，我们需要开启<strong>混合</strong>(Blending)。像大多数OpenGL的功能一样，我们可以开启<code>GL_BLEND</code>来启用<strong>混合(Blending)</strong>功能：</p>
 <pre><code class="c++">glEnable(GL_BLEND);
 </code></pre>
 
@@ -700,7 +704,7 @@ void main()
 <li>GL_FUNC_REVERSE_SUBTRACT：彼此元素相减，但顺序相反：<script type="math/tex">\bar{C}_{result} = \color{red}{Dst} - \color{green}{Src}</script>.</li>
 </ul>
 <p>通常我们可以简单地省略<code>glBlendEquation</code>因为GL_FUNC_ADD在大多数时候就是我们想要的，但是如果你如果你真想尝试努力打破主流常规，其他的方程或许符合你的要求。</p>
-<h3 id="_3">渲染半透明纹理</h3>
+<h2 id="_4">渲染半透明纹理</h2>
 <p>现在我们知道OpenGL如何处理混合，是时候把我们的知识运用起来了，我们来添加几个半透明窗子。我们会使用本教程开始时用的那个场景，但是不再渲染草纹理，取而代之的是来自教程开始处半透明窗子纹理。</p>
 <p>首先，初始化时我们需要开启混合，设置合适和混合方程：</p>
 <pre><code class="c++">glEnable(GL_BLEND);
@@ -730,7 +734,7 @@ void main()
 <p class="admonition-title">Important</p>
 <p>对于全透明物体，比如草叶，我们选择简单的丢弃透明像素而不是混合，这样就减少了令我们头疼的问题（没有深度测试问题）。</p>
 </div>
-<h3 id="_4">别打乱顺序</h3>
+<h2 id="_5">别打乱顺序</h2>
 <p>要让混合在多物体上有效，我们必须先绘制最远的物体，最后绘制最近的物体。普通的无混合物体仍然可以使用深度缓冲正常绘制，所以不必给它们排序。我们一定要保证它们在透明物体前绘制好。当无透明度物体和透明物体一起绘制的时候，通常要遵循以下原则：</p>
 <p>先绘制所有不透明物体。
 为所有透明物体排序。

@@ -444,20 +444,22 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#depth-testing">深度测试(Depth testing)</a></li>
+        <li class="main active"><a href="#_1">深度测试</a></li>
         
-            <li><a href="#_1">深度测试函数</a></li>
+            <li><a href="#_2">深度测试函数</a></li>
         
-            <li><a href="#_2">深度值精度</a></li>
+            <li><a href="#_3">深度值精度</a></li>
         
-            <li><a href="#_4">深度冲突</a></li>
+            <li><a href="#_4">深度缓冲区的可视化</a></li>
+        
+            <li><a href="#_5">深度冲突</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="depth-testing">深度测试(Depth testing)</h1>
+<h1 id="_1">深度测试</h1>
 <table>
 <thead>
 <tr>
@@ -480,8 +482,8 @@
 </tr>
 </tbody>
 </table>
-<p>在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/08%20Coordinate%20Systems/">坐标系的教程</a>中我们呈现了一个3D容器,使用<strong>深度缓冲</strong>,以防止被其他面遮挡的面渲染到前面。在本教程中我们将细致地讨论被深度缓冲区(depth-buffer或z-buffer)所存储的<strong>深度值</strong>以及它是如何确定一个片段是否被其他片段遮挡。</p>
-<p><strong>深度缓冲</strong>就像<strong>颜色缓冲</strong>(存储所有的片段颜色:视觉输出)那样存储每个片段的信息，(通常) 和颜色缓冲区有相同的宽度和高度。深度缓冲由窗口系统自动创建并将其深度值存储为 16、 24 或 32 位浮点数。在大多数系统中深度缓冲区为24位。</p>
+<p>在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/08%20Coordinate%20Systems/">坐标系的教程</a>中我们呈现了一个3D容器,使用<strong>深度缓冲(Depth Buffer)</strong>,以防止被其他面遮挡的面渲染到前面。在本教程中我们将细致地讨论被深度缓冲(或z-buffer)所存储的<strong>深度值</strong>以及它是如何确定一个片段是否被其他片段遮挡。</p>
+<p><strong>深度缓冲</strong>就像<strong>颜色缓冲(Color Buffer)</strong>(存储所有的片段颜色:视觉输出)那样存储每个片段的信息，(通常) 和颜色缓冲区有相同的宽度和高度。深度缓冲由窗口系统自动创建并将其深度值存储为 16、 24 或 32 位浮点数。在大多数系统中深度缓冲区为24位。</p>
 <p>当深度测试启用的时候， OpenGL 测试深度缓冲区内的深度值。OpenGL 执行深度测试的时候，如果此测试通过，深度缓冲内的值将被设为新的深度值。如果深度测试失败，则丢弃该片段。</p>
 <p>深度测试在片段着色器运行之后(并且模板测试运行之后，我们将在<a href="http://www.learnopengl.com/#!Advanced-OpenGL/Stencil-testing">接下来</a>的教程中讨论)在屏幕空间中执行的。屏幕空间坐标直接有关的视区，由OpenGL的<code>glViewport</code>函数给定，并且可以通过GLSL的片段着色器中内置的 <code>gl_FragCoord</code>变量访问。<code>gl_FragCoord</code> 的 X 和 y 表示该片段的屏幕空间坐标 ((0，0) 在左下角)。<code>gl_FragCoord</code> 还包含一个 z 坐标，它包含了片段的实际深度值。此 z 坐标值是与深度缓冲区的内容进行比较的值。</p>
 <div class="admonition important">
@@ -502,7 +504,7 @@
 </code></pre>
 
 <p>注意这只在深度测试被启用的时候有效。</p>
-<h2 id="_1">深度测试函数</h2>
+<h2 id="_2">深度测试函数</h2>
 <p>OpenGL 允许我们修改它深度测试使用的比较运算符(comparison operators)。这样我们能够控制OpenGL通过或丢弃碎片和如何更新深度缓冲区。我们可以通过调用<code>glDepthFunc</code>来设置比较运算符 (或叫做深度函数(depth function)):</p>
 <pre><code class="c++">glDepthFunc(GL_LESS);
 </code></pre>
@@ -560,7 +562,7 @@
 <p><img alt="" src="http://learnopengl.com/img/advanced/depth_testing_func_always.png" /></p>
 <p>重新设置到<code>GL_LESS</code>给了我们曾经的场景：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/depth_testing_func_less.png" /></p>
-<h2 id="_2">深度值精度</h2>
+<h2 id="_3">深度值精度</h2>
 <p>在深度缓冲区中包含深度值介于<code>0.0</code>和<code>1.0</code>之间，从观察者看到其内容与场景中的所有对象的 z 值进行了比较。这些视图空间中的 z 值可以在投影平头截体的近平面和远平面之间的任何值。我们因此需要一些方法来转换这些视图空间 z 值到 [0，1] 的范围内，方法之一就是线性将它们转换为 [0，1] 范围内。下面的 (线性) 方程把 z 值转换为 0.0 和 1.0 之间的值 :</p>
 <p>
 <script type="math/tex; mode=display">
@@ -584,7 +586,7 @@
 <p><img alt="" src="http://learnopengl.com/img/advanced/depth_non_linear_graph.png" /></p>
 <p>正如你所看到，一个附近的物体的小的 z 值因此给了我们很高的深度精度。变换 (从观察者的角度) 的 z 值的方程式被嵌入在投影矩阵，所以当我们变换顶点坐标从视图到裁剪，然后到非线性方程应用了的屏幕空间中。如果你好奇的投影矩阵究竟做了什么我建议阅读<a href="http://www.songho.ca/opengl/gl_projectionmatrix.html">这个文章</a>。</p>
 <p>接下来我们看看这个非线性的深度值。</p>
-<h3 id="_3">深度缓冲区的可视化</h3>
+<h2 id="_4">深度缓冲区的可视化</h2>
 <p>我们知道在片段渲染器的内置<code>gl_FragCoord</code>向量的 z 值包含那个片段的深度值。如果我们要吧深度值作为颜色输出，那么我们可以在场景中显示的所有片段的深度值。我们可以返回基于片段的深度值的颜色向量:</p>
 <pre><code class="c++">void main()
 {
@@ -630,13 +632,13 @@ void main()
 <p>如果现在运行该应用程序，我们得到在距离实际上线性的深度值。尝试移动现场周围看到深度值线性变化</p>
 <p><img alt="" src="http://www.learnopengl.com/img/advanced/depth_testing_visible_linear.png" />。</p>
 <p>颜色主要是黑色的因为深度值线性范围从 0.1 的近平面到 100 的远平面，那里离我们很远。其结果是，我们相对靠近近平面，从而得到较低 (较暗) 的深度值。</p>
-<h2 id="_4">深度冲突</h2>
-<p>两个平面或三角形如此紧密相互平行深度缓冲区不具有足够的精度以至于无法得到哪一个靠前。结果是，这两个形状不断似乎切换顺序导致怪异出问题。这被称为深度冲突，因为它看上去像形状争夺顶靠前的位置。</p>
+<h2 id="_5">深度冲突</h2>
+<p>两个平面或三角形如此紧密相互平行深度缓冲区不具有足够的精度以至于无法得到哪一个靠前。结果是，这两个形状不断似乎切换顺序导致怪异出问题。这被称为<strong>深度冲突(Z-fighting)</strong>，因为它看上去像形状争夺顶靠前的位置。</p>
 <p>我们到目前为止一直在使用的场景中有几个地方深度冲突很显眼。容器被置于确切高度地板被安置这意味着容器的底平面与地板平面共面。两个平面的深度值是相同的，因此深度测试也没有办法找出哪个是正确。</p>
 <p>如果您移动摄像机到容器的里面，那么这个影响清晰可，容器的底部不断切换容器的平面和地板的平面:</p>
 <p><img alt="" src="http://www.learnopengl.com/img/advanced/depth_testing_z_fighting.png" /></p>
 <p>深度冲突是深度缓冲区的普遍问题，当对象的距离越远一般越强(因为深度缓冲区在z值非常大的时候没有很高的精度)。深度冲突还无法完全避免，但有一般的几个技巧，将有助于减轻或完全防止深度冲突在你的场景中的出现：</p>
-<h3 id="_5">防止深度冲突</h3>
+<h3 id="_6">防止深度冲突</h3>
 <p>第一个也是最重要的技巧是让物体之间不要离得太近，以至于他们的三角形重叠。通过在物体之间制造一点用户无法察觉到的偏移，可以完全解决深度冲突。在容器和平面的条件下，我们可以把容器像+y方向上略微移动。这微小的改变可能完全不被注意但是可以有效地减少或者完全解决深度冲突。然而这需要人工的干预每个物体，并进行彻底地测试，以确保这个场景的物体之间没有深度冲突。</p>
 <p>另一个技巧是尽可能把近平面设置得远一些。前面我们讨论过越靠近近平面的位置精度越高。所以我们移动近平面远离观察者，我们可以在椎体内很有效的提高精度。然而把近平面移动的太远会导致近处的物体被裁剪掉。所以不断调整测试近平面的值，为你的场景找出最好的近平面的距离。</p>
 <p>另外一个技巧是放弃一些性能来得到更高的深度值的精度。大多数的深度缓冲区都是24位。但现在显卡支持32位深度值，这让深度缓冲区的精度提高了一大节。所以牺牲一些性能你会得到更精确的深度测试，减少深度冲突。</p>

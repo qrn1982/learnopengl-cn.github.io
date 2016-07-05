@@ -444,18 +444,23 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#material">材质(Material)</a></li>
+        <li class="main active"><a href="#_1">材质</a></li>
         
-            <li><a href="#_1">设置材质</a></li>
+    
+        <li class="main "><a href="#_2">设置材质</a></li>
         
-            <li><a href="#_4">练习</a></li>
+            <li><a href="#_3">光的属性</a></li>
+        
+            <li><a href="#_4">不同的光源颜色</a></li>
+        
+            <li><a href="#_5">练习</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="material">材质(Material)</h1>
+<h1 id="_1">材质</h1>
 <table>
 <thead>
 <tr>
@@ -498,7 +503,7 @@ uniform Material material;
 <p>如你所见，正确地指定一个物体的材质属性，似乎就是改变我们物体的相关属性的比例。效果显然很引人注目，但是对于大多数真实效果，我们最终需要更加复杂的形状，而不单单是一个立方体。在<a href="http://learnopengl-cn.readthedocs.org/zh/latest/03%20Model%20Loading/01%20Assimp/">下面的教程</a>中，我们会讨论更复杂的形状。</p>
 <p>为一个物体赋予一款正确的材质是非常困难的，这需要大量实验和丰富的经验，所以由于错误的设置材质而毁了物体的画面质量是件经常发生的事。</p>
 <p>让我们试试在着色器中实现这样的一个材质系统。</p>
-<h2 id="_1">设置材质</h2>
+<h1 id="_2">设置材质</h1>
 <p>我们在片段着色器中创建了一个uniform材质结构体，所以下面我们希望改变光照计算来顺应新的材质属性。由于所有材质元素都储存在结构体中，我们可以从uniform变量<code>material</code>取得它们：</p>
 <pre><code class="c++">void main()
 {
@@ -539,7 +544,7 @@ glUniform1f(matShineLoc, 32.0f);
 <p>运行程序，会得到下面这样的结果：</p>
 <p><img alt="" src="http://www.learnopengl.com/img/lighting/materials_with_material.png" /></p>
 <p>看起来很奇怪不是吗？</p>
-<h3 id="_2">光的属性</h3>
+<h2 id="_3">光的属性</h2>
 <p>这个物体太亮了。物体过亮的原因是环境、漫反射和镜面三个颜色任何一个光源都会去全力反射。光源对环境、漫反射和镜面元素同时具有不同的强度。前面的教程，我们通过使用一个强度值改变环境和镜面强度的方式解决了这个问题。我们想做一个相同的系统，但是这次为每个光照元素指定了强度向量。如果我们想象<code>lightColor</code>是<code>vec3(1.0)</code>，代码看起来像是这样：</p>
 <pre><code class="c++">vec3 ambient = vec3(1.0f) * material.ambient;
 vec3 diffuse = vec3(1.0f) * (diff * material.diffuse);
@@ -581,7 +586,7 @@ glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
 <p>现在，我们调整了光是如何影响物体所有的材质的，我们得到一个更像前面教程的视觉输出。这次我们完全控制了物体光照和材质：</p>
 <p><img alt="" src="http://www.learnopengl.com/img/lighting/materials_light.png" /></p>
 <p>现在改变物体的外观相对简单了些。我们做点更有趣的事！</p>
-<h3 id="_3">不同的光源颜色</h3>
+<h2 id="_4">不同的光源颜色</h2>
 <p>目前为止，我们使用光源的颜色仅仅去改变物体各个元素的强度(通过选用从白到灰到黑范围内的颜色)，并没有影响物体的真实颜色(只是强度)。由于现在能够非常容易地访问光的属性了，我们可以随着时间改变它们的颜色来获得一些有很意思的效果。由于所有东西都已经在片段着色器做好了，改变光的颜色很简单，我们可以立即创建出一些有趣的效果：</p>
 <video src="http://www.learnopengl.com/video/lighting/materials.mp4" controls="controls">
 </video>
@@ -600,7 +605,7 @@ glUniform3f(lightDiffuseLoc, diffuseColor.x, diffuseColor.y, diffuseColor.z);
 </code></pre>
 
 <p>尝试和实验使用这些光照和材质值，看看它们怎样影响图像输出的。你可以从这里找到<a href="http://learnopengl.com/code_viewer.php?code=lighting/materials">程序的源码</a>，<a href="http://learnopengl.com/code_viewer.php?code=lighting/materials&amp;type=fragment">片段着色器</a>的源码。</p>
-<h2 id="_4">练习</h2>
+<h2 id="_5">练习</h2>
 <ul>
 <li>你能像我们教程一开始那样根据一些材质的属性来模拟一个真实世界的物体吗？
 注意<a href="http://devernay.free.fr/cours/opengl/materials.html">材质表</a>中的环境光颜色与漫反射光的颜色可能不一样，因为他们并没有把光照强度考虑进去来模拟，你需要将光照颜色的强度改为<code>vec(1.0f)</code>来输出正确的结果：<a href="http://learnopengl.com/code_viewer.php?code=lighting/materials-exercise1">参考解答</a>，我做了一个青色(Cyan)的塑料箱子</li>

@@ -452,11 +452,11 @@
         
             <li><a href="#_3">我们的第一个工程</a></li>
         
-            <li><a href="#linking">链接(Linking)</a></li>
+            <li><a href="#_4">链接</a></li>
         
             <li><a href="#glew">GLEW</a></li>
         
-            <li><a href="#_4">额外的资源</a></li>
+            <li><a href="#_5">额外的资源</a></li>
         
     
     </ul>
@@ -518,7 +518,7 @@
 <p>完成上面步骤后，我们就可以使用GLFW创建我们的第一个OpenGL工程了！</p>
 <h2 id="_3">我们的第一个工程</h2>
 <p>现在，让我们打开Visual Studio，创建一个新的工程。如果提供了多个选项，选择Visual C++，然后选择<strong>空工程(Empty Project)</strong>，别忘了给你的工程起一个合适的名字。现在我们有了一个空的工程去创建我们的OpenGL程序。</p>
-<h2 id="linking">链接(Linking)</h2>
+<h2 id="_4">链接</h2>
 <p>为了使我们的程序使用GLFW，我们需要把GLFW库<strong>链接(Link)</strong>进工程。于是我们需要在链接器的设置里写上<strong>glfw3.lib</strong>。但是我们的工程还不知道在哪寻找这个文件，于是我们首先需要将我们放第三方库的目录添加进设置。</p>
 <p>为了添加这些目录，我们首先进入Project Properties(工程属性)(在解决方案窗口里右键项目)，然后选择<strong>VC++ Directories</strong>选项卡(如下图)。在下面的两栏添加目录：</p>
 <p><img alt="" src="http://learnopengl.com/img/getting-started/vc_directories.png" /></p>
@@ -568,7 +568,7 @@ glGenBuffers(1, &amp;buffer);
 <p>对于Linux用户建议使用这个命令行<code>-lGLEW -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi</code>。没有正确链接相应的库会产生<em>undefined reference</em>(未定义的引用)这个错误。</p>
 </div>
 <p>我们现在成功编译了GLFW和GLEW库，我们将进入<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/03%20Hello%20Window/">下一节</a>去使用GLFW和GLEW来设置OpenGL上下文并创建窗口。记住确保你的头文件和库文件的目录设置正确，以及链接器里引用的库文件名正确。如果仍然遇到错误，请参考额外资源中的例子。</p>
-<h2 id="_4">额外的资源</h2>
+<h2 id="_5">额外的资源</h2>
 <ul>
 <li><a href="http://www.opengl-tutorial.org/miscellaneous/building-your-own-c-application/">Building applications</a>: 提供了很多编译链接相关的信息以及一大批错误的解决方法。</li>
 <li><a href="http://wiki.codeblocks.org/index.php?title=Using_GLFW_with_Code::Blocks">GLFW with Code::Blocks</a>:使用Code::Blocks IDE编译GLFW。</li>

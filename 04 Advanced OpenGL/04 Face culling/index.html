@@ -444,20 +444,20 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#face-culling">面剔除（Face culling）</a></li>
+        <li class="main active"><a href="#_1">面剔除</a></li>
         
-            <li><a href="#winding-order">顶点连接顺序（Winding order）</a></li>
+            <li><a href="#_2">顶点连接顺序</a></li>
         
-            <li><a href="#_1">面剔除</a></li>
+            <li><a href="#_3">面剔除</a></li>
         
-            <li><a href="#_2">练习</a></li>
+            <li><a href="#_4">练习</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="face-culling">面剔除（Face culling）</h1>
+<h1 id="_1">面剔除</h1>
 <table>
 <thead>
 <tr>
@@ -487,8 +487,8 @@
 </div>
 <p>这的确是个好主意，但是有个问题需要解决：我们如何知道某个面在观察者的视野中不会出现呢？如果我们去想象任何封闭的几何平面，它们都有两面，一面面向用户，另一面背对用户。假如我们只渲染面向观察者的面会怎样？</p>
 <p>这正是<strong>面剔除</strong>(Face culling)所要做的。OpenGL允许检查所有正面朝向（Front facing）观察者的面，并渲染它们，而丢弃所有背面朝向（Back facing）的面，这样就节约了我们很多片段着色器的命令（它们很昂贵！）。我们必须告诉OpenGL我们使用的哪个面是正面，哪个面是反面。OpenGL使用一种聪明的手段解决这个问题——分析顶点数据的连接顺序（Winding order）。</p>
-<h2 id="winding-order">顶点连接顺序（Winding order）</h2>
-<p>当我们定义一系列的三角顶点时，我们会把它们定义为一个特定的连接顺序，它们可能是顺时针的或逆时针的。每个三角形由3个顶点组成，我们从三角形的中间去看，从而把这三个顶点指定一个连接顺序。</p>
+<h2 id="_2">顶点连接顺序</h2>
+<p>当我们定义一系列的三角顶点时，我们会把它们定义为一个特定的连接顺序(Winding Order)，它们可能是<strong>顺时针</strong>的或<strong>逆时针</strong>的。每个三角形由3个顶点组成，我们从三角形的中间去看，从而把这三个顶点指定一个连接顺序。</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/faceculling_windingorder.png" /></p>
 <p>正如你所看到的那样，我们先定义了顶点1，接着我们定义顶点2或3，这个不同的选择决定了这个三角形的连接顺序。下面的代码展示出这点：</p>
 <pre><code class="c++">GLfloat vertices[] = {
@@ -508,7 +508,7 @@
 <p>我们指定了它们以后，观察者面对的所有的三角形的顶点的连接顺序都是正确的，但是现在渲染的立方体另一面的三角形的顶点的连接顺序被反转。最终，我们所面对的三角形被视为正面朝向的三角形，后部的三角形被视为背面朝向的三角形。下图展示了这个效果：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced/faceculling_frontback.png" /></p>
 <p>在顶点数据中，我们定义的是两个逆时针顺序的三角形。然而，从观察者的方面看，后面的三角形是顺时针的，如果我们仍以1、2、3的顺序以观察者当面的视野看的话。即使我们以逆时针顺序定义后面的三角形，它现在还是变为顺时针。它正是我们打算剔除（丢弃）的不可见的面！</p>
-<h2 id="_1">面剔除</h2>
+<h2 id="_3">面剔除</h2>
 <p>在教程的开头，我们说过OpenGL可以丢弃背面朝向的三角形。现在我们知道了如何设置顶点的连接顺序，我们可以开始使用OpenGL默认关闭的面剔除选项了。</p>
 <p>记住我们上一节所使用的立方体的定点数据不是以逆时针顺序定义的。所以我更新了顶点数据，好去反应为一个逆时针链接顺序，你可以<a href="http://learnopengl.com/code_viewer.php?code=advanced/faceculling_vertexdata">从这里复制它</a>。把所有三角的顶点都定义为逆时针是一个很好的习惯。</p>
 <p>开启OpenGL的<code>GL_CULL_FACE</code>选项就能开启面剔除功能：</p>
@@ -545,7 +545,7 @@ glCullFace(GL_FRONT);
 </code></pre>
 
 <p>正如你所看到的那样，面剔除是OpenGL提高效率的一个强大工具，它使应用节省运算。你必须跟踪下来哪个物体可以使用面剔除，哪些不能。</p>
-<h2 id="_2">练习</h2>
+<h2 id="_4">练习</h2>
 <p>你可以自己重新定义一个顺时针的顶点顺序，然后用顺时针作为正面把它渲染出来吗：<a href="http://learnopengl.com/code_viewer.php?code=advanced/faceculling-exercise1">解决方案</a>。</p>
 
 <div id="disqus_thread"></div>

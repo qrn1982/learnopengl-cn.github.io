@@ -444,18 +444,18 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#mesh">网格(Mesh)</a></li>
+        <li class="main active"><a href="#_1">网格</a></li>
         
-            <li><a href="#_1">初始化</a></li>
+            <li><a href="#_2">初始化</a></li>
         
-            <li><a href="#_2">渲染</a></li>
+            <li><a href="#_3">渲染</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="mesh">网格(Mesh)</h1>
+<h1 id="_1">网格</h1>
 <table>
 <thead>
 <tr>
@@ -527,7 +527,7 @@ private:
 </code></pre>
 
 <p>这里没什么特别的，现在让我们研究一下<code>setupMesh</code>函数。</p>
-<h2 id="_1">初始化</h2>
+<h2 id="_2">初始化</h2>
 <p>现在我们有一大列的网格数据可用于渲染，这要感谢构造函数。我们确实需要设置合适的缓冲，通过顶点属性指针（vertex attribute pointers）定义顶点着色器layout。现在你应该对这些概念很熟悉，但是我们我们通过介绍了结构体中使用顶点数据，所以稍微有点不一样：</p>
 <pre><code class="c++">void setupMesh()
 {
@@ -584,7 +584,7 @@ vertex.TexCoords = glm::vec2(1.0f, 0.0f);
 
 <p>偏移量现在使用<code>offsetof</code>函数定义了，在这个例子里，设置法线向量的字节偏移量等于法线向量在结构体的字节偏移量，它是<code>3float</code>，也就是12字节（一个float占4字节）。注意，我们同样设置步长参数等于<code>Vertex</code>结构体的大小。</p>
 <p>使用一个像这样的结构体，不仅能提供可读性更高的代码同时也是我们可以轻松的扩展结构体。如果我们想要增加另一个顶点属性，我们把它可以简单的添加到结构体中，由于它的可扩展性，渲染代码不会被破坏。</p>
-<h2 id="_2">渲染</h2>
+<h2 id="_3">渲染</h2>
 <p>我们需要为<code>Mesh</code>类定义的最后一个函数，是它的Draw函数。在真正渲染前我们希望绑定合适的纹理，然后调用<code>glDrawElements</code>。可因为我们从一开始不知道这个网格有多少纹理以及它们应该是什么类型的，所以这件事变得很困难。所以我们该怎样在着色器中设置纹理单元和采样器呢？</p>
 <p>解决这个问题，我们需要假设一个特定的名称惯例：每个<code>diffuse</code>纹理被命名为<code>texture_diffuseN</code>,每个<code>specular</code>纹理应该被命名为<code>texture_specularN</code>。N是一个从1到纹理才抢其允许使用的最大值之间的数。可以说，在一个网格中我们有3个<code>diffuse</code>纹理和2个<code>specular</code>纹理，它们的纹理采样器应该这样被调用：</p>
 <pre><code class="c++">uniform sampler2D texture_diffuse1;

@@ -446,9 +446,9 @@
     
         <li class="main active"><a href="#_1">高级数据</a></li>
         
-            <li><a href="#_2">缓冲数据写入</a></li>
+            <li><a href="#_2">分批处理顶点属性</a></li>
         
-            <li><a href="#_3">分批处理顶点属性</a></li>
+            <li><a href="#_3">复制缓冲</a></li>
         
     
     </ul>
@@ -478,7 +478,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_2">缓冲数据写入</h2>
 <p>我们在OpenGL中大量使用缓冲来储存数据已经有一会儿了。有一些有趣的方式来操纵缓冲，也有一些有趣的方式通过纹理来向着色器传递大量数据。本教程中，我们会讨论一些更加有意思的缓冲函数，以及如何使用纹理对象来储存大量数据（教程中纹理部分还没写）。</p>
 <p>OpenGL中缓冲只是一块儿内存区域的对象，除此没有更多点的了。当把缓冲绑定到一个特定缓冲对象的时候，我们就给缓冲赋予了一个特殊的意义。当我们绑定到<code>GL_ARRAY_BUFFER</code>的时候，这个缓冲就是一个顶点数组缓冲，我们也可以简单地绑定到<code>GL_ELEMENT_ARRAY_BUFFER</code>。OpenGL内部为每个目标（target）储存一个缓冲，并基于目标来处理不同的缓冲。</p>
 <p>到目前为止，我们使用<code>glBufferData</code>函数填充缓冲对象管理的内存，这个函数分配了一块内存空间，然后把数据存入其中。如果我们向它的<code>data</code>这个参数传递的是NULL，那么OpenGL只会帮我们分配内存，而不会填充它。如果我们先打算开辟一些内存，稍后回到这个缓冲一点一点的填充数据，有些时候会很有用。</p>
@@ -503,8 +502,8 @@ glUnmapBuffer(GL_ARRAY_BUFFER);
 
 <p>调用<code>glUnmapBuffer</code>函数可以告诉OpenGL我们已经用完指针了，OpenGL会知道你已经做完了。通过解映射（unmapping），指针会不再可用，如果OpenGL可以把你的数据映射到缓冲上，就会返回<code>GL_TRUE</code>。</p>
 <p>把数据直接映射到缓冲上使用<code>glMapBuffer</code>很有用，因为不用把它储存在临时内存里。你可以从文件读取数据然后直接复制到缓冲的内存里。</p>
-<h2 id="_3">分批处理顶点属性</h2>
-<p>使用<code>glVertexAttribPointer</code>函数可以指定缓冲内容的顶点数组的属性的布局(layout)。我们已经知道，通过使用顶点属性指针我们可以交叉属性，也就是说我们可以把每个顶点的位置、法线、纹理坐标放在彼此挨着的地方。现在我们了解了更多的缓冲的内容，可以采取另一种方式了。</p>
+<h2 id="_2">分批处理顶点属性</h2>
+<p>使用<code>glVertexAttribPointer</code>函数可以指定缓冲内容的顶点数组的属性的布局(Layout)。我们已经知道，通过使用顶点属性指针我们可以交叉(Interleave)属性，也就是说我们可以把每个顶点的位置、法线、纹理坐标放在彼此挨着的地方。现在我们了解了更多的缓冲的内容，可以采取另一种方式了。</p>
 <p>我们可以做的是把每种类型的属性的所有向量数据批量保存在一个布局，而不是交叉布局。与交叉布局123123123123不同，我们采取批量方式111122223333。</p>
 <p>当从文件加载顶点数据时你通常获取一个位置数组，一个法线数组和一个纹理坐标数组。需要花点力气才能把它们结合为交叉数据。使用<code>glBufferSubData</code>可以简单的实现分批处理方式：</p>
 <pre><code class="c++">GLfloat positions[] = { ... };
@@ -526,7 +525,7 @@ glVertexAttribPointer(
 
 <p>注意，<code>stride</code>参数等于顶点属性的大小，由于同类型的属性是连续储存的，所以下一个顶点属性向量可以在它的后面3（或2）的元素那儿找到。</p>
 <p>这是我们有了另一种设置和指定顶点属性的方式。使用哪个方式对OpenGL来说也不会有立竿见影的效果，这只是一种采用更加组织化的方式去设置顶点属性。选用哪种方式取决于你的偏好和应用类型。</p>
-<p>## 复制缓冲</p>
+<h2 id="_3">复制缓冲</h2>
 <p>当你的缓冲被数据填充以后，你可能打算让其他缓冲能分享这些数据或者打算把缓冲的内容复制到另一个缓冲里。<code>glCopyBufferSubData</code>函数让我们能够相对容易地把一个缓冲的数据复制到另一个缓冲里。函数的原型是：</p>
 <pre><code class="c++">void glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
 </code></pre>

@@ -444,7 +444,7 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#assimp">Assimp开源模型导入库</a></li>
+        <li class="main active"><a href="#assimp">Assimp</a></li>
         
             <li><a href="#_1">模型加载库</a></li>
         
@@ -455,7 +455,7 @@
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="assimp">Assimp开源模型导入库</h1>
+<h1 id="assimp">Assimp</h1>
 <table>
 <thead>
 <tr>
@@ -495,8 +495,8 @@
 <p>所以我们要做的第一件事，就是加载一个模型文件为scene对象，然后获取每个节点对应的Mesh对象（我们需要递归搜索每个节点的子节点来获取所有的节点），并处理每个Mesh对象对应的顶点数据、索引以及它的材质属性。最终我们得到一个只包含我们需要的数据的Mesh集合。</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p><strong>Mesh(网格,或被译为“模型点云”)</strong></p>
-<p>用建模工具构建物体时，美工通常不会直接使用单个形状来构建一个完整的模型。一般来说，一个模型会由几个子模型/形状组合拼接而成。而模型中的那些子模型/形状就是我们所说的一个Mesh。例如一个人形模型，美工通常会把头、四肢、衣服、武器这些组件都分别构建出来，然后在把所有的组件拼合在一起，形成最终的完整模型。一个Mesh（包含顶点、索引和材质属性）是我们在OpenGL中绘制物体的最小单位。一个模型通常有多个Mesh组成。</p>
+<p><strong>网格(Mesh)</strong></p>
+<p>用建模工具构建物体时，美工通常不会直接使用单个形状来构建一个完整的模型。一般来说，一个模型会由几个子模型/形状组合拼接而成。而模型中的那些子模型/形状就是我们所说的一个网格。例如一个人形模型，美工通常会把头、四肢、衣服、武器这些组件都分别构建出来，然后在把所有的组件拼合在一起，形成最终的完整模型。一个网格（包含顶点、索引和材质属性）是我们在OpenGL中绘制物体的最小单位。一个模型通常有多个网格组成。</p>
 </div>
 <p>下一节教程中，我们将用上述描述的数据结构来创建我们自己的Model类和Mesh类，用于加载和保存那些导入的模型。如果我们想要绘制一个模型，我们不会去渲染整个模型，而是去渲染这个模型所包含的所有独立的Mesh。不管怎样，我们开始导入模型之前，我们需要先把Assimp导入到我们的工程中。</p>
 <h2 id="assimp_1">构建Assimp</h2>
@@ -522,7 +522,7 @@ Required library DirectX not found! Install the library (including dev packages)
 <p class="admonition-title">Important</p>
 <p>如果你想要让Assimp使用多线程支持来提高性能，你可以使用<b>Boost</b>库来编译 Assimp。在<a href="http://assimp.sourceforge.net/lib_html/install.html">Boost安装页面</a>，你能找到关于Boost的完整安装介绍。</p>
 </div>
-<p>现在，你应该已经能够编译Assimp库，并链接Assimp到你的工程里去了。下一节内容：<a href="http://learnopengl-cn.readthedocs.org/zh/latest/03%20Model%20Loading/02%20Mesh/">导入完美的3D物件！</a></p>
+<p>现在，你应该已经能够编译Assimp库，并链接Assimp到你的工程里去了。下一步：<a href="http://learnopengl-cn.readthedocs.org/zh/latest/03%20Model%20Loading/02%20Mesh/">导入完美的3D物件！</a></p>
 
 <div id="disqus_thread"></div>
 <script>

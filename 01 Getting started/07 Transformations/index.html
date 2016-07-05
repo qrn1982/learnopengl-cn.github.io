@@ -444,24 +444,50 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#transformations">变换(Transformations)</a></li>
+        <li class="main active"><a href="#_1">变换</a></li>
         
-            <li><a href="#vector">向量(Vector)</a></li>
+    
+        <li class="main "><a href="#_2">向量</a></li>
         
-            <li><a href="#matrix">矩阵(Matrix)</a></li>
+            <li><a href="#_3">向量与标量运算</a></li>
         
-            <li><a href="#_3">矩阵与向量相乘</a></li>
+            <li><a href="#_4">向量取反</a></li>
         
-            <li><a href="#_5">实践</a></li>
+            <li><a href="#_5">向量加减</a></li>
         
-            <li><a href="#_6">练习</a></li>
+            <li><a href="#_6">长度</a></li>
+        
+            <li><a href="#_7">向量相乘</a></li>
+        
+    
+        <li class="main "><a href="#_10">矩阵</a></li>
+        
+            <li><a href="#_11">矩阵的加减</a></li>
+        
+            <li><a href="#_12">矩阵的数乘</a></li>
+        
+    
+        <li class="main "><a href="#_14">矩阵与向量相乘</a></li>
+        
+            <li><a href="#_15">单位矩阵</a></li>
+        
+            <li><a href="#_16">缩放</a></li>
+        
+            <li><a href="#_17">平移</a></li>
+        
+    
+        <li class="main "><a href="#_20">实践</a></li>
+        
+            <li><a href="#glm">GLM</a></li>
+        
+            <li><a href="#_21">练习</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="transformations">变换(Transformations)</h1>
+<h1 id="_1">变换</h1>
 <table>
 <thead>
 <tr>
@@ -487,8 +513,8 @@
 <p>尽管我们现在已经知道了如何创建一个物体、着色、加入纹理从而给它们一些细节的表现，但是它们仍然还是不够有趣，因为它们都还是静态的物体。我们可以尝试着在每一帧改变物体的顶点并且重设缓冲区从而使他们移动，但这太繁琐了，而且会消耗很多的处理时间。然而，我们现在有一个更好的解决方案，使用(多个)矩阵(Matrix)对象可以更好的变换(Transform)一个物体。当然，这并不是说我们会去讨论武术和数字虚拟世界(译注：Matrix同样也是电影「黑客帝国」的英文名，电影中人类生活在数字虚拟世界，主角会武术)。</p>
 <p><strong>矩阵</strong>(Matrix)是一种非常有用的数学工具，尽管听起来可能有些吓人，不过一旦你理解了它们后，它们会非常有用。在讨论矩阵的过程中，我们需要使用到一些数学知识。对于一些愿意多了解这些知识的读者，我会附加一些资源给你们阅读。</p>
 <p>为了深入了解变换，我们首先要在讨论矩阵之前了解一点向量(Vector)。这一节的目标是让你拥有将来需要的最基础的数学背景知识. 如果你发现这节十分困难，尽量尝试去理解它们，当你以后需要它们的时候回过头来复习这些概念。</p>
-<h2 id="vector">向量(Vector)</h2>
-<p>向量最最基本的定义就是一个方向。或者更正式的说，向量有一个<strong>方向(Direction)</strong>和<strong>大小(Magnitude，也叫做强度或长度)</strong>。你可以把向量想成一个藏宝图上的指示：“向左走10步，向北走3步，然后向右走5步”；“左”就是方向，“10步”就是向量的长度。你可以发现，这个藏宝图的指示一共有3个向量。向量可以在任意<strong>维度</strong>(Dimension)上，但是我们通常只使用2至4维。如果一个向量有2个维度，它表示一个平面的方向(想象一下2D的图像)，当它有3个维度的时候它可以表达一个3D世界的方向。</p>
+<h1 id="_2">向量</h1>
+<p>向量(Vector)最最基本的定义就是一个方向。或者更正式的说，向量有一个<strong>方向(Direction)</strong>和<strong>大小(Magnitude，也叫做强度或长度)</strong>。你可以把向量想成一个藏宝图上的指示：“向左走10步，向北走3步，然后向右走5步”；“左”就是方向，“10步”就是向量的长度。你可以发现，这个藏宝图的指示一共有3个向量。向量可以在任意<strong>维度</strong>(Dimension)上，但是我们通常只使用2至4维。如果一个向量有2个维度，它表示一个平面的方向(想象一下2D的图像)，当它有3个维度的时候它可以表达一个3D世界的方向。</p>
 <p>下面你会看到3个向量，每个向量在图像中都用一个箭头(x, y)表示。我们在2D图片中展示这些向量，因为这样子会更直观. 你仍然可以把这些2D向量当做z坐标为0的3D向量。由于向量表示的是方向，起始于何处<strong>并不会</strong>改变它的值。下图我们可以看到向量<script type="math/tex">\color{red}{\bar{v}}</script>和<script type="math/tex">\color{blue}{\bar{w}}</script>是相等的，尽管他们的起始点不同：</p>
 <p><img alt="" src="http://learnopengl.com/img/getting-started/vectors.png" /></p>
 <p>数学家喜欢在字母上面加一横表示向量，比如说<script type="math/tex">\bar{v}</script>。当用在公式中时它们通常是这样的：</p>
@@ -499,7 +525,7 @@
 </p>
 <p>由于向量是一个方向，所以有些时候会很难形象地将它们用位置(Position)表示出来。我们通常设定这个方向的原点为(0,0,0)，然后指向对应坐标的点，使其变为<strong>位置向量(Position Vector)</strong>来表示(你也可以把起点设置为其他的点，然后说：这个向量从这个点起始指向另一个点)。位置向量(3, 5)的在图像中起点是(0, 0)，指向(3, 5)。我们可以使用向量在2D或3D空间中表示方向<strong>与</strong>位置.</p>
 <p>和普通数字一样，我们也可以用向量进行多种运算(其中一些你可能已经知道了)。</p>
-<h3 id="scalar-vector-operations">向量与标量运算(Scalar Vector Operations)</h3>
+<h2 id="_3">向量与标量运算</h2>
 <p><strong>标量(Scalar)</strong>只是一个数字(或者说是仅有一个分量的矢量)。当把一个向量加/减/乘/除一个标量，我们可以简单的把向量的每个分量分别进行该运算。对于加法来说会像这样:</p>
 <p>
 <script type="math/tex; mode=display">
@@ -507,14 +533,14 @@
 </script>
 </p>
 <p>其中的+可以是+，-，·或÷，其中·是乘号。注意－和÷运算时不能颠倒，因为颠倒的运算是没有定义的(标量-/÷矢量)</p>
-<h3 id="vector-negation">向量取反(Vector Negation)</h3>
-<p>对一个向量取反会将其方向逆转。一个指向东北的向量取反后就指向西南方向了。我们在一个向量的每个分量前加负号就可以实现取反了(或者说用-1数乘该向量):</p>
+<h2 id="_4">向量取反</h2>
+<p>对一个向量取反(Negation)会将其方向逆转。一个指向东北的向量取反后就指向西南方向了。我们在一个向量的每个分量前加负号就可以实现取反了(或者说用-1数乘该向量):</p>
 <p>
 <script type="math/tex; mode=display">
 -\bar{v} = -\begin{pmatrix} \color{red}{v_x} \\ \color{blue}{v_y} \\ \color{green}{v_z} \end{pmatrix} = \begin{pmatrix} -\color{red}{v_x} \\ -\color{blue}{v_y} \\ -\color{green}{v_z} \end{pmatrix}
 </script>
 </p>
-<h3 id="_1">向量加减</h3>
+<h2 id="_5">向量加减</h2>
 <p>向量的加法可以被定义为是<strong>分量的(Component-wise)</strong>相加，即将一个向量中的每一个分量加上另一个向量的对应分量：</p>
 <p>
 <script type="math/tex; mode=display">
@@ -531,8 +557,8 @@
 </p>
 <p>两个向量的相减会得到这两个向量指向位置的差. 这在我们想要获取两点的差会非常有用.</p>
 <p><img alt="" src="http://learnopengl.com/img/getting-started/vectors_subtraction.png" /></p>
-<h3 id="length">长度(Length)</h3>
-<p>我们使用<strong>勾股定理(Pythagoras Theorem)</strong>来获取向量的长度/大小. 如果你把向量的x与y分量画出来，该向量会形成一个以x与y分量为边的三角形:</p>
+<h2 id="_6">长度</h2>
+<p>我们使用<strong>勾股定理(Pythagoras Theorem)</strong>来获取向量的长度(Length)/大小(Magnitude). 如果你把向量的x与y分量画出来，该向量会形成一个以x与y分量为边的三角形:</p>
 <p><img alt="" src="http://learnopengl.com/img/getting-started/vectors_triangle.png" /></p>
 <p>因为两条边(x和y)是已知的，而且我们希望知道斜边<script type="math/tex">\color{red}{\bar{v}}</script>的长度，所以我们可以通过勾股定理来计算出它:</p>
 <p>
@@ -556,10 +582,10 @@
 </script>
 </p>
 <p>我们把这种方法叫做一个向量的<strong>标准化(Normalizing)</strong>。单位向量头上有一个^样子的记号，并且它会变得很有用，特别是在我们只关心方向不关系长度的时候(如果我们改变向量的长度，它的方向并不会改变)。</p>
-<h3 id="vector-vector-multiplication">向量相乘(Vector-vector Multiplication)</h3>
+<h2 id="_7">向量相乘</h2>
 <p>两个向量相乘是一种很奇怪的情况。普通的乘法在向量上是没有定义的，因为它在视觉上是没有意义的，但是有两种特定情境，当需要乘法时我们可以从中选择：一个是<strong>点乘(Dot Product)</strong>，记作<script type="math/tex">\bar{v} \cdot \bar{k}</script>，另一个是<strong>叉乘(Cross Product)</strong>，记作<script type="math/tex">\bar{v} \times \bar{k}</script>。</p>
-<h4 id="dot-product">点乘(Dot Product)</h4>
-<p>两个向量的点乘等于它们的数乘结果乘以两个向量之间夹角的余弦值。听起来有点费解，先看一下公式：</p>
+<h3 id="_8">点乘</h3>
+<p>两个向量的点乘(Dot Product)等于它们的数乘结果乘以两个向量之间夹角的余弦值。听起来有点费解，先看一下公式：</p>
 <p>
 <script type="math/tex; mode=display">
 \bar{v} \cdot \bar{k} = ||\bar{v}|| \cdot ||\bar{k}|| \cdot \cos \theta
@@ -589,8 +615,8 @@
 </script>
 </p>
 <p>计算两个单位余弦的角度，我们使用反余弦<script type="math/tex">cos^{-1}</script> ，结果是143.1度。现在我们很快就计算出了两个向量的角度。点乘在计算光照的时候会很有用。</p>
-<h4 id="cross-product">叉乘(Cross Product)</h4>
-<p>叉乘只在3D空间有定义，它需要两个不平行向量作为输入，生成正交于两个输入向量的第三个向量。如果输入的两个向量也是正交的，那么叉乘的结果将会返回3个互相正交的向量。接下来的教程中，这很有用。下面的图片展示了3D空间中叉乘的样子：</p>
+<h3 id="_9">叉乘</h3>
+<p>叉乘(Cross Product)只在3D空间有定义，它需要两个不平行向量作为输入，生成正交于两个输入向量的第三个向量。如果输入的两个向量也是正交的，那么叉乘的结果将会返回3个互相正交的向量。接下来的教程中，这很有用。下面的图片展示了3D空间中叉乘的样子：</p>
 <p><img alt="" src="http://learnopengl.com/img/getting-started/vectors_crossproduct.png" /></p>
 <p>不同于其他运算，如果你没有钻研过线性代数，会觉得叉乘很反直觉，所以最好记住公式，就没问题(记不住也没问题)。下面你会看到两个正交向量A和B叉乘结果：</p>
 <p>
@@ -599,8 +625,8 @@
 </script>
 </p>
 <p>就像你所看到的，看起来毫无头绪。可如果你这么做了，你会得到第三个向量，它正交于你的输入向量。</p>
-<h2 id="matrix">矩阵(Matrix)</h2>
-<p>现在我们已经讨论了向量的全部内容，是时候看看矩阵了！矩阵简单说是一个矩形的数字、符号或表达式数组。矩阵中每一项叫做矩阵的<strong>元素(Element)</strong>。下面是一个2×3矩阵的例子：</p>
+<h1 id="_10">矩阵</h1>
+<p>现在我们已经讨论了向量的全部内容，是时候看看矩阵(Matrix)了！矩阵简单说是一个矩形的数字、符号或表达式数组。矩阵中每一项叫做矩阵的<strong>元素(Element)</strong>。下面是一个2×3矩阵的例子：</p>
 <p>
 <script type="math/tex; mode=display">
 \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}
@@ -608,7 +634,7 @@
 </p>
 <p>矩阵可以通过(i, j)进行索引，i是行，j是列，这就是上面的矩阵叫做2×3矩阵的原因(3列2行，也叫做矩阵的<strong>维度(Dimension)</strong>)。这与你在索引2D图像时的(x, y)相反，获取4的索引是(2, 1)(第二行，第一列)(译注：如果是图像索引应该是(1, 2)，先算列，再算行)。</p>
 <p>关于矩阵基本也就是这些了，它就是矩形数学表达式阵列。矩阵也有非常漂亮的数学属性，就跟向量一样。矩阵有几个运算，叫做：矩阵加法、减法和乘法。</p>
-<h3 id="_2">矩阵的加减</h3>
+<h2 id="_11">矩阵的加减</h2>
 <p>矩阵与标量的加减如下所示：</p>
 <p>
 <script type="math/tex; mode=display">
@@ -633,7 +659,7 @@
 \begin{bmatrix} \color{red}4 & \color{red}2 \\ \color{green}1 & \color{green}6 \end{bmatrix} - \begin{bmatrix} \color{red}2 & \color{red}4 \\ \color{green}0 & \color{green}1 \end{bmatrix} = \begin{bmatrix} \color{red}4 - \color{red}2 & \color{red}2  - \color{red}4 \\ \color{green}1 - \color{green}0 & \color{green}6 - \color{green}1 \end{bmatrix} = \begin{bmatrix} \color{red}2 & -\color{red}2 \\ \color{green}1 & \color{green}5 \end{bmatrix}
 </script>
 </p>
-<h3 id="matrix-scalar-products">矩阵的数乘(Matrix-scalar Products)</h3>
+<h2 id="_12">矩阵的数乘</h2>
 <p>和矩阵与标量的加减一样，矩阵与标量之间的乘法也是矩阵的每一个元素分别乘以该标量。下面的例子展示了乘法的过程：</p>
 <p>
 <script type="math/tex; mode=display">
@@ -642,7 +668,7 @@
 </p>
 <p>现在我们也就能明白为什么一个单独的数字要叫做标量(Scalar)了。简单来说，标量就是用它的值缩放(Scale)矩阵的所有元素(译注：注意Scalar是由Scale + -ar演变过来的)。前面的例子里，所有的元素都被放大了2倍。</p>
 <p>到目前为止都还好，我们的例子都不复杂。不过矩阵与矩阵的乘法就不一样了。</p>
-<h3 id="matrix-matrix-multiplication">矩阵相乘(Matrix-matrix Multiplication)</h3>
+<h3 id="_13">矩阵相乘</h3>
 <p>矩阵之间的乘法不见得有多复杂，但的确很难让人适应。矩阵乘法基本上意味着遵照规定好的法则进行相乘。当然，相乘还有一些限制：</p>
 <ol>
 <li>只有当左侧矩阵的列数与右侧矩阵的行数相等，两个矩阵才能相乘。</li>
@@ -669,10 +695,10 @@
 </p>
 <p>就像你所看到的那样，矩阵与矩阵相乘复杂而容易犯错(这就是我们通常让计算机做这件事的原因)，而且当矩阵变大以后很快就会出现问题。如果你仍然希望了解更多，对矩阵的数学属性感到好奇，我强烈推荐你看看<a href="https://www.khanacademy.org/math/algebra2/algebra-matrices">可汗学院</a>的矩阵内容视频。</p>
 <p>不管怎样，反正现在我们知道如何进行矩阵相乘了，我们可以开始了解好东西了。</p>
-<h2 id="_3">矩阵与向量相乘</h2>
+<h1 id="_14">矩阵与向量相乘</h1>
 <p>到目前，通过这些教程我们已经相当了解向量了。我们用向量来表示位置、颜色和纹理坐标。让我们进到兔子洞更深处：向量基本上就是一个<strong>N×1</strong>矩阵，N是向量分量的个数(也叫<strong>N维(N-dimensional)</strong>向量)。如果你仔细思考这个问题，会很有意思。向量和矩阵一样都是一个数字序列，但是它只有1列。所以，这个新信息能如何帮助我们？如果我们有一个M×N矩阵，我们可以用这个矩阵乘以我们的N×1向量，因为我们的矩阵的列数等于向量的行数，所以它们就能相乘。</p>
 <p>但是为什么我们关心矩阵是否能够乘以一个向量？有很多有意思的2D/3D变换本质上都是矩阵，而矩阵与我们的向量相乘会变换我们的向量。假如你仍然有些困惑，我们看一些例子，你很快就能明白了。</p>
-<h3 id="identity-matrix">单位矩阵(Identity Matrix)</h3>
+<h2 id="_15">单位矩阵</h2>
 <p>在OpenGL中，因为有一些原因我们通常使用4×4的变换矩阵，而其中最重要的原因就是因为每一个向量都有4个分量的。我们能想到的最简单的变换矩阵就是<strong>单位矩阵(Identity Matrix)</strong>。单位矩阵是一个除了对角线以外都是0的N × N矩阵。就像你看到的，这个变换矩阵使一个向量完全不变：</p>
 <p>
 <script type="math/tex; mode=display">
@@ -684,8 +710,8 @@
 <p class="admonition-title">Important</p>
 <p>你可能会奇怪一个没变换的变换矩阵有什么用？单位矩阵通常是生成其他变换矩阵的起点，如果我们深挖线性代数，这就是一个对证明定理、解线性方程非常有用的矩阵。</p>
 </div>
-<h3 id="scaling">缩放(Scaling)</h3>
-<p>当我们对一个向量进行缩放的时候就是对向量的长度进行缩放，而它的方向保持不变。如果我们进行2或3维操作，那么我们可以分别定义一个有2或3个缩放变量的向量，每个变量缩放一个轴(x、y或z)。</p>
+<h2 id="_16">缩放</h2>
+<p>当我们对一个向量进行缩放(Scaling)的时候就是对向量的长度进行缩放，而它的方向保持不变。如果我们进行2或3维操作，那么我们可以分别定义一个有2或3个缩放变量的向量，每个变量缩放一个轴(x、y或z)。</p>
 <p>我们可以尝试去缩放向量<script type="math/tex">\color{red}{\bar{v}} = (3,2)</script>。我们可以把向量沿着x轴缩放0.5，使它的宽度缩小为原来的二分之一；我们可以沿着y轴把向量的高度缩放为原来的两倍。我们看看把向量缩放(0.5, 2)所获得的<script type="math/tex">\color{blue}{\bar{s}}</script>是什么样的：</p>
 <p><img alt="" src="http://learnopengl.com/img/getting-started/vectors_scale.png" /></p>
 <p>记住，OpenGL通常是在3D空间操作的，对于2D的情况我们可以把z轴缩放1这样z轴的值就不变了。我们刚刚的缩放操作是<strong>不均匀(Non-uniform)</strong>缩放，因为每个轴的缩放因子(Scaling Factor)都不一样。如果每个轴的缩放都一样那么就叫<strong>均匀缩放(Uniform Scale)</strong>。</p>
@@ -696,7 +722,7 @@
 </script>
 </p>
 <p>注意，第四个缩放的向量仍然是1，因为不会缩放3D空间中的w分量。w分量另有其他用途，在后面我们会看到。</p>
-<h3 id="translation">平移(Translation)</h3>
+<h2 id="_17">平移</h2>
 <p><strong>平移(Translation)</strong>是在原来向量的基础上加上另一个的向量从而获得一个在不同位置的新向量的过程，这样就基于平移向量<strong>移动(Move)</strong>了向量。我们已经讨论了向量加法，所以你应该不会陌生。</p>
 <p>和缩放矩阵一样，在4×4矩阵上有几个特别的位置用来执行特定的操作，对于平移来说它们是第四列最上面的3个值。如果我们把缩放向量表示为<script type="math/tex">(\color{red}{T_x},\color{green}{T_y},\color{blue}{T_z})</script>我们就能把平移矩阵定义为:</p>
 <p>
@@ -712,8 +738,8 @@
 <p>如果一个向量的齐次坐标是0，这个坐标就是<strong>方向向量(Direction Vector)</strong>，因为w坐标是0，这个向量就不能平移(译注:这也就是我们说的不能平移一个方向)。</p>
 </div>
 <p>有了平移矩阵我们就可以在3个方向(x、y、z)上移动物体，它是我们的变换工具箱中非常有用的一个变换矩阵。</p>
-<h3 id="rotation">旋转(Rotation)</h3>
-<p>上面几个的变换内容相对容易理解，在2D或3D空间中也容易表示出来，但旋转稍复杂些。如果你想知道旋转矩阵是如何构造出来的，我推荐你去看可汗学院<a href="https://www.khanacademy.org/math/linear-algebra/matrix_transformations">线性代数</a>视频。</p>
+<h3 id="_18">旋转</h3>
+<p>上面几个的变换内容相对容易理解，在2D或3D空间中也容易表示出来，但旋转(Rotation)稍复杂些。如果你想知道旋转矩阵是如何构造出来的，我推荐你去看可汗学院<a href="https://www.khanacademy.org/math/linear-algebra/matrix_transformations">线性代数</a>视频。</p>
 <p>首先我们来定义一个向量的旋转到底是什么。2D或3D空间中点的旋转用<strong>角(Angle)</strong>来表示。角可以是角度制或弧度制的，周角是360度或2 <a href="https://en.wikipedia.org/wiki/Pi">PI</a>弧度。我个人更喜欢用角度，因为它们看起来更直观。</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -754,7 +780,7 @@
 </script>
 </p>
 <p>在数学上讨论如何生成这样的矩阵仍然超出了本节内容。但是记住，即使这样一个矩阵也不能完全解决万向节死锁问题(尽管会极大地避免)。避免万向节死锁的真正解决方案是使用<strong>四元数(Quaternion)</strong>，它不仅安全，而且计算更加友好。有关四元数会在后面的教程中讨论。</p>
-<h3 id="_4">矩阵的组合</h3>
+<h3 id="_19">矩阵的组合</h3>
 <p>使用矩阵变换的真正力量在于，根据矩阵之前的乘法，我们可以把多个变换组合到一个矩阵中。让我们看看我们是否能生成一个多个变换相结合而成的变换矩阵。我们有一个顶点(x, y, z)，我们希望将其缩放2倍，然后用位移(1, 2, 3)来平移它。我们需要一个平移和缩放矩阵来完成这些变换。结果的变换矩阵看起来像这样：</p>
 <p>
 <script type="math/tex; mode=display">
@@ -769,11 +795,11 @@ Trans . Scale = \begin{bmatrix} \color{red}1 & \color{red}0 & \color{red}0 & \co
 </script>
 </p>
 <p>不错！向量先缩放2倍，然后平移了(1, 2, 3)个单位。</p>
-<h2 id="_5">实践</h2>
+<h1 id="_20">实践</h1>
 <p>现在我们已经解释了所有变换背后的理论，是时候将这些知识利用起来了。OpenGL没有任何自带的矩阵和向量形式，所以我们必须自己定义数学类和方法。在这个教程中我们更愿意抽象所有的数学细节，使用已经做好了的数学库。幸运的是有个使用简单的专门为OpenGL量身定做的数学库，那就是GLM。</p>
-<h3 id="glm">GLM</h3>
+<h2 id="glm">GLM</h2>
 <p>GLM是Open<strong>GL</strong> <strong>M</strong>athematics的缩写，它是一个只有头文件的库，也就是说我们只需包含合适的头文件就行了；不用链接和编译。GLM可以从他们的<a href="http://glm.g-truc.net/0.9.5/index.html">网站</a>上下载。把头文件的根目录复制到你的<code>includes</code>文件夹，然后你就可以使用这个库了。</p>
-<p><img alt="" src="http://learnopengl.com/img/getting-started/glm.png" /></p>
+<p><img alt="OpenGL Logo" src="../../img/01/07/glm.png" class="right" /></p>
 <p>我们需要的GLM的大多数功能都可以从下面这3个头文件中找到：</p>
 <pre><code class="c++">#include &lt;glm/glm.hpp&gt;
 #include &lt;glm/gtc/matrix_transform.hpp&gt;
@@ -847,7 +873,7 @@ trans = glm::rotate(trans,(GLfloat)glfwGetTime() * 50.0f, glm::vec3(0.0f, 0.0f, 
 <p>这就是我们刚刚做到的！一个平移过的箱子，它会一直转，一个变换矩阵就做到了！现在你可以明白为什么矩阵在图形领域是一个如此重要的工具了。我们可以定义一个无限数量的变换，把它们组合为一个单独的矩阵，如果愿意的话我们还可以重复使用它。在着色器中使用矩阵可以省去重新定义顶点数据的力气，它也能够节省处理时间，因为我们没有一直重新发送我们的数据(这是个非常慢的过程)。</p>
 <p>如果你没有得到正确的结果，或者你有哪儿不清楚的地方。可以看<a href="http://learnopengl.com/code_viewer.php?code=getting-started/transformations">源码</a>和<a href="http://learnopengl.com/code_viewer.php?code=getting-started/transformations&amp;type=vertex">顶点</a>、<a href="http://learnopengl.com/code_viewer.php?code=getting-started/transformations&amp;type=fragment">片段</a>着色器。</p>
 <p>下个教程中，我们会讨论怎样使用矩阵为顶点定义不同的坐标空间。这将是我们进入实时3D图像的第一步！</p>
-<h2 id="_6">练习</h2>
+<h2 id="_21">练习</h2>
 <ul>
 <li>使用应用在箱子上的最后的变换，尝试将其改变成先旋转，后平移。看看发生了什么，试着想想为什么会发生这样的事情: <a href="http://learnopengl.com/code_viewer.php?code=getting-started/transformations-exercise1">参考解答</a></li>
 <li>尝试着再次调用<code>glDrawElements</code>画出第二个箱子，但是<strong>只能</strong>使用变换将其摆放在不同的位置。保证这个箱子被摆放在窗口的左上角，并且会不断的缩放(而不是旋转)。使用sin函数在这里会很有用；注意使用sin函数取到负值时会导致物体被翻转: <a href="http://learnopengl.com/code_viewer.php?code=getting-started/transformations-exercise2">参考解答</a></li>

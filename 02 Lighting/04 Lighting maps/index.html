@@ -446,9 +446,13 @@
     
         <li class="main active"><a href="#_1">光照贴图</a></li>
         
-            <li><a href="#_2">漫反射贴图</a></li>
+    
+        <li class="main "><a href="#_2">漫反射贴图</a></li>
         
-            <li><a href="#_3">镜面贴图</a></li>
+    
+        <li class="main "><a href="#_3">镜面贴图</a></li>
+        
+            <li><a href="#_4">镜面贴图采样</a></li>
         
             <li><a href="#_5">练习</a></li>
         
@@ -483,7 +487,7 @@
 <p>前面的教程，我们讨论了让不同的物体拥有各自不同的材质并对光照做出不同的反应的方法。在一个光照场景中，让每个物体拥有和其他物体不同的外观很棒，但是这仍然不能对一个物体的图像输出提供足够多的灵活性。</p>
 <p>前面的教程中我们将一个物体自身作为一个整体为其定义了一个材质，但是现实世界的物体通常不会只有这么一种材质，而是由多种材质组成。想象一辆车：它的外表质地光亮，车窗会部分反射环境，它的轮胎没有specular高光，轮彀却非常闪亮（在洗过之后）。汽车同样有diffuse和ambient颜色，它们在整个车上都不相同；一辆车显示了多种不同的ambient/diffuse颜色。总之，这样一个物体每个部分都有多种材质属性。</p>
 <p>所以，前面的材质系统对于除了最简单的模型以外都是不够的，所以我们需要扩展前面的系统，我们要介绍diffuse和specular贴图。它们允许你对一个物体的diffuse（而对于简洁的ambient成分来说，它们几乎总是是一样的）和specular成分能够有更精确的影响。</p>
-<h2 id="_2">漫反射贴图</h2>
+<h1 id="_2">漫反射贴图</h1>
 <p>我们希望通过某种方式对每个原始像素独立设置diffuse颜色。有可以让我们基于物体原始像素的位置来获取颜色值的系统吗？</p>
 <p>这可能听起来极其相似，坦白来讲我们使用这样的系统已经有一段时间了。听起来很像在一个<a href="https://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/06%20Textures/">之前的教程</a>中谈论的<strong>纹理</strong>，它基本就是一个纹理。我们其实是使用同一个潜在原则下的不同名称：使用一张图片覆盖住物体，以便我们为每个原始像素索引独立颜色值。在光照场景中，通过纹理来呈现一个物体的diffuse颜色，这个做法被称做<strong>漫反射贴图(Diffuse texture)</strong>(因为3D建模师就是这么称呼这个做法的)。</p>
 <p>为了演示漫反射贴图，我们将会使用<a href="http://learnopengl.com/img/textures/container2.png">下面的图片</a>，它是一个有一圈钢边的木箱：</p>
@@ -542,15 +546,15 @@ glBindTexture(GL_TEXTURE_2D, diffuseMap);
 <p>现在，使用一个diffuse贴图，我们在细节上再次获得惊人的提升，这次添加到箱子上的光照开始闪光了（名符其实）。你的箱子现在可能看起来像这样：</p>
 <p><img alt="" src="http://www.learnopengl.com/img/lighting/materials_diffuse_map.png" /></p>
 <p>你可以在这里得到应用的<a href="http://learnopengl.com/code_viewer.php?code=lighting/lighting_maps_diffuse">全部代码</a>。</p>
-<h2 id="_3">镜面贴图</h2>
+<h1 id="_3">镜面贴图</h1>
 <p>你可能注意到，specular高光看起来不怎么样，由于我们的物体是个箱子，大部分是木头，我们知道木头是不应该有镜面高光的。我们通过把物体设置specular材质设置为vec3(0.0f)来修正它。但是这样意味着铁边会不再显示镜面高光，我们知道钢铁是会显示一些镜面高光的。我们会想要控制物体部分地显示镜面高光，它带有修改了的亮度。这个问题看起来和diffuse贴图的讨论一样。这是巧合吗？我想不是。</p>
-<p>我们同样用一个纹理贴图，来获得镜面高光。这意味着我们需要生成一个黑白（或者你喜欢的颜色）纹理来定义specular亮度，把它应用到物体的每个部分。下面是一个<a href="http://learnopengl.com/img/textures/container2_specular.png">specular贴图</a>的例子：</p>
+<p>我们同样用一个纹理贴图，来获得镜面高光。这意味着我们需要生成一个黑白（或者你喜欢的颜色）纹理来定义specular亮度，把它应用到物体的每个部分。下面是一个<a href="http://learnopengl.com/img/textures/container2_specular.png">镜面贴图(Specular Map)</a>的例子：</p>
 <p><img alt="" src="http://www.learnopengl.com/img/textures/container2_specular.png" /></p>
 <p>一个specular高光的亮度可以通过图片中每个纹理的亮度来获得。specular贴图的每个像素可以显示为一个颜色向量，比如：在那里黑色代表颜色向量vec3(0.0f)，灰色是vec3(0.5f)。在片段着色器中，我们采样相应的颜色值，把它乘以光的specular亮度。像素越“白”，乘积的结果越大，物体的specualr部分越亮。</p>
 <p>由于箱子几乎是由木头组成，木头作为一个材质不会有镜面高光，整个木头部分的diffuse纹理被用黑色覆盖：黑色部分不会包含任何specular高光。箱子的铁边有一个修改的specular亮度，它自身更容易受到镜面高光影响，木纹部分则不会。</p>
 <p>从技术上来讲，木头也有镜面高光，尽管这个闪亮值很小（更多的光被散射），影响很小，但是为了学习目的，我们可以假装木头不会有任何specular光反射。</p>
 <p>使用Photoshop或Gimp之类的工具，通过将图片进行裁剪，将某部分调整成黑白图样，并调整亮度/对比度的做法，可以非常容易将一个diffuse纹理贴图处理为specular贴图。</p>
-<h3 id="_4">镜面贴图采样</h3>
+<h2 id="_4">镜面贴图采样</h2>
 <p>一个specular贴图和其他纹理一样，所以代码和diffuse贴图的代码也相似。确保合理的加载了图片，生成一个纹理对象。由于我们在同样的片段着色器中使用另一个纹理采样器，我们必须为specular贴图使用一个不同的纹理单元(参见<a href="http://learnopengl-cn.readthedocs.org/zh/latest/01%20Getting%20started/06%20Textures/">纹理</a>)，所以在渲染前让我们把它绑定到合适的纹理单元</p>
 <pre><code class="c++">glUniform1i(glGetUniformLocation(lightingShader.Program, &quot;material.specular&quot;), 1);
 ...
