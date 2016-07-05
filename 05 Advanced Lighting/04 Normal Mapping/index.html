@@ -466,9 +466,10 @@
 <h3 id="_1">法线贴图</h3>
 <p>为使法线贴图工作，我们需要为每个fragment提供一个法线。像diffuse贴图和specular贴图一样，我们可以使用一个2D纹理来储存法线数据。2D纹理不仅可以储存颜色和光照数据，还可以储存法线向量。这样我们可以从2D纹理中采样得到特定纹理的法线向量。</p>
 <p>由于法线向量是个几何工具，而纹理通常只用于储存颜色信息，用纹理储存法线向量不是非常直接。如果你想一想，就会知道纹理中的颜色向量用r、g、b元素代表一个3D向量。类似的我们也可以将法线向量的x、y、z元素储存到纹理中，代替颜色的r、g、b元素。法线向量的范围在-1到1之间，所以我们先要将其映射到0到1的范围：</p>
-<p>1
-vec3 rgb_normal = normal * 0.5 - 0.5; // transforms from [-1,1] to [0,1]
-将法线向量变换为像这样的RGB颜色元素，我们就能把根据表面的形状的fragment的法线保存在2D纹理中。教程开头展示的那个砖块的例子的法线贴图如下所示：</p>
+<pre><code class="c++">vec3 rgb_normal = normal * 0.5 - 0.5; // transforms from [-1,1] to [0,1]  
+</code></pre>
+
+<p>将法线向量变换为像这样的RGB颜色元素，我们就能把根据表面的形状的fragment的法线保存在2D纹理中。教程开头展示的那个砖块的例子的法线贴图如下所示：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/normal_mapping_normal_map.png" /></p>
 <p>这会是一种偏蓝色调的纹理（你在网上找到的几乎所有法线贴图都是这样的）。这是因为所有法线的指向都偏向z轴（0, 0, 1）这是一种偏蓝的颜色。法线向量从z轴方向也向其他方向轻微偏移，颜色也就发生了轻微变化，这样看起来便有了一种深度。例如，你可以看到在每个砖块的顶部，颜色倾向于偏绿，这是因为砖块的顶部的法线偏向于指向正y轴方向（0, 1, 0），这样它就是绿色的了。</p>
 <p>在一个简单的朝向正z轴的平面上，我们可以用这个diffuse纹理和这个法线贴图来渲染前面部分的图片。要注意的是这个链接里的法线贴图和上面展示的那个不一样。原因是OpenGL读取的纹理的y（或V）坐标和纹理通常被创建的方式相反。链接里的法线贴图的y（或绿色）元素是相反的（你可以看到绿色现在在下边）；如果你没考虑这个，光照就不正确了（译注：如果你现在不再使用SOIL了，那就不要用链接里的那个法线贴图，这个问题是SOIL载入纹理上下颠倒所致，它也会把法线在y方向上颠倒）。加载纹理，把它们绑定到合适的纹理单元，然后使用下面的改变了的像素着色器来渲染一个平面：</p>
@@ -504,553 +505,53 @@ void main()
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/normal_mapping_tbn_vectors.png" /></p>
 <p>计算出切线和副切线并不像法线向量那么容易。从图中可以看到法线贴图的切线和副切线与纹理坐标的两个方向对齐。我们就是用到这个特性计算每个表面的切线和副切线的。需要用到一些数学才能得到它们；请看下图：</p>
 <p><img alt="" src="http://learnopengl.com/img/advanced-lighting/normal_mapping_surface_edges.png" /></p>
-<p>上图中我们可以看到边<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <msub>
-    <mi>E</mi>
-    <mn>2</mn>
-  </msub>
-</math>纹理坐标的不同，<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <msub>
-    <mi>E</mi>
-    <mn>2</mn>
-  </msub>
-</math>是一个三角形的边，这个三角形的另外两条边是<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-  <msub>
-    <mi>U</mi>
-    <mn>2</mn>
-  </msub>
-</math>和<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-  <msub>
-    <mi>V</mi>
-    <mn>2</mn>
-  </msub>
-</math>，它们与切线向量<em>T</em>和副切线向量<em>B</em>方向相同。这样我们可以把边</math>和<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <msub>
-    <mi>E</mi>
-    <mn>1</mn>
-  </msub>
-</math>和<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <msub>
-    <mi>E</mi>
-    <mn>2</mn>
-  </msub>
-</math>用切线向量 <em>T</em> 和副切线向量 <em>B</em> 的线性组合表示出来（译注：注意<em>T</em>和<em>B</em>都是单位长度，在<em>TB</em>平面中所有点的<em>T</em>、<em>B</em>坐标都在0到1之间，因此可以进行这样的组合）：</p>
-<pre><code class="math">E_1 = \Delta U_1T + \Delta V_1B
-
+<p>上图中我们可以看到边<script type="math/tex">E_2</script>纹理坐标的不同，<script type="math/tex">E_2</script>是一个三角形的边，这个三角形的另外两条边是<script type="math/tex">\Delta U_2</script>和<script type="math/tex">\Delta V_2</script>，它们与切线向量<script type="math/tex">T</script>和副切线向量<script type="math/tex">B</script>方向相同。这样我们可以把边<script type="math/tex">E_1</script>和<script type="math/tex">E_2</script>用切线向量<script type="math/tex">T</script>和副切线向量<script type="math/tex">B</script>的线性组合表示出来（译注：注意<script type="math/tex">T</script>和<script type="math/tex">B</script>都是单位长度，在<script type="math/tex">TB</script>平面中所有点的<script type="math/tex">T</script>、<script type="math/tex">B</script>坐标都在0到1之间，因此可以进行这样的组合）：</p>
+<p>
+<script type="math/tex; mode=display">
+E_1 = \Delta U_1T + \Delta V_1B
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
 E_2 = \Delta U_2T + \Delta V_2B
-</code></pre>
-
-<p>我们也可以写成这样：</p>
-<pre><code class="math">(E_{1x}, E_{1y}, E_{1z}) = \Delta U_1(T_x, T_y, T_z) + \Delta V_1(B_x, B_y, B_z)
-</code></pre>
-
-<p><em>E</em>是两个向量位置的差，<em>U</em>和<em>V</em>是纹理坐标的差。然后我们得到两个未知数（切线<em>T</em>和副切线<em>B</em>）和两个等式。你可能想起你的代数课了，这是让我们去接<em>T</em>和<em>B</em>。</p>
+</script>
+我们也可以写成这样：</p>
+<p>
+<script type="math/tex; mode=display">
+(E_{1x}, E_{1y}, E_{1z}) = \Delta U_1(T_x, T_y, T_z) + \Delta V_1(B_x, B_y, B_z)
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+(E_{2x}, E_{2y}, E_{2z}) = \Delta U_2(T_x, T_y, T_z) + \Delta V_2(B_x, B_y, B_z)
+</script>
+</p>
+<p>
+<script type="math/tex">E</script>是两个向量位置的差，<script type="math/tex">\Delta U</script>和<script type="math/tex">\Delta V</script>是纹理坐标的差。然后我们得到两个未知数（切线<em>T</em>和副切线<em>B</em>）和两个等式。你可能想起你的代数课了，这是让我们去接<script type="math/tex">T</script>和<script type="math/tex">B</script>。</p>
 <p>上面的方程允许我们把它们写成另一种格式：矩阵乘法</p>
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>x</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>y</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>z</mi>
-            </mrow>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>x</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>y</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>z</mi>
-            </mrow>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-  <mo>=</mo>
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>U</mi>
-            <mn>1</mn>
-          </msub>
-        </mtd>
-        <mtd>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>V</mi>
-            <mn>1</mn>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>U</mi>
-            <mn>2</mn>
-          </msub>
-        </mtd>
-        <mtd>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>V</mi>
-            <mn>2</mn>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>x</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>y</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>z</mi>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>x</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>y</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>z</mi>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-</math>
-
-<p>尝试会以一下矩阵乘法，它们确实是同一种等式。把等式写成矩阵形式的好处是，解<em>T</em>和<em>B</em>会因此变得很容易。两边都乘以<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-  <mi>U</mi>
-  <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-  <mi>V</mi>
-</math>的反数等于：</p>
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <msup>
-    <mrow>
-      <mo>[</mo>
-      <mtable rowspacing="4pt" columnspacing="1em">
-        <mtr>
-          <mtd>
-            <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-            <msub>
-              <mi>U</mi>
-              <mn>1</mn>
-            </msub>
-          </mtd>
-          <mtd>
-            <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-            <msub>
-              <mi>V</mi>
-              <mn>1</mn>
-            </msub>
-          </mtd>
-        </mtr>
-        <mtr>
-          <mtd>
-            <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-            <msub>
-              <mi>U</mi>
-              <mn>2</mn>
-            </msub>
-          </mtd>
-          <mtd>
-            <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-            <msub>
-              <mi>V</mi>
-              <mn>2</mn>
-            </msub>
-          </mtd>
-        </mtr>
-      </mtable>
-      <mo>]</mo>
-    </mrow>
-    <mrow class="MJX-TeXAtom-ORD">
-      <mo>&#x2212;<!-- − --></mo>
-      <mn>1</mn>
-    </mrow>
-  </msup>
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>x</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>y</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>z</mi>
-            </mrow>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>x</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>y</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>z</mi>
-            </mrow>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-  <mo>=</mo>
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>x</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>y</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>z</mi>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>x</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>y</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>z</mi>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-</math>
-
-<p>这样我们就可以解出<em>T</em>和<em>B</em>了。这需要我们计算出delta纹理坐标矩阵的拟阵。我不打算讲解计算逆矩阵的细节，但大致是把它变化为，1除以矩阵的行列式，再乘以它的共轭矩阵。</p>
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>x</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>y</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>T</mi>
-            <mi>z</mi>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>x</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>y</mi>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>B</mi>
-            <mi>z</mi>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-  <mo>=</mo>
-  <mfrac>
-    <mn>1</mn>
-    <mrow>
-      <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-      <msub>
-        <mi>U</mi>
-        <mn>1</mn>
-      </msub>
-      <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-      <msub>
-        <mi>V</mi>
-        <mn>2</mn>
-      </msub>
-      <mo>&#x2013;</mo>
-      <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-      <msub>
-        <mi>U</mi>
-        <mn>2</mn>
-      </msub>
-      <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-      <msub>
-        <mi>V</mi>
-        <mn>1</mn>
-      </msub>
-    </mrow>
-  </mfrac>
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>V</mi>
-            <mn>2</mn>
-          </msub>
-        </mtd>
-        <mtd>
-          <mo>&#x2212;<!-- − --></mo>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>V</mi>
-            <mn>1</mn>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <mo>&#x2212;<!-- − --></mo>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>U</mi>
-            <mn>2</mn>
-          </msub>
-        </mtd>
-        <mtd>
-          <mi mathvariant="normal">&#x0394;<!-- Δ --></mi>
-          <msub>
-            <mi>U</mi>
-            <mn>1</mn>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-  <mrow>
-    <mo>[</mo>
-    <mtable rowspacing="4pt" columnspacing="1em">
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>x</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>y</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>1</mn>
-              <mi>z</mi>
-            </mrow>
-          </msub>
-        </mtd>
-      </mtr>
-      <mtr>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>x</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>y</mi>
-            </mrow>
-          </msub>
-        </mtd>
-        <mtd>
-          <msub>
-            <mi>E</mi>
-            <mrow class="MJX-TeXAtom-ORD">
-              <mn>2</mn>
-              <mi>z</mi>
-            </mrow>
-          </msub>
-        </mtd>
-      </mtr>
-    </mtable>
-    <mo>]</mo>
-  </mrow>
-</math>
-
-<p>有了最后这个等式，我们就可以用公式、三角形的两条边以及纹理坐标计算出切线向量<em>T</em>和副切线<em>B</em>。</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} E_{1x} & E_{1y} & E_{1z} \\ E_{2x} & E_{2y} & E_{2z} \end{bmatrix} = \begin{bmatrix} \Delta U_1 & \Delta V_1 \\ \Delta U_2 & \Delta V_2 \end{bmatrix} \begin{bmatrix} T_x & T_y & T_z \\ B_x & B_y & B_z \end{bmatrix}
+</script>
+</p>
+<p>尝试会意一下矩阵乘法，它们确实是同一种等式。把等式写成矩阵形式的好处是，解<script type="math/tex">T</script>和<script type="math/tex">B</script>会因此变得很容易。两边都乘以<script type="math/tex">\Delta U \Delta V</script>的逆矩阵等于：</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} \Delta U_1 & \Delta V_1 \\ \Delta U_2 & \Delta V_2 \end{bmatrix}^{-1} \begin{bmatrix} E_{1x} & E_{1y} & E_{1z} \\ E_{2x} & E_{2y} & E_{2z} \end{bmatrix} = \begin{bmatrix} T_x & T_y & T_z \\ B_x & B_y & B_z \end{bmatrix}
+</script>
+</p>
+<p>这样我们就可以解出<script type="math/tex">T</script>和<script type="math/tex">B</script>了。这需要我们计算出delta纹理坐标矩阵的拟阵。我不打算讲解计算逆矩阵的细节，但大致是把它变化为，1除以矩阵的行列式，再乘以它的共轭矩阵。</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} T_x & T_y & T_z \\ B_x & B_y & B_z \end{bmatrix}  = \frac{1}{\Delta U_1 \Delta V_2 - \Delta U_2 \Delta V_1} \begin{bmatrix} \Delta V_2 & -\Delta V_1 \\ -\Delta U_2 & \Delta U_1 \end{bmatrix} \begin{bmatrix} E_{1x} & E_{1y} & E_{1z} \\ E_{2x} & E_{2y} & E_{2z} \end{bmatrix}
+</script>
+</p>
+<p>有了最后这个等式，我们就可以用公式、三角形的两条边以及纹理坐标计算出切线向量<script type="math/tex">T</script>和副切线<script type="math/tex">B</script>。</p>
 <p>如果你对这些数学内容不理解也不用担心。当你知道我们可以用一个三角形的顶点和纹理坐标（因为纹理坐标和切线向量在同一空间中）计算出切线和副切线你就已经部分地达到目的了（译注：上面的推导已经很清楚了，如果你不明白可以参考任意线性代数教材，就像作者所说的记住求得切线空间的公式也行，不过不管怎样都得理解切线空间的含义）。</p>
 <h3 id="_3">手工计算切线和副切线</h3>
 <p>这个教程的demo场景中有一个简单的2D平面，它朝向正z方向。这次我们会使用切线空间来实现法线贴图，所以我们可以使平面朝向任意方向，法线贴图仍然能够工作。使用前面讨论的数学方法，我们来手工计算出表面的切线和副切线向量。</p>
-<p>假设平面使用下面的向量建立起来（1、2、3和1、3、4，它们是两个三角形）：
-// positions
+<p>假设平面使用下面的向量建立起来（1、2、3和1、3、4，它们是两个三角形）：</p>
+<pre><code class="c++">// positions
 glm::vec3 pos1(-1.0,  1.0, 0.0);
 glm::vec3 pos2(-1.0, -1.0, 0.0);
 glm::vec3 pos3(1.0, -1.0, 0.0);
@@ -1061,16 +562,16 @@ glm::vec2 uv2(0.0, 0.0);
 glm::vec2 uv3(1.0, 0.0);
 glm::vec2 uv4(1.0, 1.0);
 // normal vector
-glm::vec3 nm(0.0, 0.0, 1.0);</p>
+glm::vec3 nm(0.0, 0.0, 1.0);
+</code></pre>
+
 <p>我们先计算第一个三角形的边和deltaUV坐标：</p>
-<p>1
-2
-3
-4
-glm::vec3 edge1 = pos2 - pos1;
+<pre><code class="c++">glm::vec3 edge1 = pos2 - pos1;
 glm::vec3 edge2 = pos3 - pos1;
 glm::vec2 deltaUV1 = uv2 - uv1;
-glm::vec2 deltaUV2 = uv3 - uv1;</p>
+glm::vec2 deltaUV2 = uv3 - uv1;
+</code></pre>
+
 <p>有了计算切线和副切线的必备数据，我们就可以开始写出来自于前面部分中的下列等式：</p>
 <pre><code class="c++">GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
 

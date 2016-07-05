@@ -537,12 +537,18 @@ if(lightVector.w == 0.0) // 请留意浮点数错误
 <h3 id="attenuation">衰减(Attenuation)</h3>
 <p>随着光线穿越距离的变远使得亮度也相应地减少的现象，通常称之为<strong>衰减(Attenuation)</strong>。一种随着距离减少亮度的方式是使用线性等式。这样的一个随着距离减少亮度的线性方程，可以使远处的物体更暗。然而，这样的线性方程效果会有点假。在真实世界，通常光在近处时非常亮，但是一个光源的亮度，开始的时候减少的非常快，之后随着距离的增加，减少的速度会慢下来。我们需要一种不同的方程来减少光的亮度。</p>
 <p>幸运的是一些聪明人已经早就把它想到了。下面的方程把一个片段的光的亮度除以一个已经计算出来的衰减值，这个值根据光源的远近得到：</p>
-<p><img alt="Latex Formula" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Light_casters1.png" /></p>
-<p>在这里<img alt="I" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/I.png" />是当前片段的光的亮度，<img alt="d" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/d.png" />代表片段到光源的距离。为了计算衰减值，我们定义3个项：常数项<img alt="Kc" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Kc.png" />，一次项<img alt="Kl" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Kl.png" />和二次项<img alt="Kq" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Kq.png" />。</p>
-<p>常数项通常是1.0，它的作用是保证坟墓永远不会比1小，因为它可以利用一定的距离增加亮度，这个结果不会影响到我们所寻找的。
-一次项用于与距离值相称，这回以线性的方式减少亮度。
-二次项用于与距离的平方相乘，为光源设置一个亮度的二次递减。二次项在距离比较近的时候相比一次项会比一次项更小，但是当距离更远的时候比一次项更大。
-由于二次项的光会以线性方式减少，指导距离足够大的时候，就会超过一次项，之后，光的亮度会减少的更快。最后的效果就是光在近距离时，非常量，但是距离变远亮度迅速降低，最后亮度降低速度再次变慢。下面的图展示了在100以内的范围，这样的衰减效果。</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{equation} F_{att} = \frac{1.0}{K_c + K_l * d + K_q * d^2} \end{equation}
+</script>
+</p>
+<p>在这里<script type="math/tex">d</script>代表片段到光源的距离。为了计算衰减值，我们定义3个（可配置）项：<strong>常数</strong>项<script type="math/tex">K_c</script>，<strong>一次</strong>项<script type="math/tex">K_l</script>和<strong>二次</strong>项<script type="math/tex">K_q</script>。</p>
+<ul>
+<li>常数项通常是1.0，它的作用是保证坟墓永远不会比1小，因为它可以利用一定的距离增加亮度，这个结果不会影响到我们所寻找的。</li>
+<li>一次项用于与距离值相称，这回以线性的方式减少亮度。</li>
+<li>二次项用于与距离的平方相乘，为光源设置一个亮度的二次递减。二次项在距离比较近的时候相比一次项会比一次项更小，但是当距离更远的时候比一次项更大。</li>
+</ul>
+<p>由于二次项的光会以线性方式减少，指导距离足够大的时候，就会超过一次项，之后，光的亮度会减少的更快。最后的效果就是光在近距离时，非常量，但是距离变远亮度迅速降低，最后亮度降低速度再次变慢。下面的图展示了在100以内的范围，这样的衰减效果。</p>
 <p><img alt="" src="http://www.learnopengl.com/img/lighting/attenuation.png" /></p>
 <p>你可以看到当距离很近的时候光有最强的亮度，但是随着距离增大，亮度明显减弱，大约接近100的时候，就会慢下来。这就是我们想要的。</p>
 <h4 id="_2">选择正确的值</h4>
@@ -550,10 +556,10 @@ if(lightVector.w == 0.0) // 请留意浮点数错误
 <table>
 <thead>
 <tr>
-<th>Distance</th>
-<th>Constant</th>
-<th>Linear</th>
-<th>Quadratic</th>
+<th>距离</th>
+<th>常数项</th>
+<th>一次项</th>
+<th>二次项</th>
 </tr>
 </thead>
 <tbody>
@@ -631,7 +637,7 @@ if(lightVector.w == 0.0) // 请留意浮点数错误
 </tr>
 </tbody>
 </table>
-<p>就像你所看到的，常数项<img alt="Kc" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Kc.png" />一直都是1.0。一次项<img alt="Kl" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Kl.png" />为了覆盖更远的距离通常很小，二次项<img alt="Kq" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Kq.png" />就更小了。尝试用这些值进行实验，看看它们在你的实现中各自的效果。我们的环境中，32到100的距离对大多数光通常就足够了。</p>
+<p>就像你所看到的，常数项<script type="math/tex">K_c</script>一直都是1.0。一次项<script type="math/tex">K_l</script>为了覆盖更远的距离通常很小，二次项<script type="math/tex">K_q</script>就更小了。尝试用这些值进行实验，看看它们在你的实现中各自的效果。我们的环境中，32到100的距离对大多数光通常就足够了。</p>
 <h4 id="_3">实现衰减</h4>
 <p>为了实现衰减，在着色器中我们会需要三个额外数值：也就是公式的常量、一次项和二次项。最好把它们储存在之前定义的Light结构体中。要注意的是我们计算<code>lightDir</code>，就是在前面的教程中我们所做的，不是像之前的定向光的那部分。</p>
 <pre><code class="c++">struct Light
@@ -679,13 +685,13 @@ specular *= attenuation;
 <ul>
 <li><code>LightDir</code>：从片段指向光源的向量。</li>
 <li><code>SpotDir</code>：聚光灯所指向的方向。</li>
-<li><code>Phiφ</code>：定义聚光灯半径的切光角。每个落在这个角度之外的，聚光灯都不会照亮。</li>
-<li><code>Thetaθ</code>：<code>LightDir</code>向量和<code>SpotDir向</code>量之间的角度。θ值应该比φ值小，这样才会在聚光灯内。</li>
+<li><code>Phi\(\phi\)</code>：定义聚光灯半径的切光角。每个落在这个角度之外的，聚光灯都不会照亮。</li>
+<li><code>Theta\(\theta\)</code>：<code>LightDir</code>向量和<code>SpotDir</code>向量之间的角度。<script type="math/tex">\theta</script>值应该比<script type="math/tex">\Phi</script>值小，这样才会在聚光灯内。</li>
 </ul>
-<p>所以我们大致要做的是，计算<code>LightDir</code>向量和<code>SpotDir</code>向量的点乘（返回两个单位向量的点乘，还记得吗？），然后在和遮光角φ对比。现在你应该明白聚光灯是我们下面将创建的手电筒的范例。</p>
+<p>所以我们大致要做的是，计算<code>LightDir</code>向量和<code>SpotDir</code>向量的点乘（返回两个单位向量的点乘，还记得吗？），然后在和切光角<script type="math/tex">\phi</script>对比。现在你应该明白聚光灯是我们下面将创建的手电筒的范例。</p>
 <h3 id="_4">手电筒</h3>
 <p>手电筒是一个坐落在观察者位置的聚光灯，通常瞄准玩家透视图的前面。基本上说，一个手电筒是一个普通的聚光灯，但是根据玩家的位置和方向持续的更新它的位置和方向。</p>
-<p>所以我们需要为片段着色器提供的值，是聚光灯的位置向量（来计算光的方向坐标），聚光灯的方向向量和遮光角。我们可以把这些值储存在<code>Light</code>结构体中：</p>
+<p>所以我们需要为片段着色器提供的值，是聚光灯的位置向量（来计算光的方向坐标），聚光灯的方向向量和切光角。我们可以把这些值储存在<code>Light</code>结构体中：</p>
 <pre><code class="c++">struct Light
 {
     vec3 position;
@@ -701,8 +707,8 @@ glUniform3f(lightSpotdirLoc, camera.Front.x, camera.Front.y, camera.Front.z);
 glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
 </code></pre>
 
-<p>你可以看到，我们为遮光角设置一个角度，但是我们根据一个角度计算了余弦值，把这个余弦结果传给了片段着色器。这么做的原因是在片段着色器中，我们计算<code>LightDir</code>和<code>SpotDir</code>向量的点乘，而点乘返回一个余弦值，不是一个角度，所以我们不能直接把一个角度和余弦值对比。为了获得这个角度，我们必须计算点乘结果的反余弦，这个操作开销是很大的。所以为了节约一些性能，我们先计算给定切光角的余弦值，然后把结果传递给片段着色器。由于每个角度都被表示为余弦了，我们可以直接对比它们，而不用进行任何开销高昂的操作。</p>
-<p>现在剩下要做的是计算θ值，用它和φ值对比，以决定我们是否在或不在聚光灯的内部：</p>
+<p>你可以看到，我们为切光角设置一个角度，但是我们根据一个角度计算了余弦值，把这个余弦结果传给了片段着色器。这么做的原因是在片段着色器中，我们计算<code>LightDir</code>和<code>SpotDir</code>向量的点乘，而点乘返回一个余弦值，不是一个角度，所以我们不能直接把一个角度和余弦值对比。为了获得这个角度，我们必须计算点乘结果的反余弦，这个操作开销是很大的。所以为了节约一些性能，我们先计算给定切光角的余弦值，然后把结果传递给片段着色器。由于每个角度都被表示为余弦了，我们可以直接对比它们，而不用进行任何开销高昂的操作。</p>
+<p>现在剩下要做的是计算<script type="math/tex">\theta</script>值，用它和<script type="math/tex">\phi</script>值对比，以决定我们是否在或不在聚光灯的内部：</p>
 <pre><code class="c++">float theta = dot(lightDir, normalize(-light.direction));
 if(theta &gt; light.cutOff)
 {
@@ -715,7 +721,7 @@ color = vec4(light.ambient*vec3(texture(material.diffuse,TexCoords)), 1.0f);
 <p>我们首先计算<code>lightDir</code>和取反的<code>direction</code>向量的点乘（它是取反过的因为我们想要向量指向光源，而不是从光源作为指向出发点。译注：前面的<code>specular</code>教程中作者却用了相反的表示方法，这里读者可以选择喜欢的表达方式）。确保对所有相关向量进行了标准化处理。</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>你可能奇怪为什么if条件中使用&gt;符号而不是&lt;符号。为了在聚光灯以内，θ不是应该比光的遮光值更小吗？这没错，但是不要忘了，角度值是以余弦值来表示的，一个0度的角表示为1.0的余弦值，当一个角是90度的时候被表示为0.0的余弦值，你可以在这里看到：</p>
+<p>你可能奇怪为什么if条件中使用&gt;符号而不是&lt;符号。为了在聚光灯以内，<code>theta</code>不是应该比光的切光值更小吗？这没错，但是不要忘了，角度值是以余弦值来表示的，一个0度的角表示为1.0的余弦值，当一个角是90度的时候被表示为0.0的余弦值，你可以在这里看到：</p>
 <p><img alt="" src="http://www.learnopengl.com/img/lighting/light_casters_cos.png" /></p>
 <p>现在你可以看到，余弦越是接近1.0，角度就越小。这就解释了为什么θ需要比切光值更大了。切光值当前被设置为12.5的余弦，它等于0.9978，所以θ的余弦值在0.9979和1.0之间，片段会在聚光灯内，被照亮。</p>
 </div>
@@ -726,21 +732,36 @@ color = vec4(light.ambient*vec3(texture(material.diffuse,TexCoords)), 1.0f);
 <h2 id="_5">平滑/软化边缘</h2>
 <p>为创建聚光灯的平滑边，我们希望去模拟的聚光灯有一个内圆锥和外圆锥。我们可以把内圆锥设置为前面部分定义的圆锥，我们希望外圆锥从内边到外边逐步的变暗。</p>
 <p>为创建外圆锥，我们简单定义另一个余弦值，它代表聚光灯的方向向量和外圆锥的向量（等于它的半径）的角度。然后，如果片段在内圆锥和外圆锥之间，就会给它计算出一个0.0到1.0之间的亮度。如果片段在内圆锥以内这个亮度就等于1.0，如果在外面就是0.0。</p>
-<p>我们可以使用下面的公式计算这样的值：
-<img alt="Latex Formula" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Light_casters1.png" />
-这里<img alt="Epsilon" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/epsilon.png" />是内部（<img alt="Phi" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/phi.png" />）和外部圆锥(<img alt="Gamma" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/gamma.png" />)<img alt="Latex Formula" src="https://raw.githubusercontent.com/LearnOpenGL-CN/LearnOpenGL-CN/master/img/Light_casters3.png" />的差。结果I的值是聚光灯在当前片段的亮度。</p>
+<p>我们可以使用下面的公式计算这样的值：</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{equation} I = \frac{\theta - \gamma}{\epsilon} \end{equation}
+</script>
+</p>
+<p>这里<script type="math/tex">\epsilon</script>是内部（<script type="math/tex">\phi</script>）和外部圆锥（<script type="math/tex">\gamma</script>）（\epsilon =  \phi - \gamma）的差。结果<script type="math/tex">I</script>的值是聚光灯在当前片段的亮度。</p>
 <p>很难用图画描述出这个公式是怎样工作的，所以我们尝试使用一个例子：</p>
 <table>
 <thead>
 <tr>
-<th>θ</th>
-<th>θ in degrees</th>
-<th>φ (inner cutoff)</th>
-<th>φ in degrees</th>
-<th>γ (outer cutoff)</th>
-<th>γ in degrees</th>
-<th>ε</th>
-<th>l</th>
+<th>
+<script type="math/tex">\theta</script>
+</th>
+<th>角度制<script type="math/tex">\theta</script>
+</th>
+<th>
+<script type="math/tex">\phi</script>（内切）</th>
+<th>角度制<script type="math/tex">\phi</script>
+</th>
+<th>
+<script type="math/tex">\gamma</script>（外切）</th>
+<th>角度制<script type="math/tex">\gamma</script>
+</th>
+<th>
+<script type="math/tex">\epsilon</script>
+</th>
+<th>
+<script type="math/tex">I</script>
+</th>
 </tr>
 </thead>
 <tbody>
@@ -829,9 +850,9 @@ specular* = intensity;
 </code></pre>
 
 <p>注意，我们使用了<code>clamp</code>函数，它把第一个参数固定在0.0和1.0之间。这保证了亮度值不会超出[0, 1]以外。</p>
-<p>确定你把<code>outerCutOff</code>值添加到了<code>Light</code>结构体，并在应用中设置了它的uniform值。对于下面的图片，内部遮光角<code>12.5f</code>，外部遮光角是<code>17.5f</code>：</p>
+<p>确定你把<code>outerCutOff</code>值添加到了<code>Light</code>结构体，并在应用中设置了它的uniform值。对于下面的图片，内部切光角<code>12.5f</code>，外部切光角是<code>17.5f</code>：</p>
 <p><img alt="" src="http://www.learnopengl.com/img/lighting/light_casters_spotlight.png" /></p>
-<p>看起来好多了。仔细看看内部和外部遮光角，尝试创建一个符合你求的聚光灯。可以在这里找到应用源码，以及片段的源代码。</p>
+<p>看起来好多了。仔细看看内部和外部切光角，尝试创建一个符合你求的聚光灯。可以在这里找到应用源码，以及片段的源代码。</p>
 <p>这样的一个手电筒/聚光灯类型的灯光非常适合恐怖游戏，结合定向和点光，环境会真的开始被照亮了。<a href="http://learnopengl-cn.readthedocs.org/zh/latest/02%20Lighting/06%20Multiple%20lights/">下一个教程</a>，我们会结合所有我们目前讨论了的光和技巧。</p>
 <h2 id="_6">练习</h2>
 <ul>
