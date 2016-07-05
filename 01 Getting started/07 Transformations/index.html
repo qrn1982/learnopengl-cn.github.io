@@ -799,7 +799,7 @@ Trans . Scale = \begin{bmatrix} \color{red}1 & \color{red}0 & \color{red}0 & \co
 <p>现在我们已经解释了所有变换背后的理论，是时候将这些知识利用起来了。OpenGL没有任何自带的矩阵和向量形式，所以我们必须自己定义数学类和方法。在这个教程中我们更愿意抽象所有的数学细节，使用已经做好了的数学库。幸运的是有个使用简单的专门为OpenGL量身定做的数学库，那就是GLM。</p>
 <h2 id="glm">GLM</h2>
 <p>GLM是Open<strong>GL</strong> <strong>M</strong>athematics的缩写，它是一个只有头文件的库，也就是说我们只需包含合适的头文件就行了；不用链接和编译。GLM可以从他们的<a href="http://glm.g-truc.net/0.9.5/index.html">网站</a>上下载。把头文件的根目录复制到你的<code>includes</code>文件夹，然后你就可以使用这个库了。</p>
-<p><img alt="OpenGL Logo" src="../../img/01/07/glm.png" class="right" /></p>
+<p><img alt="GLM Logo" src="../../img/01/07/glm.png" class="right" /></p>
 <p>我们需要的GLM的大多数功能都可以从下面这3个头文件中找到：</p>
 <pre><code class="c++">#include &lt;glm/glm.hpp&gt;
 #include &lt;glm/gtc/matrix_transform.hpp&gt;
