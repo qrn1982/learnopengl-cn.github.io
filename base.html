@@ -62,6 +62,7 @@
         {%- for path in extra_javascript %}
         <script src="{{ path }}"></script>
         {%- endfor %}
+        <script>SetFunctionTagCallbacks();</script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">

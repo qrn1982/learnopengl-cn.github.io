@@ -87,7 +87,6 @@ img.large {
 	height: auto;
 }
 
-
 video {
 	display: block;
 	margin-left: auto;
@@ -103,4 +102,54 @@ video {
 .hljs-comment {
 	font-style: normal;
 	font-size: 90%;
+}
+
+function {
+    cursor: pointer;
+}
+
+#hover {
+    display: none;
+    position: absolute;
+    color: #222;
+    width: 600px;
+    border-radius: 5px;
+    border: 5px dotted #ccc;
+    background-color: #fff;
+    background-repeat: repeat-x;
+    opacity:0.95;
+    filter:alpha(opacity=95); /* For IE8 and earlier */
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+}
+
+#hover h2 {
+    color: #823;
+    margin-bottom: 0px;
+}
+
+#hover h3 {
+    margin-bottom: 0px;
+    margin-top: -30px;
+    margin-left: 100px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: normal;
+    /* text-decoration: underline; */
+    color: #238;
+}
+
+#hover h4 {
+	margin-bottom: 4px;
+	color: #45A;
+}
+
+#hover pre {
+	margin-top: 0px;
+	padding: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: 12px;
 }
