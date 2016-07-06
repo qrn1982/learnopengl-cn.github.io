@@ -115,3 +115,14 @@ a.nav-title {
 def {
     color: green;
 }
+
+fun {
+    font-family: "Courier New", Courier, monospace;
+    color: #822;
+}
+
+var {
+    font-style: normal;
+    font-family: "Courier New", Courier, monospace;
+    color: #227;
+}
